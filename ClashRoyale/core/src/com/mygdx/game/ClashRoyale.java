@@ -37,5 +37,6 @@ public class ClashRoyale extends ApplicationAdapter {
 	public void dispose () {
 		batch.dispose();
 		img.dispose();
+		startSound.dispose();
 	}
 }
