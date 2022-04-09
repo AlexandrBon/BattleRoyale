@@ -1,16 +1,17 @@
-package com.mygdx.game;
+package hse.java.cr;
 
 import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.mygdx.game.ClashRoyale;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		initialize(new ClashRoyale(), config);
+		config.useCompass = false;
+		config.useAccelerometer = false;
+		initialize(new Starter(), config);
 	}
 }
