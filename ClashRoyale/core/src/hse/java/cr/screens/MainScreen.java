@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
 import hse.java.cr.Data;
 import hse.java.cr.Starter;
@@ -13,11 +15,11 @@ import org.jetbrains.annotations.NotNull;
 
 public class MainScreen implements Screen {
     private float frameDelta = 0f;
-    private Texture curFrame;
+    private TextureRegion curFrame;
     private final SpriteBatch batch;
     private final Data assets;
     private final Starter game;
-    private final Animation<Texture> hitAnimation;
+    private final Animation<TextureRegion> hitAnimation;
     private final OrthographicCamera camera;
     private final Texture gameBackground;
 
@@ -30,13 +32,9 @@ public class MainScreen implements Screen {
         gameBackground = ScreenAssistant.
                 getBackground("backgrounds/game_background_2.png");
 
-        Texture[] hitFrames = new Texture[12];
-        for (int i = 0; i < 12; i++) {
-            String path = "golemAnimation1/0_Golem_Run Slashing_0"
-                    + (i < 10 ? "0" + i : i) + ".png";
-            hitFrames[i] = assets.getManager().get(path);
-        }
-        hitAnimation = new Animation<>(0.07f, hitFrames);
+        TextureAtlas atlas = new TextureAtlas("golemAnimation2/packed.atlas");
+        hitAnimation = new Animation<TextureRegion>(0.07f,
+                atlas.findRegions("0_Golem_Run Slashing"));
         hitAnimation.setPlayMode(Animation.PlayMode.LOOP);
     }
 
@@ -82,7 +80,6 @@ public class MainScreen implements Screen {
 
     @Override
     public void dispose() {
-        curFrame.dispose();
         batch.dispose();
     }
 }

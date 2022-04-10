@@ -6,7 +6,6 @@ import hse.java.cr.screens.LoadingScreen;
 
 public class Starter extends Game {
     private Data assets;
-
     public Data getAssets() {
         return assets;
     }
