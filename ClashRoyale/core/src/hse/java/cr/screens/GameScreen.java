@@ -6,17 +6,19 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import hse.java.cr.Data;
+import hse.java.cr.Golem;
 import hse.java.cr.Starter;
 import org.jetbrains.annotations.NotNull;
 
-public class MainScreen implements Screen {
+public class GameScreen implements Screen {
     private final SpriteBatch batch;
     private final Data assets;
     private final Starter game;
     private final OrthographicCamera camera;
     private final Texture gameBackground;
+    private final Golem golem = new Golem("golemAnimation2/packed.atlas");
 
-    public MainScreen(@NotNull Starter game) {
+    public GameScreen(@NotNull Starter game) {
         this.game = game;
         assets = game.getAssets();
         batch = new SpriteBatch();
@@ -40,6 +42,7 @@ public class MainScreen implements Screen {
         batch.begin();
 
         batch.draw(gameBackground, 0, 0);
+        golem.draw(batch, 1);
 
         batch.end();
 
@@ -47,6 +50,7 @@ public class MainScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
+
     }
 
     @Override
@@ -66,6 +70,6 @@ public class MainScreen implements Screen {
 
     @Override
     public void dispose() {
-        batch.dispose();
+
     }
 }
