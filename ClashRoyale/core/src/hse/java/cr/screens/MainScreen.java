@@ -92,6 +92,7 @@ public class MainScreen implements Screen {
 
     @Override
     public void dispose() {
+        curFrame.dispose();
         batch.dispose();
         playButton.dispose();
         stage.dispose();
