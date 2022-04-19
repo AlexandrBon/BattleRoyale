@@ -2,6 +2,8 @@ package hse.java.cr.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -9,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import hse.java.cr.Data;
 import hse.java.cr.Starter;
+import hse.java.cr.Mana;
 import org.jetbrains.annotations.NotNull;
 
 public class MainScreen implements Screen {
@@ -20,6 +23,7 @@ public class MainScreen implements Screen {
     private final Animation<Texture> hitAnimation;
     private final OrthographicCamera camera;
     private final Texture gameBackground;
+    private final Mana mana;
 
     public MainScreen(@NotNull Starter game) {
         this.game = game;
@@ -38,6 +42,7 @@ public class MainScreen implements Screen {
         }
         hitAnimation = new Animation<>(0.07f, hitFrames);
         hitAnimation.setPlayMode(Animation.PlayMode.LOOP);
+        mana = new Mana();
     }
 
     @Override
@@ -59,6 +64,19 @@ public class MainScreen implements Screen {
 
         batch.end();
         frameDelta += Gdx.graphics.getDeltaTime();
+
+        float timer = 0;
+        mana.manaBar.begin(ShapeRenderer.ShapeType.Filled);
+        mana.manaBar.setColor(Color.BLUE);
+        mana.manaBar.rect(0, 0, mana.w  * ((float)mana.count / 10), mana.h);
+        mana.manaBar.end();
+        timer += delta;
+        if (timer >= 1) {
+            if (mana.count < 10) {
+                mana.count++;
+            }
+            timer -= 1;
+        }
     }
 
     @Override
