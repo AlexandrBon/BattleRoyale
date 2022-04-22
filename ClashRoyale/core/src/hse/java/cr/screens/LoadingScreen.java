@@ -7,44 +7,46 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
-import hse.java.cr.Data;
+import hse.java.cr.Assets;
 import hse.java.cr.Starter;
 import org.jetbrains.annotations.NotNull;
 
 public class LoadingScreen implements Screen {
-    private final Data assets;
-    private final OrthographicCamera camera;
-    private final SpriteBatch batch;
-    private final int LOAD_LINE_WIDTH;
-    private final int LOAD_LINE_HEIGHT;
-    private final ShapeRenderer loadLine;
-    private final Texture loadingBackground;
+    private Assets assets;
+    private OrthographicCamera camera;
+    private SpriteBatch batch;
+    private int LOAD_LINE_WIDTH;
+    private int LOAD_LINE_HEIGHT;
+    private ShapeRenderer loadLine;
+    private Sprite loadingBackground;
     private final Starter game;
-    private final BitmapFont font;
+    private BitmapFont font;
 
     public LoadingScreen(@NotNull Starter game) {
-        LOAD_LINE_WIDTH = Gdx.graphics.getWidth();
-        LOAD_LINE_HEIGHT = Gdx.graphics.getHeight() / 15;
         this.game = game;
-        loadLine = new ShapeRenderer();
-        assets = game.getAssets();
-        loadingBackground = ScreenAssistant.
-                getBackground("backgrounds/game_background_1.png");
-
-        camera = new OrthographicCamera();//new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getWidth());
-        camera.setToOrtho(false);
-        batch = new SpriteBatch();
-        font = new BitmapFont();
-        font.getData().scale(5);
-        font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
     }
 
     @Override
     public void show() {
+        LOAD_LINE_WIDTH = Gdx.graphics.getWidth();
+        LOAD_LINE_HEIGHT = Gdx.graphics.getHeight() / 15;
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false);
+        loadLine = new ShapeRenderer();
+        assets = game.getAssets();
 
+        loadingBackground = new Sprite(new Texture("backgrounds/game_background_1.png"));
+        loadingBackground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        batch = new SpriteBatch();
+        font = new BitmapFont();
+        font.getData().scale(5);
+        font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
     }
 
     @Override
@@ -59,14 +61,14 @@ public class LoadingScreen implements Screen {
 
         batch.begin();
 
-        batch.draw(loadingBackground, 0, 0);
-        font.draw(batch, Integer.valueOf((int)(progress * 100)).toString() + "%",
-                (float)LOAD_LINE_WIDTH / 2 - 50, LOAD_LINE_HEIGHT + 100);
+        loadingBackground.draw(batch);
+        font.draw(batch, Integer.valueOf((int)(progress * 100f)).toString() + "%",
+                (float)LOAD_LINE_WIDTH / 2 - 70, LOAD_LINE_HEIGHT + 100);
 
         batch.end();
 
         loadLine.begin(ShapeRenderer.ShapeType.Filled);
-        loadLine.setColor(Color.RED);
+        loadLine.setColor(Color.GOLDENROD);
         loadLine.rect(0, 0, progress * LOAD_LINE_WIDTH, LOAD_LINE_HEIGHT);
         loadLine.end();
         if (isLoaded) {
@@ -98,6 +100,5 @@ public class LoadingScreen implements Screen {
     public void dispose() {
         batch.dispose();
         loadLine.dispose();
-        loadingBackground.dispose();
     }
 }

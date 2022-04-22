@@ -1,4 +1,4 @@
-package hse.java.cr;
+package hse.java.cr.helpers;
 
 import com.badlogic.gdx.tools.texturepacker.TexturePacker;
 import com.badlogic.gdx.tools.texturepacker.TexturePacker.Settings;

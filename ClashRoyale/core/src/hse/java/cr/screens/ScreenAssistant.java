@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ScreenAssistant {
     @NotNull
-    public static Texture getBackground(@NotNull String path) {
+    public static Texture setupBackground(@NotNull String path) {
         Pixmap pixmapOld = new Pixmap(Gdx.files.internal(path));
         Pixmap pixmap = new Pixmap(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), pixmapOld.getFormat());
         pixmap.drawPixmap(pixmapOld,

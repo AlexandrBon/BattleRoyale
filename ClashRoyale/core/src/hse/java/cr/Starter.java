@@ -5,14 +5,14 @@ import com.badlogic.gdx.Game;
 import hse.java.cr.screens.LoadingScreen;
 
 public class Starter extends Game {
-    private Data assets;
-    public Data getAssets() {
+    private Assets assets;
+    public Assets getAssets() {
         return assets;
     }
 
     @Override
     public void create() {
-        assets = new Data();
+        assets = new Assets();
         assets.load();
         setScreen(new LoadingScreen(this));
     }

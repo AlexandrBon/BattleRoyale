@@ -1,36 +1,36 @@
 package hse.java.cr.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-import hse.java.cr.Data;
-import hse.java.cr.Golem;
+import hse.java.cr.Assets;
+import hse.java.cr.model.Golem;
 import hse.java.cr.Starter;
 import org.jetbrains.annotations.NotNull;
 
 public class GameScreen implements Screen {
-    private final SpriteBatch batch;
-    private final Data assets;
-    private final Starter game;
-    private final OrthographicCamera camera;
-    private final Texture gameBackground;
+    private SpriteBatch batch;
+    private Assets assets;
+    private Starter game;
+    private OrthographicCamera camera;
+    private Sprite gameBackground;
     private final Golem golem = new Golem("golemAnimation2/packed.atlas");
 
     public GameScreen(@NotNull Starter game) {
         this.game = game;
-        assets = game.getAssets();
-        batch = new SpriteBatch();
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false);
-        gameBackground = ScreenAssistant.
-                getBackground("backgrounds/game_background_2.png");
     }
 
     @Override
     public void show() {
-
+        assets = game.getAssets();
+        batch = new SpriteBatch();
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false);
+        gameBackground = new Sprite(assets.get(Assets.gameBackground));
+        gameBackground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     @Override
@@ -41,11 +41,10 @@ public class GameScreen implements Screen {
 
         batch.begin();
 
-        batch.draw(gameBackground, 0, 0);
+        gameBackground.draw(batch);
         golem.draw(batch, 1);
 
         batch.end();
-
     }
 
     @Override

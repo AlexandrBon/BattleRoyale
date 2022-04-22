@@ -1,14 +1,14 @@
-package hse.java.cr;
+package hse.java.cr.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
+import hse.java.cr.Assets;
 
 public class Golem extends Actor {
     public enum State {
@@ -16,6 +16,7 @@ public class Golem extends Actor {
         RUN,
         JUMP
     }
+
     private State state;
     private Vector2 position;
     private int health;
@@ -23,12 +24,13 @@ public class Golem extends Actor {
     private TextureRegion curFrame;
     private float frameDelta = 0f;
 
-    public Golem(String pathToTextureAtlas) {
+    public Golem(String pathToAnimation) {
         golemAnimations = new Array<>(State.values().length);
         position = new Vector2(0, 0);
         curFrame = new TextureRegion();
         state = State.HIT;
-        TextureAtlas atlas = new TextureAtlas(pathToTextureAtlas);
+
+        TextureAtlas atlas = new TextureAtlas(pathToAnimation);
 
         int n = golemAnimations.size;
         n = 1; // TODO: add RUN and JUMP animation
@@ -57,6 +59,15 @@ public class Golem extends Actor {
     public void setHealth(int health) {
         this.health = health;
     }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
