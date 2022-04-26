@@ -17,8 +17,20 @@ public class Assets {
     public static final AssetDescriptor<TextureAtlas> uiAtlas =
             new AssetDescriptor<>("ui/button.atlas", TextureAtlas.class);
 
-    public static final AssetDescriptor<TextureAtlas> golemAtlas =
-            new AssetDescriptor<>("ui/button.atlas", TextureAtlas.class);
+    public static final AssetDescriptor<TextureAtlas> goblinAnimation_1 =
+            new AssetDescriptor<>("goblinAnimation_1/goblinAnimation_1.atlas", TextureAtlas.class);
+
+    public static final AssetDescriptor<TextureAtlas> golemAnimation_1 =
+            new AssetDescriptor<>("golemAnimation_1/golemAnimation_1.atlas", TextureAtlas.class);
+
+    public static final AssetDescriptor<TextureAtlas> golemAnimation_2 =
+            new AssetDescriptor<>("golemAnimation_2/golemAnimation_2.atlas", TextureAtlas.class);
+
+    public static final AssetDescriptor<TextureAtlas> golemAnimation_3 =
+            new AssetDescriptor<>("golemAnimation_3/golemAnimation_3.atlas", TextureAtlas.class);
+
+    public static final AssetDescriptor<TextureAtlas> cardTextures =
+            new AssetDescriptor<>("cardTextures/cardTextures.atlas", TextureAtlas.class);
 
     public static final AssetDescriptor<Texture> mainMenuBackground =
             new AssetDescriptor<Texture>("backgrounds/game_background_2.png", Texture.class);
@@ -29,7 +41,11 @@ public class Assets {
     public void load() {
         manager.load(clickSound);
         manager.load(mainMenuBackground);
-        manager.load(golemAtlas);
+        manager.load(cardTextures);
+        manager.load(goblinAnimation_1);
+        manager.load(golemAnimation_1);
+        manager.load(golemAnimation_2);
+        manager.load(golemAnimation_3);
         manager.load(uiAtlas);
     }
 

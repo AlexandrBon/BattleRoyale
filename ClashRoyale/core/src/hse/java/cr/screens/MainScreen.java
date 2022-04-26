@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import hse.java.cr.Assets;
 import hse.java.cr.Starter;
-import hse.java.cr.buttons.SimpleButton;
+import hse.java.cr.buttons.UIButton;
 import org.jetbrains.annotations.NotNull;
 
 public class MainScreen implements Screen {
@@ -19,7 +19,7 @@ public class MainScreen implements Screen {
     private Starter game;
     private OrthographicCamera camera;
     private Sprite gameBackground;
-    private SimpleButton playButton;
+    private UIButton playButton;
     private Stage stage;
 
     public MainScreen(@NotNull Starter game) {
@@ -35,7 +35,7 @@ public class MainScreen implements Screen {
         camera.setToOrtho(false);
         gameBackground = new Sprite(assets.get(Assets.mainMenuBackground));
         gameBackground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        playButton = new SimpleButton("Play", assets);
+        playButton = new UIButton("Play", assets);
 
         stage.addActor(playButton);
         Gdx.input.setInputProcessor(stage);
@@ -43,9 +43,9 @@ public class MainScreen implements Screen {
         stage.addListener(new ClickListener() {
             @Override
             public void clicked (InputEvent event, float x, float y) {
-                if (playButton.getState().equals(SimpleButton.State.HOVERED)) {
-                    playButton.setState(SimpleButton.State.PRESSED);
-                    playButton.playClickSound();
+                if (playButton.getState().equals(UIButton.State.HOVERED)) {
+                    playButton.setState(UIButton.State.PRESSED);
+                    playButton.playSound();
                 }
             }
         });
@@ -53,20 +53,20 @@ public class MainScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(0, 0, 0, 1);
+        ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1f);
         camera.update();
         batch.setProjectionMatrix(camera.combined);
 
         batch.enableBlending(); // Enable alpha
         batch.begin();
 
-        gameBackground.setAlpha(0.3f);
+        gameBackground.setAlpha(0.6f);
         gameBackground.draw(batch);
 
         batch.end();
         stage.draw();
 
-        if (playButton.getState().equals(SimpleButton.State.PRESSED)) {
+        if (playButton.getState().equals(UIButton.State.PRESSED)) {
             game.setScreen(new GameScreen(game));
         }
     }

@@ -1,0 +1,34 @@
+
+cardTextures.png
+size: 2048, 2048
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+brownGolem
+  rotate: false
+  xy: 2, 484
+  size: 720, 480
+  orig: 720, 480
+  offset: 0, 0
+  index: -1
+grayGolem
+  rotate: false
+  xy: 904, 1386
+  size: 720, 480
+  orig: 720, 480
+  offset: 0, 0
+  index: -1
+greenGoblin
+  rotate: false
+  xy: 2, 966
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: -1
+greenGolem
+  rotate: false
+  xy: 2, 2
+  size: 720, 480
+  orig: 720, 480
+  offset: 0, 0
+  index: -1

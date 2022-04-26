@@ -7,10 +7,10 @@ public class Packer {
     public static void main (String[] args) {
         Settings settings = new Settings();
         settings.alias = false;
-        settings.maxHeight = 1024;
-        settings.maxWidth = 1024;
-        TexturePacker.process(settings, "assets/golemAnimation1",
-                "assets/golemAnimation2",
-                "packed");
+        settings.maxHeight = 2048;
+        settings.maxWidth = 2048;
+        TexturePacker.process(settings, "assets/goblinAnimation_1",
+                "assets/goblinAnimation_1",
+                "goblinAnimation_1");
     }
 }

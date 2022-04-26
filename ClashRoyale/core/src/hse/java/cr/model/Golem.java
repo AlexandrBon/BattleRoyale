@@ -1,14 +1,15 @@
 package hse.java.cr.model;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.assets.AssetDescriptor;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import hse.java.cr.Assets;
+
+import java.util.Iterator;
+import java.util.Random;
 
 public class Golem extends Actor {
     public enum State {
@@ -24,23 +25,22 @@ public class Golem extends Actor {
     private TextureRegion curFrame;
     private float frameDelta = 0f;
 
-    public Golem(String pathToAnimation) {
+    public Golem(TextureAtlas golemAtlas) {
         golemAnimations = new Array<>(State.values().length);
         position = new Vector2(0, 0);
-        curFrame = new TextureRegion();
+        curFrame = new Sprite();
         state = State.HIT;
-
-        TextureAtlas atlas = new TextureAtlas(pathToAnimation);
 
         int n = golemAnimations.size;
         n = 1; // TODO: add RUN and JUMP animation
 
+        Array<Animation<TextureRegion>> golemAnimationsTemp = new Array<>();
         for (int i = 0; i < n; i++) {
-            golemAnimations.add(new Animation<>(0.07f,
-                    atlas.findRegions("0_Golem_Run Slashing")));
+            golemAnimations.add(new Animation<>(0.07f, golemAtlas.getRegions()));
             golemAnimations.get(i).setPlayMode(Animation.PlayMode.LOOP);
             // TODO: JUMP PlayMode is .NORMAL
         }
+
 
     }
 
@@ -72,10 +72,9 @@ public class Golem extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         curFrame = golemAnimations.get(state.ordinal()).getKeyFrame(frameDelta);
-        batch.draw(curFrame, position.x, position.y);
+        batch.draw(curFrame, position.x,  position.y, 100, 100);
         frameDelta += Gdx.graphics.getDeltaTime();
     }
-
     public void dispose() {
     }
 }

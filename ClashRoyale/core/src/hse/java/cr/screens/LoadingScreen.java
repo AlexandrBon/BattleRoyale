@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import hse.java.cr.Assets;
@@ -51,12 +50,12 @@ public class LoadingScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(0, 0, 0, 1);
+        ScreenUtils.clear(1, 1, 1, 1);
         camera.update();
         batch.setProjectionMatrix(camera.combined);
         loadLine.setProjectionMatrix(camera.combined);
 
-        boolean isLoaded = assets.updateManager(1);
+        boolean isLoaded = assets.updateManager(17);
         float progress = assets.getManager().getProgress();
 
         batch.begin();

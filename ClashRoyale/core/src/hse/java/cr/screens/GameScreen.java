@@ -5,9 +5,10 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import hse.java.cr.Assets;
-import hse.java.cr.model.Golem;
+import hse.java.cr.Cards;
 import hse.java.cr.Starter;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,7 +18,8 @@ public class GameScreen implements Screen {
     private Starter game;
     private OrthographicCamera camera;
     private Sprite gameBackground;
-    private final Golem golem = new Golem("golemAnimation2/packed.atlas");
+    private Cards cards;
+    private Stage stage;
 
     public GameScreen(@NotNull Starter game) {
         this.game = game;
@@ -31,7 +33,10 @@ public class GameScreen implements Screen {
         camera.setToOrtho(false);
         gameBackground = new Sprite(assets.get(Assets.gameBackground));
         gameBackground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        stage = new Stage();
+        cards = new Cards(assets, stage);
     }
+
 
     @Override
     public void render(float delta) {
@@ -42,9 +47,9 @@ public class GameScreen implements Screen {
         batch.begin();
 
         gameBackground.draw(batch);
-        golem.draw(batch, 1);
-
+        cards.draw(batch, 1);
         batch.end();
+        stage.draw();
     }
 
     @Override
