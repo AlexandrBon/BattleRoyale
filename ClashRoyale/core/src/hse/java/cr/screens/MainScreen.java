@@ -94,5 +94,6 @@ public class MainScreen implements Screen {
     public void dispose() {
         batch.dispose();
         playButton.dispose();
+        stage.dispose();
     }
 }

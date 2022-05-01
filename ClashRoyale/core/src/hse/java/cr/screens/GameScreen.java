@@ -37,7 +37,6 @@ public class GameScreen implements Screen {
         cards = new Cards(assets, stage);
     }
 
-
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
@@ -47,8 +46,10 @@ public class GameScreen implements Screen {
         batch.begin();
 
         gameBackground.draw(batch);
-        cards.draw(batch, 1);
+        cards.draw(batch, 1f);
+
         batch.end();
+
         stage.draw();
     }
 
