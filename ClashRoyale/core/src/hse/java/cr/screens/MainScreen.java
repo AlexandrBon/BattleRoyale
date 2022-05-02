@@ -24,6 +24,7 @@ public class MainScreen implements Screen {
     private final OrthographicCamera camera;
     private final Texture gameBackground;
     private final Mana mana;
+    private float timer = 0;
 
     public MainScreen(@NotNull Starter game) {
         this.game = game;
@@ -55,6 +56,7 @@ public class MainScreen implements Screen {
         ScreenUtils.clear(0, 0, 0, 1);
         camera.update();
         batch.setProjectionMatrix(camera.combined);
+        mana.manaBar.setProjectionMatrix(camera.combined);
 
         curFrame = hitAnimation.getKeyFrame(frameDelta);
         batch.begin();
@@ -64,8 +66,6 @@ public class MainScreen implements Screen {
 
         batch.end();
         frameDelta += Gdx.graphics.getDeltaTime();
-
-        float timer = 0;
         mana.manaBar.begin(ShapeRenderer.ShapeType.Filled);
         mana.manaBar.setColor(Color.BLUE);
         mana.manaBar.rect(0, 0, mana.w  * ((float)mana.count / 10), mana.h);
