@@ -5,66 +5,77 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
-import hse.java.cr.Data;
+import hse.java.cr.Assets;
 import hse.java.cr.Starter;
-import hse.java.cr.Mana;
+import hse.java.cr.buttons.UIButton;
 import org.jetbrains.annotations.NotNull;
+import hse.java.cr.Mana;
 
 public class MainScreen implements Screen {
-    private float frameDelta = 0f;
-    private Texture curFrame;
-    private final SpriteBatch batch;
-    private final Data assets;
-    private final Starter game;
-    private final Animation<Texture> hitAnimation;
-    private final OrthographicCamera camera;
-    private final Texture gameBackground;
+    private SpriteBatch batch;
+    private Assets assets;
+    private Starter game;
+    private OrthographicCamera camera;
+    private Sprite gameBackground;
+    private UIButton playButton;
+    private Stage stage;
     private final Mana mana;
     private float timer = 0;
 
     public MainScreen(@NotNull Starter game) {
         this.game = game;
-        assets = game.getAssets();
-        batch = new SpriteBatch();
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false);
-        gameBackground = ScreenAssistant.
-                getBackground("backgrounds/game_background_2.png");
-
-        Texture[] hitFrames = new Texture[12];
-        for (int i = 0; i < 12; i++) {
-            String path = "golemAnimation1/0_Golem_Run Slashing_0"
-                    + (i < 10 ? "0" + i : i) + ".png";
-            hitFrames[i] = assets.getManager().get(path);
-        }
-        hitAnimation = new Animation<>(0.07f, hitFrames);
-        hitAnimation.setPlayMode(Animation.PlayMode.LOOP);
-        mana = new Mana();
     }
 
     @Override
     public void show() {
+        stage = new Stage();
+        assets = game.getAssets();
+        batch = new SpriteBatch();
+        mana = new Mana();
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false);
+        gameBackground = new Sprite(assets.get(Assets.mainMenuBackground));
+        gameBackground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        playButton = new UIButton("Play", assets);
 
+        stage.addActor(playButton);
+        Gdx.input.setInputProcessor(stage);
+
+        stage.addListener(new ClickListener() {
+            @Override
+            public void clicked (InputEvent event, float x, float y) {
+                if (playButton.getState().equals(UIButton.State.HOVERED)) {
+                    playButton.setState(UIButton.State.PRESSED);
+                    playButton.playSound();
+                }
+            }
+        });
     }
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(0, 0, 0, 1);
+        ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1f);
         camera.update();
         batch.setProjectionMatrix(camera.combined);
         mana.manaBar.setProjectionMatrix(camera.combined);
 
-        curFrame = hitAnimation.getKeyFrame(frameDelta);
+        batch.enableBlending(); // Enable alpha
         batch.begin();
 
-        batch.draw(gameBackground, 0, 0);
-        batch.draw(curFrame, 0, 0);
+        gameBackground.setAlpha(0.6f);
+        gameBackground.draw(batch);
 
         batch.end();
+        stage.draw();
+
+        if (playButton.getState().equals(UIButton.State.PRESSED)) {
+            game.setScreen(new GameScreen(game));
+        }
         frameDelta += Gdx.graphics.getDeltaTime();
         mana.manaBar.begin(ShapeRenderer.ShapeType.Filled);
         mana.manaBar.setColor(Color.BLUE);
@@ -100,7 +111,8 @@ public class MainScreen implements Screen {
 
     @Override
     public void dispose() {
-        curFrame.dispose();
         batch.dispose();
+        playButton.dispose();
+        stage.dispose();
     }
 }

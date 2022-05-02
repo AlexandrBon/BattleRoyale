@@ -1,61 +1,73 @@
 package hse.java.cr.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
-import hse.java.cr.Data;
+import hse.java.cr.Assets;
 import hse.java.cr.Starter;
 import org.jetbrains.annotations.NotNull;
 
 public class LoadingScreen implements Screen {
-    private final Data assets;
-    private final OrthographicCamera camera;
-    private final SpriteBatch batch;
-    private static final int LOAD_LINE_WIDTH = 1280;
-    private static final int LOAD_LINE_HEIGHT = 70;
-    private final ShapeRenderer loadLine;
-    private final Texture loadingBackground;
+    private Assets assets;
+    private OrthographicCamera camera;
+    private SpriteBatch batch;
+    private int LOAD_LINE_WIDTH;
+    private int LOAD_LINE_HEIGHT;
+    private ShapeRenderer loadLine;
+    private Sprite loadingBackground;
     private final Starter game;
+    private BitmapFont font;
 
     public LoadingScreen(@NotNull Starter game) {
         this.game = game;
-        loadLine = new ShapeRenderer();
-        assets = game.getAssets();
-        loadingBackground = ScreenAssistant.
-                getBackground("backgrounds/game_background_1.png");
-
-        camera = new OrthographicCamera(1280, 720);
-        camera.setToOrtho(false);
-        batch = new SpriteBatch();
     }
 
     @Override
     public void show() {
+        LOAD_LINE_WIDTH = Gdx.graphics.getWidth();
+        LOAD_LINE_HEIGHT = Gdx.graphics.getHeight() / 15;
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false);
+        loadLine = new ShapeRenderer();
+        assets = game.getAssets();
 
+        loadingBackground = new Sprite(new Texture("backgrounds/game_background_1.png"));
+        loadingBackground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        batch = new SpriteBatch();
+        font = new BitmapFont();
+        font.getData().scale(5);
+        font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
     }
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(0, 0, 0, 1);
+        ScreenUtils.clear(1, 1, 1, 1);
         camera.update();
         batch.setProjectionMatrix(camera.combined);
         loadLine.setProjectionMatrix(camera.combined);
 
-        boolean isLoaded = assets.updateManager(0);
+        boolean isLoaded = assets.updateManager(17);
+        float progress = assets.getManager().getProgress();
 
         batch.begin();
 
-        batch.draw(loadingBackground, 0, 0);
+        loadingBackground.draw(batch);
+        font.draw(batch, Integer.valueOf((int)(progress * 100f)).toString() + "%",
+                (float)LOAD_LINE_WIDTH / 2 - 70, LOAD_LINE_HEIGHT + 100);
 
         batch.end();
 
-        float progress = assets.getManager().getProgress();
         loadLine.begin(ShapeRenderer.ShapeType.Filled);
-        loadLine.setColor(Color.RED);
+        loadLine.setColor(Color.GOLDENROD);
         loadLine.rect(0, 0, progress * LOAD_LINE_WIDTH, LOAD_LINE_HEIGHT);
         loadLine.end();
         if (isLoaded) {
@@ -87,6 +99,5 @@ public class LoadingScreen implements Screen {
     public void dispose() {
         batch.dispose();
         loadLine.dispose();
-        loadingBackground.dispose();
     }
 }

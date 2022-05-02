@@ -1,0 +1,204 @@
+
+goblinAnimation_1.png
+size: 2048, 2048
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+0_Goblin_Walking
+  rotate: false
+  xy: 2, 904
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: 0
+0_Goblin_Walking
+  rotate: false
+  xy: 2, 2
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: 1
+0_Goblin_Walking
+  rotate: false
+  xy: 904, 904
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: 2
+0_Goblin_Walking
+  rotate: false
+  xy: 904, 2
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: 3
+
+goblinAnimation_1-2.png
+size: 2048, 2048
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+0_Goblin_Walking
+  rotate: false
+  xy: 2, 904
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: 4
+0_Goblin_Walking
+  rotate: false
+  xy: 2, 2
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: 5
+0_Goblin_Walking
+  rotate: false
+  xy: 904, 904
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: 6
+0_Goblin_Walking
+  rotate: false
+  xy: 904, 2
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: 7
+
+goblinAnimation_1-3.png
+size: 2048, 2048
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+0_Goblin_Walking
+  rotate: false
+  xy: 2, 904
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: 8
+0_Goblin_Walking
+  rotate: false
+  xy: 2, 2
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: 9
+0_Goblin_Walking
+  rotate: false
+  xy: 904, 904
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: 10
+0_Goblin_Walking
+  rotate: false
+  xy: 904, 2
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: 11
+
+goblinAnimation_1-4.png
+size: 2048, 2048
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+0_Goblin_Walking
+  rotate: false
+  xy: 2, 904
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: 12
+0_Goblin_Walking
+  rotate: false
+  xy: 2, 2
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: 13
+0_Goblin_Walking
+  rotate: false
+  xy: 904, 904
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: 14
+0_Goblin_Walking
+  rotate: false
+  xy: 904, 2
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: 15
+
+goblinAnimation_1-5.png
+size: 2048, 2048
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+0_Goblin_Walking
+  rotate: false
+  xy: 2, 904
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: 16
+0_Goblin_Walking
+  rotate: false
+  xy: 2, 2
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: 17
+0_Goblin_Walking
+  rotate: false
+  xy: 904, 904
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: 18
+0_Goblin_Walking
+  rotate: false
+  xy: 904, 2
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: 19
+
+goblinAnimation_1-6.png
+size: 2048, 2048
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+0_Goblin_Walking
+  rotate: false
+  xy: 2, 904
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: 20
+0_Goblin_Walking
+  rotate: false
+  xy: 2, 2
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: 21
+0_Goblin_Walking
+  rotate: false
+  xy: 904, 904
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: 22
+0_Goblin_Walking
+  rotate: false
+  xy: 904, 2
+  size: 900, 900
+  orig: 900, 900
+  offset: 0, 0
+  index: 23
