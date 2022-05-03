@@ -69,6 +69,18 @@ public class MainScreen implements Screen {
         if (playButton.getState().equals(UIButton.State.PRESSED)) {
             game.setScreen(new GameScreen(game));
         }
+        frameDelta += Gdx.graphics.getDeltaTime();
+        mana.manaBar.begin(ShapeRenderer.ShapeType.Filled);
+        mana.manaBar.setColor(Color.BLUE);
+        mana.manaBar.rect(0, 0, mana.w  * ((float)mana.count / 10), mana.h);
+        mana.manaBar.end();
+        timer += delta;
+        if (timer >= 1) {
+            if (mana.count < 10) {
+                mana.count++;
+            }
+            timer -= 1;
+        }
     }
 
     @Override
