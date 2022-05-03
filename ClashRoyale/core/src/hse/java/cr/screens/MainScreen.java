@@ -24,7 +24,7 @@ public class MainScreen implements Screen {
     private Sprite gameBackground;
     private UIButton playButton;
     private Stage stage;
-    private final Mana mana;
+    private Mana mana;
     private float timer = 0;
 
     public MainScreen(@NotNull Starter game) {
@@ -76,7 +76,6 @@ public class MainScreen implements Screen {
         if (playButton.getState().equals(UIButton.State.PRESSED)) {
             game.setScreen(new GameScreen(game));
         }
-        frameDelta += Gdx.graphics.getDeltaTime();
         mana.manaBar.begin(ShapeRenderer.ShapeType.Filled);
         mana.manaBar.setColor(Color.BLUE);
         mana.manaBar.rect(0, 0, mana.w  * ((float)mana.count / 10), mana.h);

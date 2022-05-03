@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import hse.java.cr.Assets;
 import hse.java.cr.Cards;
 import hse.java.cr.Starter;
+import hse.java.cr.model.Character;
 import org.jetbrains.annotations.NotNull;
 
 public class GameScreen implements Screen {
@@ -20,6 +21,8 @@ public class GameScreen implements Screen {
     private Sprite gameBackground;
     private Cards cards;
     private Stage stage;
+    private Character testCharacter;
+    private Character testCharacter2;
 
     public GameScreen(@NotNull Starter game) {
         this.game = game;
@@ -35,6 +38,10 @@ public class GameScreen implements Screen {
         gameBackground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         stage = new Stage();
         cards = new Cards(assets, stage);
+        testCharacter = new Character(assets.get(Assets.brownGolem), true);
+        testCharacter2 = new Character(assets.get(Assets.brownGolem), false);
+        stage.addActor(testCharacter);
+        stage.addActor(testCharacter2);
     }
 
     @Override
@@ -47,6 +54,8 @@ public class GameScreen implements Screen {
 
         gameBackground.draw(batch);
         cards.draw(batch, 1f);
+        testCharacter.act(delta);
+        testCharacter2.act(delta);
 
         batch.end();
 
