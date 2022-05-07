@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.Color;
 
 public class Character extends Actor {
     public enum State {
@@ -21,6 +23,7 @@ public class Character extends Actor {
 
     private Character currentOpponennt;
     private float timer;
+    private ShapeRenderer hpLine;
 
     private int attack = 1;
     private int maxHealth;
@@ -37,6 +40,7 @@ public class Character extends Actor {
             position = new Vector2(1100, 100);
             maxHealth = 1;
         }
+        hpLine = new ShapeRenderer();
         health = maxHealth;
         curFrame = new Sprite();
         myTeam = team;
@@ -95,6 +99,12 @@ public class Character extends Actor {
             return;
         }
         curFrame = golemAnimations.get(state.ordinal()).getKeyFrame(frameDelta);
+
+        // TODO: fix hp line
+        //hpLine.begin(ShapeRenderer.ShapeType.Filled);
+        //hpLine.setColor(Color.RED);
+        //hpLine.rect(position.x, position.y + 100, position.x, position.y + 90);
+        //hpLine.end();
         batch.draw(curFrame, position.x,  position.y,
                 getWidth() * getScaleX(), getHeight() * getScaleY());
         frameDelta += Gdx.graphics.getDeltaTime();
