@@ -2,8 +2,6 @@ package hse.java.cr.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,18 +12,15 @@ import hse.java.cr.Assets;
 import hse.java.cr.Starter;
 import hse.java.cr.buttons.UIButton;
 import org.jetbrains.annotations.NotNull;
-import hse.java.cr.Mana;
 
 public class MainScreen implements Screen {
     private SpriteBatch batch;
     private Assets assets;
-    private Starter game;
+    private final Starter game;
     private OrthographicCamera camera;
     private Sprite gameBackground;
     private UIButton playButton;
     private Stage stage;
-    private Mana mana;
-    private float timer = 0;
 
     public MainScreen(@NotNull Starter game) {
         this.game = game;
@@ -36,7 +31,6 @@ public class MainScreen implements Screen {
         stage = new Stage();
         assets = game.getAssets();
         batch = new SpriteBatch();
-        mana = new Mana();
         camera = new OrthographicCamera();
         camera.setToOrtho(false);
         gameBackground = new Sprite(assets.get(Assets.mainMenuBackground));
@@ -62,7 +56,6 @@ public class MainScreen implements Screen {
         ScreenUtils.clear(0.8f, 0.8f, 0.8f, 1f);
         camera.update();
         batch.setProjectionMatrix(camera.combined);
-        mana.manaBar.setProjectionMatrix(camera.combined);
 
         batch.enableBlending(); // Enable alpha
         batch.begin();
@@ -75,17 +68,6 @@ public class MainScreen implements Screen {
 
         if (playButton.getState().equals(UIButton.State.PRESSED)) {
             game.setScreen(new GameScreen(game));
-        }
-        mana.manaBar.begin(ShapeRenderer.ShapeType.Filled);
-        mana.manaBar.setColor(Color.BLUE);
-        mana.manaBar.rect(0, 0, mana.w  * ((float)mana.count / 10), mana.h);
-        mana.manaBar.end();
-        timer += delta;
-        if (timer >= 1) {
-            if (mana.count < 10) {
-                mana.count++;
-            }
-            timer -= 1;
         }
     }
 

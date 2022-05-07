@@ -8,21 +8,18 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import hse.java.cr.Assets;
-import hse.java.cr.model.Cards;
+import hse.java.cr.model.GameInterface;
 import hse.java.cr.Starter;
-import hse.java.cr.model.Character;
 import org.jetbrains.annotations.NotNull;
 
 public class GameScreen implements Screen {
     private SpriteBatch batch;
     private Assets assets;
-    private Starter game;
+    private final Starter game;
     private OrthographicCamera camera;
     private Sprite gameBackground;
-    private Cards cards;
+    private GameInterface gameInterface;
     private Stage stage;
-    private Character testCharacter;
-    private Character testCharacter2;
 
     public GameScreen(@NotNull Starter game) {
         this.game = game;
@@ -37,11 +34,7 @@ public class GameScreen implements Screen {
         gameBackground = new Sprite(assets.get(Assets.gameBackground));
         gameBackground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         stage = new Stage();
-        cards = new Cards(assets, stage);
-        testCharacter = new Character(assets.get(Assets.brownGolem), true);
-        testCharacter2 = new Character(assets.get(Assets.brownGolem), false);
-        stage.addActor(testCharacter);
-        stage.addActor(testCharacter2);
+        gameInterface = new GameInterface(assets, stage);
     }
 
     @Override
@@ -49,17 +42,14 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0, 0, 0, 1);
         camera.update();
         batch.setProjectionMatrix(camera.combined);
-
-        batch.begin();
-
-        gameBackground.draw(batch);
-        cards.draw(batch, 1f);
-        testCharacter.act(delta);
-        testCharacter2.act(delta);
-
-        batch.end();
-
+        {
+            batch.begin();
+            gameBackground.draw(batch);
+            gameInterface.draw(batch, 1f);
+            batch.end();
+        }
         stage.draw();
+        gameInterface.getMana().draw(camera.combined, delta);
     }
 
     @Override

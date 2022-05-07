@@ -1,72 +1,23 @@
 package hse.java.cr.model;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import hse.java.cr.Assets;
 
-class Card extends Actor {
-    enum State {
-        NORMAL,
-        TOUCH_DOWN,
-        TOUCH_UP
-    }
 
-    private final TextureRegion cardTexture;
-    private final TextureAtlas characterAtlas;
-    private State state = State.NORMAL;
-
-    public Card(TextureRegion cardTexture, TextureAtlas characterAtlas) {
-        this.cardTexture = cardTexture;
-        this.characterAtlas = characterAtlas;
-
-        float scale = Gdx.graphics.getHeight() / 5f / cardTexture.getRegionHeight();
-
-        setBounds(0, 0,
-                cardTexture.getRegionWidth() * scale,
-                cardTexture.getRegionHeight() * scale);
-    }
-
-    public TextureAtlas getCharacterAtlas() {
-        return characterAtlas;
-    }
-
-    @Override
-    public void draw (Batch batch, float parentAlpha) {
-        Color color = batch.getColor();
-        batch.setColor(color.r, color.g, color.b, parentAlpha);
-        batch.draw(cardTexture, getX(), getY(), getWidth(), getHeight());
-    }
-
-    public void setState(State state) {
-        this.state = state;
-    }
-
-    public State getState() {
-        return state;
-    }
-
-
-    public void setCenterPosition(float x, float y) {
-        this.setPosition(x - getWidth() / 2, y - getHeight() / 2);
-    }
-}
-
-public class Cards {
-    private final Stage cardStage;
+public class GameInterface {
+    private final Stage gameInterfaceStage;
     private final Array<Card> cardConveyor;
     private final Stage gameStage;
     private Card curCard;
+    private final Mana mana;
 
-    public Cards(Assets assets, Stage gameStage) {
-        cardStage = new Stage();
+    public GameInterface(Assets assets, Stage gameStage) {
+        mana = new Mana();
         this.gameStage = gameStage;
         cardConveyor = new Array<>(4);
         // TODO need to init from User's Card Deck(or randomly generate every new game)
@@ -82,13 +33,23 @@ public class Cards {
         cardConveyor.add(new Card(
                 assets.get(Assets.cardsAtlas).findRegion("greenGolem"),
                 assets.get(Assets.greenGolem)));
+        gameInterfaceStage = new Stage();
+        setupGameInterfaceStage();
+    }
 
+    public Mana getMana() {
+        return mana;
+    }
+
+    private void setupGameInterfaceStage() {
         float width = cardConveyor.get(0).getWidth();
+
         for (int i = 0; i < 4; i++) {
             cardConveyor.get(i).setPosition(0 + i * width, 0);
-            cardStage.addActor(cardConveyor.get(i));
+            gameInterfaceStage.addActor(cardConveyor.get(i));
         }
-        cardStage.addListener(new InputListener() {
+
+        gameInterfaceStage.addListener(new InputListener() {
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 for (int i = 0; i < 4; i++) {
@@ -112,7 +73,7 @@ public class Cards {
                 }
             }
         });
-        Gdx.input.setInputProcessor(cardStage);
+        Gdx.input.setInputProcessor(gameInterfaceStage);
     }
 
     public void draw(Batch batch, float parentAlpha) {
@@ -127,8 +88,10 @@ public class Cards {
                     break;
                 }
                 case TOUCH_UP: {
-                    gameStage.addActor(new Character(curCard.getCharacterAtlas(),
-                        curCard.getX(), curCard.getY()));
+                    if (mana.decreaseMana(curCard.getCost())) {
+                        gameStage.addActor(new Character(curCard.getCharacterAtlas(),
+                                curCard.getX(), curCard.getY(), true));
+                    }
                     curCard.setPosition(0 + i * width, 0);
                     curCard.setState(Card.State.NORMAL);
                     break;
@@ -139,5 +102,9 @@ public class Cards {
                 }
             }
         }
+    }
+
+    public void dispose() {
+        gameInterfaceStage.dispose();
     }
 }

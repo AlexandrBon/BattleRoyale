@@ -2,11 +2,9 @@ package hse.java.cr.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.*;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.Color;
 
 public class Character extends Actor {
     public enum State {
@@ -22,7 +20,7 @@ public class Character extends Actor {
     private float frameDelta = 0f;
     private Character currentOpponennt;
     private float timer;
-    private ShapeRenderer hpLine;
+    private final ShapeRenderer hpLine;
 
     private int attack = 1;
     private int maxHealth;
@@ -30,17 +28,13 @@ public class Character extends Actor {
     private boolean myTeam;
     private boolean isRun = true;
     
-    public Character(TextureAtlas golemAtlas, float x, float y) {
-        health = 100;
-    
-
-    public Character(TextureAtlas golemAtlas, boolean team) {
+    public Character(TextureAtlas golemAtlas, float x, float y, boolean team) {
         golemAnimations = new Array<>(State.values().length);
         if (team) {
-            position = new Vector2(100, 100);
+            setPosition(100, 100);
             maxHealth = 10;
         } else {
-            position = new Vector2(1100, 100);
+            setPosition(1100, 100);
             maxHealth = 1;
         }
         hpLine = new ShapeRenderer();
@@ -53,7 +47,7 @@ public class Character extends Actor {
         n = 1; // TODO: add RUN and JUMP animation
 
         for (int i = 0; i < n; i++) {
-            golemAnimations.add(new Animation<>(0.07f, golemAtlas.getRegions()));
+            golemAnimations.add(new Animation<>(0.06f, golemAtlas.getRegions()));
             golemAnimations.get(i).setPlayMode(Animation.PlayMode.LOOP);
             // TODO: JUMP PlayMode is .NORMAL
         }
@@ -68,10 +62,10 @@ public class Character extends Actor {
 
         setBounds(x, y, textureWidth * getScaleX(),
                 textureHeight * getScaleY());
-
     }
-    public Character(TextureAtlas golemAtlas) {
-       this(golemAtlas, 0, 0);
+
+    public Character(TextureAtlas golemAtlas, boolean team) {
+       this(golemAtlas, 0, 0, team);
     }
 
     public int getHealth() {
@@ -106,7 +100,7 @@ public class Character extends Actor {
                 getWidth() * getScaleX(), getHeight() * getScaleY());
         frameDelta += Gdx.graphics.getDeltaTime();
 
-        decreaseHealth(1);
+        //decreaseHealth(1);
         if (getHealth() < 0) {
             remove();
         }
@@ -118,10 +112,12 @@ public class Character extends Actor {
             return;
         }
         if (isRun) {
-            for(Actor actor : this.getStage().getActors()) {
+            for(Actor actor : getStage().getActors()) {
                 if (actor instanceof Character) {
                     Character character = (Character) actor;
-                    if (character != this && character.getHealth() > 0 && !character.myTeam && character.position.y == position.y && Math.abs(position.x - character.position.x) <= 100) {
+                    if (character != this && character.getHealth() > 0
+                            && !character.myTeam && character.getY() == getY()
+                            && Math.abs(getX() - character.getX()) <= 100) {
                         isRun = false;
                         currentOpponennt = character;
                         timer = 0;
@@ -129,9 +125,9 @@ public class Character extends Actor {
                 }
             }
             if (myTeam) {
-                position.x++;
+                moveBy(1, 0);
             } else {
-                position.x--;
+                moveBy(-1, 0);
             }
         } else {
             timer += delta;
@@ -148,5 +144,6 @@ public class Character extends Actor {
     }
 
     public void dispose() {
+        hpLine.dispose();
     }
 }
