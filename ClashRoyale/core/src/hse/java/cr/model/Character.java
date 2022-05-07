@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.Color;
 
 public class Character extends Actor {
     public enum State {
@@ -14,16 +16,37 @@ public class Character extends Actor {
     }
 
     private State state;
-    private int health;
+    
     private final Array<Animation<TextureRegion>> golemAnimations;
     private TextureRegion curFrame;
     private float frameDelta = 0f;
+    private Character currentOpponennt;
+    private float timer;
+    private ShapeRenderer hpLine;
 
+    private int attack = 1;
+    private int maxHealth;
+    private int health;
+    private boolean myTeam;
+    private boolean isRun = true;
+    
     public Character(TextureAtlas golemAtlas, float x, float y) {
         health = 100;
+    
+
+    public Character(TextureAtlas golemAtlas, boolean team) {
         golemAnimations = new Array<>(State.values().length);
-        //setPosition((float)Math.random() * 500 + 100, (float)Math.random() * 500 + 100);
+        if (team) {
+            position = new Vector2(100, 100);
+            maxHealth = 10;
+        } else {
+            position = new Vector2(1100, 100);
+            maxHealth = 1;
+        }
+        hpLine = new ShapeRenderer();
+        health = maxHealth;
         curFrame = new Sprite();
+        myTeam = team;
         state = State.HIT;
 
         int n = golemAnimations.size;
@@ -54,7 +77,7 @@ public class Character extends Actor {
     public int getHealth() {
         return health;
     }
-
+    
     public void setHealth(int health) {
         this.health = health;
     }
@@ -73,7 +96,10 @@ public class Character extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        //moveBy(2, 0);
+        moveBy(2, 0);
+        if (health == 0) {
+            remove();
+        }
         curFrame = golemAnimations.get(state.ordinal()).getKeyFrame(frameDelta);
 
         batch.draw(curFrame, getX(),  getY(),
@@ -85,6 +111,42 @@ public class Character extends Actor {
             remove();
         }
     }
+
+    @Override
+    public void act(float delta) {
+        if (health == 0) {
+            return;
+        }
+        if (isRun) {
+            for(Actor actor : this.getStage().getActors()) {
+                if (actor instanceof Character) {
+                    Character character = (Character) actor;
+                    if (character != this && character.getHealth() > 0 && !character.myTeam && character.position.y == position.y && Math.abs(position.x - character.position.x) <= 100) {
+                        isRun = false;
+                        currentOpponennt = character;
+                        timer = 0;
+                    }
+                }
+            }
+            if (myTeam) {
+                position.x++;
+            } else {
+                position.x--;
+            }
+        } else {
+            timer += delta;
+            if (timer >= 1) {
+                int opponentHealth = Math.max(0, currentOpponennt.getHealth() - attack);
+                currentOpponennt.setHealth(opponentHealth);
+                if (opponentHealth == 0) {
+                    isRun = true;
+                    currentOpponennt = null;
+                }
+                timer = 0;
+            }
+        }
+    }
+
     public void dispose() {
     }
 }
