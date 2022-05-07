@@ -40,8 +40,8 @@ public class UIButton extends Actor {
             batch.draw(buttonFrames.get(state.ordinal()), getX(), getY());
             int x = Gdx.input.getX();
             int y = Gdx.input.getY();
-            if (getX() <= x && x <= getX() + getWidth()
-                    && getY() <= y && y <= getY() + getHeight()) {
+            if (getX() <= x && x <= getRight()
+                    && getY() <= y && y <= getTop()) {
                 setState(UIButton.State.HOVERED);
             } else {
                 setState(UIButton.State.NORMAL);

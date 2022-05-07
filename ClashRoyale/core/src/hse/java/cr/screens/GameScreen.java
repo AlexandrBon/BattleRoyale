@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import hse.java.cr.Assets;
-import hse.java.cr.Cards;
+import hse.java.cr.model.Cards;
 import hse.java.cr.Starter;
 import org.jetbrains.annotations.NotNull;
 

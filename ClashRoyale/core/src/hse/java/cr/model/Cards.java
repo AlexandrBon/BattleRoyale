@@ -1,7 +1,6 @@
-package hse.java.cr;
+package hse.java.cr.model;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -10,18 +9,18 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
-import hse.java.cr.model.Character;
+import hse.java.cr.Assets;
 
 class Card extends Actor {
     enum State {
         NORMAL,
-        PRESSED
+        TOUCH_DOWN,
+        TOUCH_UP
     }
 
     private final TextureRegion cardTexture;
-    private TextureAtlas characterAtlas;
+    private final TextureAtlas characterAtlas;
     private State state = State.NORMAL;
 
     public Card(TextureRegion cardTexture, TextureAtlas characterAtlas) {
@@ -38,13 +37,11 @@ class Card extends Actor {
     public TextureAtlas getCharacterAtlas() {
         return characterAtlas;
     }
+
     @Override
     public void draw (Batch batch, float parentAlpha) {
         Color color = batch.getColor();
         batch.setColor(color.r, color.g, color.b, parentAlpha);
-        if (state.equals(State.PRESSED)) {
-            setPosition(Gdx.input.getX(), Gdx.input.getY());
-        }
         batch.draw(cardTexture, getX(), getY(), getWidth(), getHeight());
     }
 
@@ -52,16 +49,22 @@ class Card extends Actor {
         this.state = state;
     }
 
+    public State getState() {
+        return state;
+    }
+
+
     public void setCenterPosition(float x, float y) {
         this.setPosition(x - getWidth() / 2, y - getHeight() / 2);
     }
 }
 
 public class Cards {
-    private Stage cardStage;
-    private Array<Card> cardConveyor;
-    private Stage gameStage;
+    private final Stage cardStage;
+    private final Array<Card> cardConveyor;
+    private final Stage gameStage;
     private Card curCard;
+
     public Cards(Assets assets, Stage gameStage) {
         cardStage = new Stage();
         this.gameStage = gameStage;
@@ -85,27 +88,56 @@ public class Cards {
             cardConveyor.get(i).setPosition(0 + i * width, 0);
             cardStage.addActor(cardConveyor.get(i));
         }
-        cardStage.addListener(new ClickListener() {
+        cardStage.addListener(new InputListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y) {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 for (int i = 0; i < 4; i++) {
                     curCard = cardConveyor.get(i);
-                    if (curCard.getX() + curCard.getWidth() >= x
-                        && curCard.getY() + curCard.getHeight() >= y) {
-                        curCard.setCenterPosition(x, y);
-                        //gameStage.addActor(new Character(curCard.getCharacterAtlas()));
+                    if (curCard.getRight() >= x && curCard.getTop() >= y) {
+                        curCard.setState(Card.State.TOUCH_DOWN);
+                        break;
+                    }
+                }
+                return true;
+            }
+
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                for (int i = 0; i < 4; i++) {
+                    curCard = cardConveyor.get(i);
+                    if (curCard.getRight() >= x && curCard.getTop() >= y) {
+                        curCard.setState(Card.State.TOUCH_UP);
                         break;
                     }
                 }
             }
         });
-
         Gdx.input.setInputProcessor(cardStage);
     }
 
     public void draw(Batch batch, float parentAlpha) {
+        float width = cardConveyor.get(0).getWidth();
         for (int i = 0; i < 4; i++) {
-            cardConveyor.get(i).draw(batch, parentAlpha);
+            curCard = cardConveyor.get(i);
+            switch (curCard.getState()) {
+                case TOUCH_DOWN: {
+                    curCard.setCenterPosition(Gdx.input.getX(),
+                            Gdx.graphics.getHeight() - Gdx.input.getY());
+                    curCard.draw(batch,  0.5f);
+                    break;
+                }
+                case TOUCH_UP: {
+                    gameStage.addActor(new Character(curCard.getCharacterAtlas(),
+                        curCard.getX(), curCard.getY()));
+                    curCard.setPosition(0 + i * width, 0);
+                    curCard.setState(Card.State.NORMAL);
+                    break;
+                }
+                case NORMAL: {
+                    curCard.draw(batch, parentAlpha);
+                    break;
+                }
+            }
         }
     }
 }

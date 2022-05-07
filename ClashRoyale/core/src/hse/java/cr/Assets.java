@@ -18,10 +18,10 @@ public class Assets {
             new AssetDescriptor<>("ui/button.atlas", TextureAtlas.class);
 
     public static final AssetDescriptor<TextureAtlas> greenGoblin =
-            new AssetDescriptor<>("greenGoblin/goblinAnimation_1.atlas", TextureAtlas.class);
+            new AssetDescriptor<>("greenGoblin/greenGoblin.atlas", TextureAtlas.class);
 
     public static final AssetDescriptor<TextureAtlas> grayGolem =
-            new AssetDescriptor<>("grayGolem/golemAnimation_1.atlas", TextureAtlas.class);
+            new AssetDescriptor<>("grayGolem/grayGolemRun.atlas", TextureAtlas.class);
 
     public static final AssetDescriptor<TextureAtlas> greenGolem =
             new AssetDescriptor<>("greenGolem/golemAnimation_2.atlas", TextureAtlas.class);

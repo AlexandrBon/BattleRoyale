@@ -14,15 +14,15 @@ public class Character extends Actor {
     }
 
     private State state;
-    private Vector2 position;
     private int health;
     private final Array<Animation<TextureRegion>> golemAnimations;
     private TextureRegion curFrame;
     private float frameDelta = 0f;
 
-    public Character(TextureAtlas golemAtlas) {
+    public Character(TextureAtlas golemAtlas, float x, float y) {
+        health = 100;
         golemAnimations = new Array<>(State.values().length);
-        position = new Vector2((float)Math.random() * 500 + 100, (float)Math.random() * 500 + 100);
+        //setPosition((float)Math.random() * 500 + 100, (float)Math.random() * 500 + 100);
         curFrame = new Sprite();
         state = State.HIT;
 
@@ -43,26 +43,24 @@ public class Character extends Actor {
 
         setScale(width / textureWidth, height / textureHeight);
 
-        setBounds(0, 0,
-                textureWidth * getScaleX(),
+        setBounds(x, y, textureWidth * getScaleX(),
                 textureHeight * getScaleY());
 
     }
-
-    public Vector2 getPosition() {
-        return position;
+    public Character(TextureAtlas golemAtlas) {
+       this(golemAtlas, 0, 0);
     }
 
     public int getHealth() {
         return health;
     }
 
-    public void setPosition(Vector2 position) {
-        this.position = position;
-    }
-
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public void decreaseHealth(int damage) {
+        this.health -= damage;
     }
 
     public State getState() {
@@ -75,10 +73,17 @@ public class Character extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        //moveBy(2, 0);
         curFrame = golemAnimations.get(state.ordinal()).getKeyFrame(frameDelta);
-        batch.draw(curFrame, position.x,  position.y,
+
+        batch.draw(curFrame, getX(),  getY(),
                 getWidth() * getScaleX(), getHeight() * getScaleY());
         frameDelta += Gdx.graphics.getDeltaTime();
+
+        decreaseHealth(1);
+        if (getHealth() < 0) {
+            remove();
+        }
     }
     public void dispose() {
     }
