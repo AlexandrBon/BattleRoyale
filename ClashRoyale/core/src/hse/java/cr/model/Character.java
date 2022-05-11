@@ -32,10 +32,10 @@ public class Character extends Actor {
         golemAnimations = new Array<>(State.values().length);
         if (team) {
             setPosition(100, 100);
-            maxHealth = 10;
+            maxHealth = 100;
         } else {
             setPosition(1100, 100);
-            maxHealth = 1;
+            maxHealth = 100;
         }
         hpLine = new ShapeRenderer();
         health = maxHealth;
@@ -100,7 +100,7 @@ public class Character extends Actor {
                 getWidth() * getScaleX(), getHeight() * getScaleY());
         frameDelta += Gdx.graphics.getDeltaTime();
 
-        //decreaseHealth(1);
+        decreaseHealth(1);
         if (getHealth() < 0) {
             remove();
         }
