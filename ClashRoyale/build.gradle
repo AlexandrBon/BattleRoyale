@@ -72,5 +72,7 @@ project(":core") {
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
         implementation "org.mini2Dx:universal-tween-engine:6.3.3"
+        implementation group: 'com.esotericsoftware', name: 'kryonet', version: '2.22.0-RC1'
+
     }
 }
