@@ -1,0 +1,144 @@
+
+grayGolemRun.png
+size: 2048, 2048
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: xy
+Golem_01_Walking
+  rotate: false
+  xy: 1, 1447
+  size: 720, 480
+  orig: 720, 480
+  offset: 0, 0
+  index: 4
+Golem_01_Walking
+  rotate: false
+  xy: 1, 965
+  size: 720, 480
+  orig: 720, 480
+  offset: 0, 0
+  index: 17
+Golem_01_Walking
+  rotate: false
+  xy: 723, 1447
+  size: 720, 480
+  orig: 720, 480
+  offset: 0, 0
+  index: 9
+Golem_01_Walking
+  rotate: false
+  xy: 1, 483
+  size: 720, 480
+  orig: 720, 480
+  offset: 0, 0
+  index: 1
+Golem_01_Walking
+  rotate: false
+  xy: 723, 965
+  size: 720, 480
+  orig: 720, 480
+  offset: 0, 0
+  index: 14
+Golem_01_Walking
+  rotate: false
+  xy: 1, 1
+  size: 720, 480
+  orig: 720, 480
+  offset: 0, 0
+  index: 6
+Golem_01_Walking
+  rotate: false
+  xy: 723, 483
+  size: 720, 480
+  orig: 720, 480
+  offset: 0, 0
+  index: 11
+Golem_01_Walking
+  rotate: false
+  xy: 723, 1
+  size: 720, 480
+  orig: 720, 480
+  offset: 0, 0
+  index: 3
+
+grayGolemRun2.png
+size: 2048, 2048
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: xy
+Golem_01_Walking
+  rotate: false
+  xy: 1, 1447
+  size: 720, 480
+  orig: 720, 480
+  offset: 0, 0
+  index: 16
+Golem_01_Walking
+  rotate: false
+  xy: 1, 965
+  size: 720, 480
+  orig: 720, 480
+  offset: 0, 0
+  index: 8
+Golem_01_Walking
+  rotate: false
+  xy: 723, 1447
+  size: 720, 480
+  orig: 720, 480
+  offset: 0, 0
+  index: 0
+Golem_01_Walking
+  rotate: false
+  xy: 1, 483
+  size: 720, 480
+  orig: 720, 480
+  offset: 0, 0
+  index: 13
+Golem_01_Walking
+  rotate: false
+  xy: 723, 965
+  size: 720, 480
+  orig: 720, 480
+  offset: 0, 0
+  index: 5
+Golem_01_Walking
+  rotate: false
+  xy: 1, 1
+  size: 720, 480
+  orig: 720, 480
+  offset: 0, 0
+  index: 10
+Golem_01_Walking
+  rotate: false
+  xy: 723, 483
+  size: 720, 480
+  orig: 720, 480
+  offset: 0, 0
+  index: 2
+Golem_01_Walking
+  rotate: false
+  xy: 723, 1
+  size: 720, 480
+  orig: 720, 480
+  offset: 0, 0
+  index: 15
+
+grayGolemRun3.png
+size: 1024, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: xy
+Golem_01_Walking
+  rotate: false
+  xy: 1, 483
+  size: 720, 480
+  orig: 720, 480
+  offset: 0, 0
+  index: 7
+Golem_01_Walking
+  rotate: false
+  xy: 1, 1
+  size: 720, 480
+  orig: 720, 480
+  offset: 0, 0
+  index: 12
