@@ -1,6 +1,7 @@
 package hse.java.cr.model;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
@@ -96,8 +97,15 @@ public class Character extends Actor {
         }
         curFrame = golemAnimations.get(state.ordinal()).getKeyFrame(frameDelta);
 
+        batch.end();
+        hpLine.begin(ShapeRenderer.ShapeType.Filled);
+        hpLine.setColor(Color.RED);
+        hpLine.rect(getX() + 50, getTop() - 150, ((float) health / maxHealth) * getWidth() * getScaleX() / 2, 15);
+        hpLine.end();
+        batch.begin();
+
         batch.draw(curFrame, getX(),  getY(),
-                getWidth() * getScaleX(), getHeight() * getScaleY());
+                (myTeam ? 1 : -1) * getWidth() * getScaleX(), getHeight() * getScaleY());
         frameDelta += Gdx.graphics.getDeltaTime();
 
         decreaseHealth(1);
@@ -116,7 +124,7 @@ public class Character extends Actor {
                 if (actor instanceof Character) {
                     Character character = (Character) actor;
                     if (character != this && character.getHealth() > 0
-                            && !character.myTeam && character.getY() == getY()
+                            && (character.myTeam != myTeam) && character.getY() == getY()
                             && Math.abs(getX() - character.getX()) <= 100) {
                         isRun = false;
                         currentOpponennt = character;
