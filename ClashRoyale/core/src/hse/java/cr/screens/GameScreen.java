@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import hse.java.cr.Assets;
 import hse.java.cr.model.GameInterface;
+import hse.java.cr.model.Spell;
 import hse.java.cr.Starter;
 import org.jetbrains.annotations.NotNull;
 
@@ -35,6 +36,9 @@ public class GameScreen implements Screen {
         gameBackground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         stage = new Stage();
         gameInterface = new GameInterface(assets, stage);
+
+        // tested spell
+        //stage.addActor(new Spell(assets.get(Assets.fire), 100, 100, true));
     }
 
     @Override

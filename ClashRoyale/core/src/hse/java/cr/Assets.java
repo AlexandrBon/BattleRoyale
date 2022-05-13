@@ -29,6 +29,9 @@ public class Assets {
     public static final AssetDescriptor<TextureAtlas> brownGolem =
             new AssetDescriptor<>("brownGolem/golemAnimation_3.atlas", TextureAtlas.class);
 
+    public static final AssetDescriptor<TextureAtlas> fire =
+            new AssetDescriptor<>("fire/fire_1.atlas", TextureAtlas.class);
+
     public static final AssetDescriptor<TextureAtlas> cardsAtlas =
             new AssetDescriptor<>("cardTextures/cardTextures.atlas", TextureAtlas.class);
 
@@ -46,6 +49,7 @@ public class Assets {
         manager.load(grayGolem);
         manager.load(greenGolem);
         manager.load(brownGolem);
+        manager.load(fire);
         manager.load(uiAtlas);
     }
 
