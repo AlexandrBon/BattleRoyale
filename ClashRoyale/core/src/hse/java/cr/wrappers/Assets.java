@@ -1,4 +1,4 @@
-package hse.java.cr;
+package hse.java.cr.wrappers;
 
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
@@ -39,10 +39,10 @@ public class Assets {
             new AssetDescriptor<>("cardTextures/cardTextures.atlas", TextureAtlas.class);
 
     public static final AssetDescriptor<Texture> mainMenuBackground =
-            new AssetDescriptor<Texture>("backgrounds/game_background_1.png", Texture.class);
+            new AssetDescriptor<>("backgrounds/game_background_1.png", Texture.class);
 
     public static final AssetDescriptor<Texture> gameBackground =
-            new AssetDescriptor<Texture>("backgrounds/game_background_2.png", Texture.class);
+            new AssetDescriptor<>("backgrounds/game_background_2.png", Texture.class);
 
     public void load() {
         manager.load(clickSound);

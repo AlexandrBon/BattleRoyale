@@ -8,9 +8,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
-import hse.java.cr.Assets;
-import hse.java.cr.Starter;
+import com.esotericsoftware.kryonet.Client;
+import hse.java.cr.wrappers.Assets;
+import hse.java.cr.client.EventListener;
+import hse.java.cr.client.Starter;
 import hse.java.cr.buttons.UIButton;
+import hse.java.cr.network.Network;
 import org.jetbrains.annotations.NotNull;
 
 public class MainScreen implements Screen {
@@ -49,6 +52,25 @@ public class MainScreen implements Screen {
                 }
             }
         });
+        setupClient();
+    }
+
+    private void setupClient() {
+        final Client client = new Client();
+
+        //client.addListener(new EventListener());
+
+        Network.register(client);
+
+        try {
+            client.start();
+            client.connect(15000, "192.168.0.130", 6334,  6334);
+        } catch (Exception e) {
+            System.out.println("client couldn't connect");
+        }
+
+        // Success
+        Starter.setClient(client);
     }
 
     @Override

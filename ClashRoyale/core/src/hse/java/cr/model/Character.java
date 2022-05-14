@@ -20,7 +20,7 @@ public class Character extends Actor {
     private float frameDelta = 0f;
     private Character currentOpponennt;
     private float timer;
-    private final ShapeRenderer hpLine;
+    private ShapeRenderer hpLine;
 
     private int attack = 1;
     private int maxHealth;
@@ -37,7 +37,7 @@ public class Character extends Actor {
             setPosition(1100, 100);
             maxHealth = 100;
         }
-        hpLine = new ShapeRenderer();
+        //hpLine = new ShapeRenderer();
         health = maxHealth;
         curFrame = new Sprite();
         myTeam = team;
@@ -106,7 +106,6 @@ public class Character extends Actor {
         }
     }
 
-    @Override
     public void act(float delta) {
         if (health == 0) {
             return;
@@ -144,6 +143,6 @@ public class Character extends Actor {
     }
 
     public void dispose() {
-        hpLine.dispose();
+        //hpLine.dispose();
     }
 }

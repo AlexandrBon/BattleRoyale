@@ -11,8 +11,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
-import hse.java.cr.Assets;
-import hse.java.cr.Starter;
+import com.badlogic.gdx.utils.reflect.ReflectionException;
+import hse.java.cr.wrappers.Assets;
+import hse.java.cr.client.Starter;
 import org.jetbrains.annotations.NotNull;
 
 public class LoadingScreen implements Screen {
@@ -55,7 +56,7 @@ public class LoadingScreen implements Screen {
         batch.setProjectionMatrix(camera.combined);
         loadLine.setProjectionMatrix(camera.combined);
 
-        boolean isLoaded = assets.updateManager(17);
+        boolean isLoaded = assets.updateManager(30);
         float progress = assets.getManager().getProgress();
 
         batch.begin();
@@ -71,6 +72,11 @@ public class LoadingScreen implements Screen {
         loadLine.rect(0, 0, progress * LOAD_LINE_WIDTH, LOAD_LINE_HEIGHT);
         loadLine.end();
         if (isLoaded) {
+            try {
+                assets.fillStringToTextureAtlasMap();
+            } catch (ReflectionException e) {
+                System.out.println("FUCK");
+            }
             game.setScreen(new MainScreen(game));
         }
     }

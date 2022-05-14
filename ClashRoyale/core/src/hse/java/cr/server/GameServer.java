@@ -2,7 +2,6 @@ package hse.java.cr.server;
 
 import com.esotericsoftware.kryonet.Server;
 import hse.java.cr.network.Network;
-
 import java.io.IOException;
 
 public class GameServer {
@@ -12,7 +11,9 @@ public class GameServer {
     public GameServer() {
         server = new Server();
         Network.register(server);
-        // TODO: add listeners
+
+        server.addListener(new NewObjectListener(server));
+
         bindServer();
     }
 

@@ -1,11 +1,23 @@
-package hse.java.cr;
+package hse.java.cr.client;
 
 import com.badlogic.gdx.Game;
 
+import com.esotericsoftware.kryonet.Client;
+import hse.java.cr.wrappers.Assets;
 import hse.java.cr.screens.LoadingScreen;
 
 public class Starter extends Game {
     private Assets assets;
+    private static Client client;
+
+    public static void setClient(Client client) {
+        Starter.client = client;
+    }
+
+    public static Client getClient() {
+        return client;
+    }
+
     public Assets getAssets() {
         return assets;
     }

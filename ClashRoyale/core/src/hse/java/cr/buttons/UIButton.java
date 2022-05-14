@@ -5,7 +5,8 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
-import hse.java.cr.Assets;
+import hse.java.cr.wrappers.Assets;
+
 
 public class UIButton extends Actor {
     public enum State {
