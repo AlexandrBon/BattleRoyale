@@ -4,12 +4,18 @@ import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.reflect.Field;
+import com.badlogic.gdx.utils.reflect.ReflectionException;
+
+import java.util.HashMap;
+
+import static com.badlogic.gdx.utils.reflect.ClassReflection.getFields;
 
 public class Assets {
     private final AssetManager manager = new AssetManager();
+    private static final HashMap<String, TextureAtlas>
+            stringToTextureAtlas = new HashMap<>();
 
     public static final AssetDescriptor<Sound> clickSound =
             new AssetDescriptor<>("sounds/clickSound.mp3", Sound.class);
@@ -33,7 +39,7 @@ public class Assets {
             new AssetDescriptor<>("cardTextures/cardTextures.atlas", TextureAtlas.class);
 
     public static final AssetDescriptor<Texture> mainMenuBackground =
-            new AssetDescriptor<Texture>("backgrounds/game_background_2.png", Texture.class);
+            new AssetDescriptor<Texture>("backgrounds/game_background_1.png", Texture.class);
 
     public static final AssetDescriptor<Texture> gameBackground =
             new AssetDescriptor<Texture>("backgrounds/game_background_2.png", Texture.class);
@@ -41,6 +47,7 @@ public class Assets {
     public void load() {
         manager.load(clickSound);
         manager.load(mainMenuBackground);
+        manager.load(gameBackground);
         manager.load(cardsAtlas);
         manager.load(greenGoblin);
         manager.load(grayGolem);
@@ -57,8 +64,22 @@ public class Assets {
         return manager;
     }
 
+    public static TextureAtlas stringToTextureAtlas(String s) {
+        return stringToTextureAtlas.get(s);
+    }
+
     public boolean updateManager(int millis) {
         return manager.update(millis);
+    }
+
+    public void fillStringToTextureAtlasMap() throws ReflectionException {
+        for (Field field : getFields(Assets.class)) {
+            try {
+                stringToTextureAtlas.put(field.getName(),
+                        get((AssetDescriptor<TextureAtlas>) field.get(field)));
+            } catch (ClassCastException ignored) {
+            }
+        }
     }
 
     public void dispose() {

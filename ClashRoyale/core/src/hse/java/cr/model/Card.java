@@ -26,9 +26,7 @@ public class Card extends Actor {
         cost = 3;
 
         float scale = Gdx.graphics.getHeight() / 5f / cardTexture.getRegionHeight();
-
-        setBounds(0, 0,
-                cardTexture.getRegionWidth() * scale,
+        setBounds(0, 0, cardTexture.getRegionWidth() * scale,
                 cardTexture.getRegionHeight() * scale);
     }
 
