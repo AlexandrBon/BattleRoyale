@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.esotericsoftware.kryonet.Client;
+import hse.java.cr.events.JoinRequestEvent;
 import hse.java.cr.wrappers.Assets;
 import hse.java.cr.client.EventListener;
 import hse.java.cr.client.Starter;
@@ -58,13 +59,11 @@ public class MainScreen implements Screen {
     private void setupClient() {
         final Client client = new Client();
 
-        //client.addListener(new EventListener());
-
         Network.register(client);
 
         try {
             client.start();
-            client.connect(15000, "192.168.0.130", 6334,  6334);
+            client.connect(15000, "192.168.0.130", 54555);
         } catch (Exception e) {
             System.out.println("client couldn't connect");
         }

@@ -2,17 +2,21 @@ package hse.java.cr.server;
 
 import com.esotericsoftware.kryonet.Server;
 import hse.java.cr.network.Network;
+
+import javax.print.DocFlavor;
 import java.io.IOException;
 
 public class GameServer {
     public static GameServer instance;
     Server server;
 
+
     public GameServer() {
         server = new Server();
         Network.register(server);
 
-        server.addListener(new NewObjectListener(server));
+        server.addListener(new NewObjectListener());
+        server.addListener(new JoinListener());
 
         bindServer();
     }
@@ -21,7 +25,7 @@ public class GameServer {
         server.start();
 
         try {
-            server.bind(6334, 6334);
+            server.bind(54555);
         } catch (IOException e) {
             e.printStackTrace();
         }

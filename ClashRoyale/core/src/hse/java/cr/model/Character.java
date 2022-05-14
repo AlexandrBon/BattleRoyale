@@ -28,17 +28,10 @@ public class Character extends Actor {
     private boolean myTeam;
     private boolean isRun = true;
     
-    public Character(TextureAtlas golemAtlas, float x, float y, boolean team) {
+    public Character(TextureAtlas characterAtlas, float x, float y, boolean team) {
         golemAnimations = new Array<>(State.values().length);
-        if (team) {
-            setPosition(100, 100);
-            maxHealth = 100;
-        } else {
-            setPosition(1100, 100);
-            maxHealth = 100;
-        }
-        //hpLine = new ShapeRenderer();
-        health = maxHealth;
+        setPosition(x, y);
+        health = 100;
         curFrame = new Sprite();
         myTeam = team;
         state = State.HIT;
@@ -47,7 +40,7 @@ public class Character extends Actor {
         n = 1; // TODO: add RUN and JUMP animation
 
         for (int i = 0; i < n; i++) {
-            golemAnimations.add(new Animation<>(0.06f, golemAtlas.getRegions()));
+            golemAnimations.add(new Animation<>(0.06f, characterAtlas.getRegions()));
             golemAnimations.get(i).setPlayMode(Animation.PlayMode.LOOP);
             // TODO: JUMP PlayMode is .NORMAL
         }
@@ -64,8 +57,8 @@ public class Character extends Actor {
                 textureHeight * getScaleY());
     }
 
-    public Character(TextureAtlas golemAtlas, boolean team) {
-       this(golemAtlas, 0, 0, team);
+    public Character(TextureAtlas characterAtlas, boolean team) {
+       this(characterAtlas, 0, 0, team);
     }
 
     public int getHealth() {
@@ -89,23 +82,6 @@ public class Character extends Actor {
     }
 
     @Override
-    public void draw(Batch batch, float parentAlpha) {
-        moveBy(2, 0);
-        if (health == 0) {
-            remove();
-        }
-        curFrame = golemAnimations.get(state.ordinal()).getKeyFrame(frameDelta);
-
-        batch.draw(curFrame, getX(),  getY(),
-                getWidth() * getScaleX(), getHeight() * getScaleY());
-        frameDelta += Gdx.graphics.getDeltaTime();
-
-        decreaseHealth(1);
-        if (getHealth() < 0) {
-            remove();
-        }
-    }
-
     public void act(float delta) {
         if (health == 0) {
             return;
@@ -115,7 +91,7 @@ public class Character extends Actor {
                 if (actor instanceof Character) {
                     Character character = (Character) actor;
                     if (character != this && character.getHealth() > 0
-                            && !character.myTeam && character.getY() == getY()
+                            && (character.myTeam != myTeam) && character.getY() == getY()
                             && Math.abs(getX() - character.getX()) <= 100) {
                         isRun = false;
                         currentOpponennt = character;
@@ -140,6 +116,19 @@ public class Character extends Actor {
                 timer = 0;
             }
         }
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        if (health == 0) {
+            remove();
+        }
+        curFrame = golemAnimations.get(state.ordinal()).getKeyFrame(frameDelta);
+
+        batch.draw(curFrame, getX(),  getY(),
+                getWidth() * getScaleX(), getHeight() * getScaleY());
+        frameDelta += Gdx.graphics.getDeltaTime();
+        decreaseHealth(0);
     }
 
     public void dispose() {

@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import hse.java.cr.wrappers.Assets;
 import org.jetbrains.annotations.NotNull;
 
 public class Card extends Actor {
@@ -20,9 +21,10 @@ public class Card extends Actor {
     private State state = State.NORMAL;
     private int cost;
 
-    public Card(@NotNull TextureRegion cardTexture, TextureAtlas characterAtlas) {
-        this.cardTexture = cardTexture;
-        this.characterAtlas = characterAtlas;
+    public Card(Assets assets, String characterName/*TextureAtlas characterAtlas*/) {
+        cardTexture = assets.get(Assets.cardsAtlas).findRegion(characterName);
+        setName(characterName);
+        this.characterAtlas = Assets.stringToTextureAtlas(characterName);
         cost = 3;
 
         float scale = Gdx.graphics.getHeight() / 5f / cardTexture.getRegionHeight();

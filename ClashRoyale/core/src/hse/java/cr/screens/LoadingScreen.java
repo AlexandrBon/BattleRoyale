@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.reflect.ReflectionException;
 import hse.java.cr.wrappers.Assets;
 import hse.java.cr.client.Starter;
 import org.jetbrains.annotations.NotNull;
+import org.lwjgl.Sys;
 
 public class LoadingScreen implements Screen {
     private Assets assets;
@@ -75,7 +76,8 @@ public class LoadingScreen implements Screen {
             try {
                 assets.fillStringToTextureAtlasMap();
             } catch (ReflectionException e) {
-                System.out.println("FUCK");
+                System.out.println("assets have not been loaded yet");
+                System.exit(1);
             }
             game.setScreen(new MainScreen(game));
         }

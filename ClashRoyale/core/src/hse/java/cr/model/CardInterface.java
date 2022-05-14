@@ -15,20 +15,11 @@ public class CardInterface extends Group {
     public CardInterface(Assets assets, Stage gameStage) {
         this.gameStage = gameStage;
         mana = new Mana();
-        addActor(new Card(
-                assets.get(Assets.cardsAtlas).findRegion("brownGolem"),
-                assets.get(Assets.brownGolem)));
-        addActor(new Card(
-                assets.get(Assets.cardsAtlas).findRegion("grayGolem"),
-                assets.get(Assets.grayGolem)));
-        addActor(new Card(
-                assets.get(Assets.cardsAtlas).findRegion("greenGoblin"),
-                assets.get(Assets.greenGoblin)));
-        addActor(new Card(
-                assets.get(Assets.cardsAtlas).findRegion("greenGolem"),
-                assets.get(Assets.greenGolem)));
+        addActor(new Card(assets, "brownGolem"));
+        addActor(new Card(assets, "grayGolem"));
+        addActor(new Card(assets, "greenGoblin"));
+        addActor(new Card(assets, "greenGolem"));
 
-        System.out.println();
         float width = getChild(0).getWidth();
 
         for (int i = 0; i < 4; i++) {
@@ -58,7 +49,7 @@ public class CardInterface extends Group {
                                 curCard.getX(), curCard.getY(), true));
 
                         final NewCharacterEvent characterEvent = new NewCharacterEvent();
-                        characterEvent.characterName = "";
+                        characterEvent.characterName = curCard.getName();
                         characterEvent.x = curCard.getX();
                         characterEvent.y = curCard.getY();
                         Starter.getClient().sendTCP(characterEvent);
