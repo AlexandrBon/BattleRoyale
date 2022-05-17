@@ -89,6 +89,8 @@ public class Character extends Actor {
         this.state = state;
     }
 
+    public boolean getTeam() {return myTeam;}
+
     @Override
     public void draw(Batch batch, float parentAlpha) {
         moveBy(2, 0);

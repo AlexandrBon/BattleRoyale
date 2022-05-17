@@ -15,16 +15,21 @@ import com.badlogic.gdx.utils.Array;
 public class Spell extends Actor {
     private TextureRegion curFrame;
     private float frameDelta = 0f;
-    private boolean myTeam;
-    private float lifiTime = 1000;
+    private final float radius;
+    private final boolean myTeam;
+    private float lifiTime;
     private Vector2 position;
-    private Animation<TextureRegion> spellAnimation;
+    private final Animation<TextureRegion> spellAnimation;
 
     public Spell(TextureAtlas atlas, float x, float y, boolean team) {
         myTeam = team;
         position = new Vector2();
         position.x = x;
         position.y = y;
+
+        //TODO: normal radius and lifeTime;
+        radius = 100;
+        lifiTime = 1000;
 
         curFrame = new Sprite();
         spellAnimation = new Animation<>(0.06f, atlas.getRegions());
@@ -53,5 +58,18 @@ public class Spell extends Actor {
         batch.draw(curFrame, getX(),  getY(),
                 (myTeam ? 1 : -1) * getWidth() * getScaleX(), getHeight() * getScaleY());
         frameDelta += Gdx.graphics.getDeltaTime();
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        for(Actor actor : getStage().getActors()) {
+            if (actor instanceof Character) {
+                Character character = (Character) actor;
+                if (character.getTeam() != myTeam && (Math.abs(character.getX() - getX()) <= radius)) {
+                    //TODO: make something;
+                }
+            }
+        }
     }
 }
