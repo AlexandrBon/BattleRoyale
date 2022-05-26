@@ -2,9 +2,12 @@ package hse.java.cr.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import hse.java.cr.client.Player;
+import hse.java.cr.wrappers.Assets;
 
 public class Character extends Actor {
     public enum State {
@@ -14,28 +17,27 @@ public class Character extends Actor {
     }
 
     private State state;
-    
     private final Array<Animation<TextureRegion>> golemAnimations;
     private TextureRegion curFrame;
     private float frameDelta = 0f;
     private Character currentOpponennt;
     private float timer;
-    private ShapeRenderer hpLine;
+    private Rectangle hpLine;
 
+    private final boolean mySide;
     private int attack = 1;
     private int maxHealth;
     private int health;
-    private boolean myTeam;
     private boolean isRun = true;
     
-    public Character(TextureAtlas characterAtlas, float x, float y, boolean team) {
+    public Character(String characterName, float x, float y, boolean side) {
+        TextureAtlas characterAtlas = Assets.stringToTextureAtlas(characterName);
         golemAnimations = new Array<>(State.values().length);
         setPosition(x, y);
         health = 100;
         curFrame = new Sprite();
-        myTeam = team;
         state = State.HIT;
-
+        mySide = side;
         int n = golemAnimations.size;
         n = 1; // TODO: add RUN and JUMP animation
 
@@ -55,10 +57,6 @@ public class Character extends Actor {
 
         setBounds(x, y, textureWidth * getScaleX(),
                 textureHeight * getScaleY());
-    }
-
-    public Character(TextureAtlas characterAtlas, boolean team) {
-       this(characterAtlas, 0, 0, team);
     }
 
     public int getHealth() {
@@ -87,11 +85,13 @@ public class Character extends Actor {
             return;
         }
         if (isRun) {
-            for(Actor actor : getStage().getActors()) {
+            Array.ArrayIterator<Actor> actorIterator =
+                    new Array.ArrayIterator<>(getStage().getActors());
+            for(Actor actor : actorIterator) {
                 if (actor instanceof Character) {
                     Character character = (Character) actor;
                     if (character != this && character.getHealth() > 0
-                            && (character.myTeam != myTeam) && character.getY() == getY()
+                            && (character.mySide != mySide) && character.getY() == getY()
                             && Math.abs(getX() - character.getX()) <= 100) {
                         isRun = false;
                         currentOpponennt = character;
@@ -99,10 +99,10 @@ public class Character extends Actor {
                     }
                 }
             }
-            if (myTeam) {
-                moveBy(1, 0);
+            if (mySide) {
+                moveBy(100 * delta, 0);
             } else {
-                moveBy(-1, 0);
+                moveBy(-100 * delta, 0);
             }
         } else {
             timer += delta;
@@ -120,18 +120,17 @@ public class Character extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        if (health == 0) {
+        System.out.println("Draw: " + getX());
+        if (health <= 0) {
             remove();
         }
+        frameDelta += Gdx.graphics.getDeltaTime();
         curFrame = golemAnimations.get(state.ordinal()).getKeyFrame(frameDelta);
 
         batch.draw(curFrame, getX(),  getY(),
-                getWidth() * getScaleX(), getHeight() * getScaleY());
-        frameDelta += Gdx.graphics.getDeltaTime();
-        decreaseHealth(0);
+                (Player.isLeft ? 1 : -1) * getWidth() * getScaleX(), getHeight() * getScaleY());
     }
 
     public void dispose() {
-        //hpLine.dispose();
     }
 }

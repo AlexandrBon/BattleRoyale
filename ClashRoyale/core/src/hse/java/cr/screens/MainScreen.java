@@ -48,12 +48,13 @@ public class MainScreen implements Screen {
             @Override
             public void clicked (InputEvent event, float x, float y) {
                 if (playButton.getState().equals(UIButton.State.HOVERED)) {
+                    setupClient();
+
                     playButton.setState(UIButton.State.PRESSED);
                     playButton.playSound();
                 }
             }
         });
-        setupClient();
     }
 
     private void setupClient() {
@@ -63,7 +64,7 @@ public class MainScreen implements Screen {
 
         try {
             client.start();
-            client.connect(15000, "192.168.0.130", 54555);
+            client.connect(10000, "localhost", 54555, 54777);
         } catch (Exception e) {
             System.out.println("client couldn't connect");
         }

@@ -39,7 +39,9 @@ public class GameScreen implements Screen {
         player = new Player(assets);
         Starter.getClient().addListener(new EventListener(player));
         Starter.getClient().addListener(new JoinResponseListener());
-        Starter.getClient().sendTCP(new JoinRequestEvent());
+        JoinRequestEvent joinRequestEvent = new JoinRequestEvent();
+        joinRequestEvent.username = "USERNAME";
+        Starter.getClient().sendTCP(joinRequestEvent);
     }
 
     @Override
