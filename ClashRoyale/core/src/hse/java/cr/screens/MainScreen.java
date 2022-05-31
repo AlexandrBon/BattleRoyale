@@ -9,6 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.esotericsoftware.kryonet.Client;
+import hse.java.cr.client.JoinResponseListener;
+import hse.java.cr.client.Player;
 import hse.java.cr.events.JoinRequestEvent;
 import hse.java.cr.wrappers.Assets;
 import hse.java.cr.client.EventListener;
@@ -24,7 +26,10 @@ public class MainScreen implements Screen {
     private OrthographicCamera camera;
     private Sprite gameBackground;
     private UIButton playButton;
+    private UIButton playButton2;
     private Stage stage;
+    public static boolean isGameRunning = false;
+    private boolean zoomingOut;
 
     public MainScreen(@NotNull Starter game) {
         this.game = game;
@@ -37,11 +42,14 @@ public class MainScreen implements Screen {
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         camera.setToOrtho(false);
+
         gameBackground = new Sprite(assets.get(Assets.mainMenuBackground));
         gameBackground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         playButton = new UIButton("Play", assets);
-
+        playButton2 = new UIButton("Play", assets);
+        playButton2.setBounds(0, 0, playButton2.getWidth(), playButton2.getHeight());
         stage.addActor(playButton);
+        stage.addActor(playButton2);
         Gdx.input.setInputProcessor(stage);
 
         stage.addListener(new ClickListener() {
@@ -49,9 +57,12 @@ public class MainScreen implements Screen {
             public void clicked (InputEvent event, float x, float y) {
                 if (playButton.getState().equals(UIButton.State.HOVERED)) {
                     setupClient();
-
                     playButton.setState(UIButton.State.PRESSED);
                     playButton.playSound();
+                } else if (playButton2.getState().equals(UIButton.State.HOVERED)) {
+                    //setupClient();
+                    playButton2.setState(UIButton.State.PRESSED);
+                    playButton2.playSound();
                 }
             }
         });
@@ -71,6 +82,11 @@ public class MainScreen implements Screen {
 
         // Success
         Starter.setClient(client);
+        Starter.getClient().addListener(new JoinResponseListener());
+        JoinRequestEvent joinRequestEvent = new JoinRequestEvent();
+        joinRequestEvent.username = "USERNAME";
+        joinRequestEvent.playersCount = 2;
+        Starter.getClient().sendTCP(joinRequestEvent);
     }
 
     @Override
@@ -89,12 +105,23 @@ public class MainScreen implements Screen {
         stage.draw();
 
         if (playButton.getState().equals(UIButton.State.PRESSED)) {
-            game.setScreen(new GameScreen(game));
+            if (isGameRunning) {
+                game.setScreen(new GameScreen(game));
+            } else {
+                if (camera.zoom <= 0.8) {
+                    zoomingOut = true;
+                } else if (camera.zoom >= 0.99) {
+                    zoomingOut = false;
+                }
+                float zoomSpeed = 0.002f;
+                camera.zoom += zoomingOut ? zoomSpeed : -zoomSpeed;
+            }
         }
     }
 
     @Override
     public void resize(int width, int height) {
+
     }
 
     @Override

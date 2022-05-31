@@ -1,5 +1,6 @@
 package hse.java.cr.events;
 
-public class JoinResponseEvent {
+public class EnemyInfo {
     public boolean isLeft;
+    public String enemyUsername;
 }

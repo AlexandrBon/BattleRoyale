@@ -2,9 +2,7 @@ package hse.java.cr.network;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.EndPoint;
-import hse.java.cr.events.JoinRequestEvent;
-import hse.java.cr.events.JoinResponseEvent;
-import hse.java.cr.events.NewCharacterEvent;
+import hse.java.cr.events.*;
 import org.jetbrains.annotations.NotNull;
 
 public class Network {
@@ -12,6 +10,10 @@ public class Network {
         Kryo kryo = endPoint.getKryo();
         kryo.register(NewCharacterEvent.class);
         kryo.register(JoinRequestEvent.class);
-        kryo.register(JoinResponseEvent.class);
+        kryo.register(EnemyInfo.class);
+        kryo.register(GameStartsEvent.class);
+        kryo.register(PlayerUpdateEvent.class);
+        kryo.register(PlayerUpdateEvent.ObjectState.class);
+        kryo.register(PlayerUpdateEvent.ObjectState[].class);
     }
 }

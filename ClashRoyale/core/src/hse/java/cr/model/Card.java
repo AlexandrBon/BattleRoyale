@@ -21,7 +21,7 @@ public class Card extends Actor {
     private State state = State.NORMAL;
     private int cost;
 
-    public Card(Assets assets, String characterName/*TextureAtlas characterAtlas*/) {
+    public Card(Assets assets, String characterName) {
         cardTexture = assets.get(Assets.cardsAtlas).findRegion(characterName);
         setName(characterName);
         this.characterAtlas = Assets.stringToTextureAtlas(characterName);
@@ -41,6 +41,7 @@ public class Card extends Actor {
         Color color = batch.getColor();
         batch.setColor(color.r, color.g, color.b, parentAlpha);
         batch.draw(cardTexture, getX(), getY(), getWidth(), getHeight());
+        //batch.setColor(getColor());
     }
 
     public void setCost(int cost) {
@@ -61,6 +62,6 @@ public class Card extends Actor {
 
 
     public void setCenterPosition(float x, float y) {
-        this.setPosition(x - getWidth() / 2, y - getHeight() / 2);
+        setPosition(x - getWidth() / 2, y - getHeight() / 2);
     }
 }

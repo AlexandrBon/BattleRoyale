@@ -40,7 +40,8 @@ public class GameInterface {
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 for (int i = 0; i < 4; i++) {
                     curCard = (Card) cardInterface.getChild(i);
-                    if (curCard.getRight() >= x && curCard.getTop() >= y) {
+                    if (curCard.getRight() >= x && curCard.getTop() >= y
+                        && curCard.getState().equals(Card.State.TOUCH_DOWN)) {
                         curCard.setState(Card.State.TOUCH_UP);
                         break;
                     }

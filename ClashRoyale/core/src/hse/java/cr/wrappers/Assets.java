@@ -72,12 +72,12 @@ public class Assets {
         return manager.update(millis);
     }
 
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public void fillStringToTextureAtlasMap() throws ReflectionException {
         for (Field field : getFields(Assets.class)) {
-            try {
+            if (get((AssetDescriptor) field.get(null)) instanceof TextureAtlas) {
                 stringToTextureAtlas.put(field.getName(),
-                        get((AssetDescriptor<TextureAtlas>) field.get(field)));
-            } catch (ClassCastException ignored) {
+                        get((AssetDescriptor<TextureAtlas>) field.get(null)));
             }
         }
     }

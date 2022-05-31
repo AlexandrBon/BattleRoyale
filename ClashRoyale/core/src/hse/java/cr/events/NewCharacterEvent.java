@@ -4,6 +4,7 @@ public class NewCharacterEvent {
     public String characterName;
     public float x;
     public float y;
+    public int gameIndex;
 
     public NewCharacterEvent() {
 

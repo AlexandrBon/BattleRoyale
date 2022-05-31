@@ -16,6 +16,7 @@ public class Character extends Actor {
         JUMP
     }
 
+    private int characterIndex;
     private State state;
     private final Array<Animation<TextureRegion>> golemAnimations;
     private TextureRegion curFrame;
@@ -30,10 +31,11 @@ public class Character extends Actor {
     private int health;
     private boolean isRun = true;
     
-    public Character(String characterName, float x, float y, boolean side) {
+    public Character(String characterName, float x, float y, boolean side, int index) {
+        characterIndex = index;
         TextureAtlas characterAtlas = Assets.stringToTextureAtlas(characterName);
         golemAnimations = new Array<>(State.values().length);
-        setPosition(x, y);
+
         health = 100;
         curFrame = new Sprite();
         state = State.HIT;
@@ -71,12 +73,12 @@ public class Character extends Actor {
         this.health -= damage;
     }
 
-    public State getState() {
-        return state;
+    public void setIndex(int index) {
+        characterIndex = index;
     }
 
-    public void setState(State state) {
-        this.state = state;
+    public int getIndex() {
+        return characterIndex;
     }
 
     @Override
@@ -99,11 +101,11 @@ public class Character extends Actor {
                     }
                 }
             }
-            if (mySide) {
-                moveBy(100 * delta, 0);
+            /*if (mySide) {
+                moveBy(50, 0);
             } else {
-                moveBy(-100 * delta, 0);
-            }
+                moveBy(-50, 0);
+            }*/
         } else {
             timer += delta;
             if (timer >= 1) {
@@ -120,7 +122,6 @@ public class Character extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        System.out.println("Draw: " + getX());
         if (health <= 0) {
             remove();
         }
@@ -128,7 +129,8 @@ public class Character extends Actor {
         curFrame = golemAnimations.get(state.ordinal()).getKeyFrame(frameDelta);
 
         batch.draw(curFrame, getX(),  getY(),
-                (Player.isLeft ? 1 : -1) * getWidth() * getScaleX(), getHeight() * getScaleY());
+                (mySide ? 1 : -1) * getWidth() * getScaleX(),
+                getHeight() * getScaleY());
     }
 
     public void dispose() {
