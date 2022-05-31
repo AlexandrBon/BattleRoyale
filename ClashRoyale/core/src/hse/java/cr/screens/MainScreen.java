@@ -20,6 +20,7 @@ public class MainScreen implements Screen {
     private OrthographicCamera camera;
     private Sprite gameBackground;
     private UIButton playButton;
+    private UIButton deckButton;
     private Stage stage;
 
     public MainScreen(@NotNull Starter game) {
@@ -36,8 +37,11 @@ public class MainScreen implements Screen {
         gameBackground = new Sprite(assets.get(Assets.mainMenuBackground));
         gameBackground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         playButton = new UIButton("Play", assets);
+        deckButton = new UIButton("Play", assets);
+        deckButton.moveBy(0, -100);
 
         stage.addActor(playButton);
+        stage.addActor(deckButton);
         Gdx.input.setInputProcessor(stage);
 
         stage.addListener(new ClickListener() {
@@ -46,6 +50,10 @@ public class MainScreen implements Screen {
                 if (playButton.getState().equals(UIButton.State.HOVERED)) {
                     playButton.setState(UIButton.State.PRESSED);
                     playButton.playSound();
+                }
+                if (deckButton.getState().equals(UIButton.State.HOVERED)) {
+                    deckButton.setState(UIButton.State.PRESSED);
+                    deckButton.playSound();
                 }
             }
         });
@@ -68,6 +76,9 @@ public class MainScreen implements Screen {
 
         if (playButton.getState().equals(UIButton.State.PRESSED)) {
             game.setScreen(new GameScreen(game));
+        }
+        if (deckButton.getState().equals(UIButton.State.PRESSED)) {
+            game.setScreen(new DeckScreen(game, this));
         }
     }
 
@@ -94,6 +105,7 @@ public class MainScreen implements Screen {
     public void dispose() {
         batch.dispose();
         playButton.dispose();
+        deckButton.dispose();
         stage.dispose();
     }
 }
