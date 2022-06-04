@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
 import hse.java.cr.wrappers.Assets;
 import hse.java.cr.client.Starter;
+import hse.java.cr.wrappers.FontSizeHandler;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.Sys;
 
@@ -45,9 +46,11 @@ public class LoadingScreen implements Screen {
         loadingBackground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         batch = new SpriteBatch();
-        font = new BitmapFont();
-        font.getData().scale(5);
-        font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
+
+        font = FontSizeHandler.INSTANCE.getFont(
+                Gdx.graphics.getHeight() / 15,
+                Color.ORANGE
+        );
     }
 
     @Override
@@ -64,7 +67,7 @@ public class LoadingScreen implements Screen {
 
         loadingBackground.draw(batch);
         font.draw(batch, Integer.valueOf((int)(progress * 100f)).toString() + "%",
-                (float)LOAD_LINE_WIDTH / 2 - 70, LOAD_LINE_HEIGHT + 100);
+                (float)LOAD_LINE_WIDTH / 2, LOAD_LINE_HEIGHT + 50);
 
         batch.end();
 
@@ -76,7 +79,7 @@ public class LoadingScreen implements Screen {
             try {
                 assets.fillStringToTextureAtlasMap();
             } catch (ReflectionException e) {
-                System.out.println("assets have not been loaded yet");
+                System.out.println("please, rerun game");
                 System.exit(1);
             }
             game.setScreen(new MainScreen(game));

@@ -6,6 +6,7 @@ import com.esotericsoftware.kryonet.Server;
 import hse.java.cr.events.JoinRequestEvent;
 import hse.java.cr.server.ServerFoundation;
 import hse.java.cr.server.ServerGame;
+import hse.java.cr.server.ServerGame.GameStatus;
 import hse.java.cr.server.ServerPlayer;
 
 import java.util.Arrays;
@@ -28,14 +29,22 @@ public class JoinListener extends Listener {
             ServerGame serverGame =
                     Arrays.stream(serverGames)
                             .parallel()
-                            .filter(game -> game.players.items.length == playersCount)
+                            .filter(game -> game.players.items.length == playersCount
+                                            && (game.gameStatus.equals(GameStatus.EMPTY)
+                                            || game.gameStatus.equals(GameStatus.WAITING))
+                            )
                             .findAny()
                             .orElse(new ServerGame(playersCount));
 
             if (serverGame.gameStatus.equals(ServerGame.GameStatus.EMPTY)) {
                 ServerFoundation.INSTANCE.addGame(serverGame);
             }
-            serverGame.addPlayer(new ServerPlayer(connection));
+
+            serverGame.addPlayer(new ServerPlayer(
+                    connection,
+                    joinRequestEvent.screenWidth,
+                    joinRequestEvent.screenHeight
+            ));
 
             if (serverGame.increasePlayersCount() == playersCount) {
                 serverGame.start();

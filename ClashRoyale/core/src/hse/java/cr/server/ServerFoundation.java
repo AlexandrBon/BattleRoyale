@@ -10,11 +10,18 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class ServerFoundation {
     public static ServerFoundation INSTANCE;
     private final Server server;
     private static final Map<Integer, ServerGame> serverGames = new HashMap<>();
+    public static final ScheduledExecutorService executorService =
+            Executors.newScheduledThreadPool(8);
 
     public Server getServer() {
         return server;
@@ -41,6 +48,7 @@ public class ServerFoundation {
         server.addListener(new JoinListener());
 
         bindServer();
+
     }
 
     private void bindServer() {
@@ -52,7 +60,11 @@ public class ServerFoundation {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         ServerFoundation.INSTANCE = new ServerFoundation();
+        /*while (true) {
+            Thread.currentThread().wait();
+
+        }*/
     }
 }

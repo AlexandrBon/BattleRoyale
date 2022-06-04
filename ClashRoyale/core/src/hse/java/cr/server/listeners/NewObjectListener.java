@@ -18,16 +18,16 @@ public class NewObjectListener extends Listener {
             ServerPlayer player1 = game.getPlayerByConnection(connection);
             ServerPlayer player2 = game.getEnemy(player1);
 
-            player1.getServerCharacters().add(new ServerCharacter(
-                    player1.getServerCharacters().size,
+            player1.addCharacter(new ServerCharacter(
+                    player1.getNewCharacterIndex(),
                     character.x,
                     character.y,
                     true
             ));
 
             player2.getServerCharacters().add(new ServerCharacter(
-                    player2.getServerCharacters().size,
-                    800 - character.x,
+                    player2.getNewCharacterIndex(),
+                    player2.getScreenWidth() - character.x,
                     character.y,
                     false
             ));

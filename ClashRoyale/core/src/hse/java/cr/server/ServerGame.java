@@ -2,6 +2,7 @@ package hse.java.cr.server;
 
 import com.badlogic.gdx.utils.Array;
 import com.esotericsoftware.kryonet.Connection;
+import hse.java.cr.client.Player;
 import hse.java.cr.events.EnemyInfo;
 import hse.java.cr.events.GameStartsEvent;
 import hse.java.cr.events.PlayerUpdateEvent;
@@ -11,6 +12,7 @@ import static hse.java.cr.server.ServerPlayer.PlayerStatus;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 public class ServerGame implements Runnable {
     public enum GameStatus {
@@ -19,11 +21,14 @@ public class ServerGame implements Runnable {
         RUNNING,
         END
     }
+
     public GameStatus gameStatus;
     public int serverGameIndex;
     private int currentPlayersCount = 0;
     public Array<ServerPlayer> players;
     private final Array<SimpleEntry<ServerPlayer, ServerPlayer>> currentBattles;
+    private long pastTime = System.nanoTime();
+    private double delta = 0;
 
     public ServerGame(int playersCount) {
         gameStatus = GameStatus.EMPTY;
@@ -40,23 +45,17 @@ public class ServerGame implements Runnable {
         GameStartsEvent gameStartsEvent = new GameStartsEvent();
         gameStartsEvent.gameIndex = serverGameIndex;
         for (ServerPlayer player : players.items) {
-            sendToPlayer(player.getConnection(), gameStartsEvent);
+            player.getConnection().sendTCP(gameStartsEvent);
         }
-        final Thread thread = new Thread(this);
-        thread.setName("UpdateThread");
-        thread.start();
+
+        ServerFoundation.executorService
+                .scheduleAtFixedRate(this, 0, 60, TimeUnit.MILLISECONDS);
     }
 
     public void splitIntoPairs() {
         currentBattles.clear();
         ServerPlayer first = null, second = null;
         for (ServerPlayer player : players.items) {
-            if (first != null && second != null) {
-                currentBattles.add(new SimpleEntry<>(first, second));
-                first = null;
-                second = null;
-                continue;
-            }
             boolean flag = player.getStatus().equals(PlayerStatus.EMPTY)
                     || player.getStatus().equals(PlayerStatus.WIN);
             if (first != null && flag) {
@@ -64,9 +63,12 @@ public class ServerGame implements Runnable {
             } else if (flag) {
                 first = player;
             }
+            if (first != null && second != null) {
+                currentBattles.add(new SimpleEntry<>(first, second));
+                first = null;
+                second = null;
+            }
         }
-        assert first != null && second != null;
-        currentBattles.add(new SimpleEntry<>(first, second));
         sendOpponentInfos();
     }
 
@@ -78,25 +80,20 @@ public class ServerGame implements Runnable {
             player1 = pair.getKey();
             player2 = pair.getValue();
 
-            enemyInfo.enemyUsername = player1.getName();
+            enemyInfo.enemyUsername = String.valueOf(player1.getName());
             enemyInfo.isLeft = true;
-            sendToPlayer(player2.getConnection(), enemyInfo);
+            assert player2 != null;
+            player2.getConnection().sendTCP(enemyInfo);
 
-            enemyInfo.enemyUsername = player2.getName();
+            enemyInfo.enemyUsername = String.valueOf(player2.getName());
             enemyInfo.isLeft = false;
-            sendToPlayer(player1.getConnection(), enemyInfo);
+            player1.getConnection().sendTCP(enemyInfo);
         }
     }
 
     public void addPlayer(ServerPlayer player) {
         players.add(player);
         gameStatus = GameStatus.WAITING;
-    }
-
-    private void sendToPlayer(Connection connection,
-                                  Object object) {
-        ServerFoundation.INSTANCE.getServer()
-                .sendToTCP(connection.getID(), object);
     }
 
     public ServerPlayer getPlayerByConnection(final Connection connection) {
@@ -119,7 +116,7 @@ public class ServerGame implements Runnable {
 
     public void tick() {
         ServerPlayer player1, player2;
-        for(SimpleEntry<ServerPlayer, ServerPlayer>
+        for (SimpleEntry<ServerPlayer, ServerPlayer>
                 pair : currentBattles.items) {
             if (pair == null) {
                 break;
@@ -134,8 +131,32 @@ public class ServerGame implements Runnable {
             final PlayerUpdateEvent player1UpdateEvent = getPlayerUpdateEvent(player1);
             final PlayerUpdateEvent player2UpdateEvent = getPlayerUpdateEvent(player2);
 
-            sendToPlayer(player1.getConnection(), player1UpdateEvent);
-            sendToPlayer(player2.getConnection(), player2UpdateEvent);
+            player1.getConnection().sendTCP(player1UpdateEvent);
+            player2.getConnection().sendTCP(player2UpdateEvent);
+        }
+    }
+
+    private void checkAndUpdateGameState() {
+        int empty = 0, win = 0, lose = 0;
+        for (ServerPlayer player : players.items) {
+            switch (player.getStatus()) {
+                case WIN: {
+                    win++;
+                    break;
+                }
+                case LOSE: {
+                    lose++;
+                    break;
+                }
+                case EMPTY: {
+                    empty++;
+                    break;
+                }
+            }
+        }
+        if (win == 1 && lose == players.items.length - 1) {
+            gameStatus = GameStatus.END;
+            Thread.currentThread().notify();
         }
     }
 
@@ -156,33 +177,22 @@ public class ServerGame implements Runnable {
 
     @Override
     public void run() {
-        long pastTime = System.nanoTime();
         double amountOfTicks = 60;
-        double ns = 1000000000 / amountOfTicks;
-        double delta = 0;
-
-        while (gameStatus.equals(GameStatus.RUNNING)) {
-            try {
-                Thread.sleep((long) (60F / amountOfTicks));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            long now = System.nanoTime();
-            delta += (now - pastTime) / ns;
-            pastTime = now;
-
-            while (delta > 0) {
-                tick();
-                delta--;
-            }
+        try {
+            Thread.sleep((long) (60F / amountOfTicks));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
+        long now = System.nanoTime();
+        double nanoSeconds = 1000000000 / amountOfTicks;
+        delta += (now - pastTime) / nanoSeconds;
+        pastTime = now;
 
-    }
-
-    public int getCurrentPlayersCount() {
-        return currentPlayersCount;
+        while (delta > 0) {
+            tick();
+            delta--;
+        }
     }
 
     public int increasePlayersCount() {

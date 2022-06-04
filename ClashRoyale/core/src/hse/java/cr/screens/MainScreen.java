@@ -26,7 +26,6 @@ public class MainScreen implements Screen {
     private OrthographicCamera camera;
     private Sprite gameBackground;
     private UIButton playButton;
-    private UIButton playButton2;
     private Stage stage;
     public static boolean isGameRunning = false;
     private boolean zoomingOut;
@@ -45,11 +44,10 @@ public class MainScreen implements Screen {
 
         gameBackground = new Sprite(assets.get(Assets.mainMenuBackground));
         gameBackground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
         playButton = new UIButton("Play", assets);
-        playButton2 = new UIButton("Play", assets);
-        playButton2.setBounds(0, 0, playButton2.getWidth(), playButton2.getHeight());
         stage.addActor(playButton);
-        stage.addActor(playButton2);
+
         Gdx.input.setInputProcessor(stage);
 
         stage.addListener(new ClickListener() {
@@ -59,10 +57,6 @@ public class MainScreen implements Screen {
                     setupClient();
                     playButton.setState(UIButton.State.PRESSED);
                     playButton.playSound();
-                } else if (playButton2.getState().equals(UIButton.State.HOVERED)) {
-                    //setupClient();
-                    playButton2.setState(UIButton.State.PRESSED);
-                    playButton2.playSound();
                 }
             }
         });
@@ -86,6 +80,8 @@ public class MainScreen implements Screen {
         JoinRequestEvent joinRequestEvent = new JoinRequestEvent();
         joinRequestEvent.username = "USERNAME";
         joinRequestEvent.playersCount = 2;
+        joinRequestEvent.screenHeight = Gdx.graphics.getHeight();
+        joinRequestEvent.screenWidth = Gdx.graphics.getWidth();
         Starter.getClient().sendTCP(joinRequestEvent);
     }
 
