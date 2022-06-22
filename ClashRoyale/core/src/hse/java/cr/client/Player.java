@@ -49,10 +49,9 @@ public class Player {
     }
 
     public void update(float delta) {
-        System.out.println(objectManager.serverCharacterPositions.keySet());
-        Array<Actor> characters = gameStage.getActors();
+        Actor[] actors = gameStage.getActors().items;
         Vector2 characterPos = new Vector2();
-        for (Actor actor : characters.items) {
+        for (Actor actor : actors) {
             Character character;
             if (actor instanceof Character) {
                 character = (Character) actor;
@@ -85,7 +84,7 @@ public class Player {
         gameInterface.getCardInterface().getMana().draw(batch.getProjectionMatrix(), delta);
         {
             batch.begin();
-            font.draw(batch, enemyUsername,
+            font.draw(batch, "username",
                     Gdx.graphics.getWidth() - 300, Gdx.graphics.getHeight());
             batch.end();
         }

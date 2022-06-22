@@ -7,7 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import hse.java.cr.client.Player;
+import hse.java.cr.client.Starter;
 import hse.java.cr.wrappers.Assets;
+import jdk.swing.interop.SwingInterOpUtils;
 
 public class Character extends Actor {
     public enum State {
@@ -45,18 +47,15 @@ public class Character extends Actor {
 
         for (int i = 0; i < n; i++) {
             golemAnimations.add(new Animation<>(0.06f, characterAtlas.getRegions()));
-            golemAnimations.get(i).setPlayMode(Animation.PlayMode.LOOP);
+            golemAnimations.get(i).setPlayMode(Animation.PlayMode.LOOP_REVERSED);
             // TODO: JUMP PlayMode is .NORMAL
         }
 
         float textureWidth = golemAnimations.get(0).getKeyFrame(0).getRegionWidth();
         float textureHeight = golemAnimations.get(0).getKeyFrame(0).getRegionHeight();
-
-        float height = Gdx.graphics.getHeight() / 3f;
-        float width = height * textureWidth / textureHeight;
-
-        setScale(width / textureWidth, height / textureHeight);
-
+        System.out.println(textureWidth + " " + textureHeight);
+        float scale = Gdx.graphics.getHeight() / 8f / textureHeight;
+        setScale(scale, scale);
         setBounds(x, y, textureWidth * getScaleX(),
                 textureHeight * getScaleY());
     }
@@ -87,13 +86,12 @@ public class Character extends Actor {
             return;
         }
         if (isRun) {
-            Array.ArrayIterator<Actor> actorIterator =
-                    new Array.ArrayIterator<>(getStage().getActors());
-            for(Actor actor : actorIterator) {
+            Actor[] actors = getStage().getActors().items;
+            for(Actor actor : actors) {
                 if (actor instanceof Character) {
                     Character character = (Character) actor;
                     if (character != this && character.getHealth() > 0
-                            && (character.mySide != mySide) && character.getY() == getY()
+                            && (character.mySide != mySide) && Math.abs(character.getY() - getY()) < 20
                             && Math.abs(getX() - character.getX()) <= 100) {
                         isRun = false;
                         currentOpponennt = character;
@@ -101,11 +99,13 @@ public class Character extends Actor {
                     }
                 }
             }
-            /*if (mySide) {
-                moveBy(50, 0);
-            } else {
-                moveBy(-50, 0);
-            }*/
+            if (Starter.getClient() == null) {
+                if (mySide) {
+                    moveBy(1, 0);
+                } else {
+                    moveBy(-1, 0);
+                }
+            }
         } else {
             timer += delta;
             if (timer >= 1) {
@@ -113,7 +113,7 @@ public class Character extends Actor {
                 currentOpponennt.setHealth(opponentHealth);
                 if (opponentHealth == 0) {
                     isRun = true;
-                    currentOpponennt = null;
+                    currentOpponennt.remove();
                 }
                 timer = 0;
             }
@@ -127,10 +127,9 @@ public class Character extends Actor {
         }
         frameDelta += Gdx.graphics.getDeltaTime();
         curFrame = golemAnimations.get(state.ordinal()).getKeyFrame(frameDelta);
-
-        batch.draw(curFrame, getX(),  getY(),
-                (mySide ? 1 : -1) * getWidth() * getScaleX(),
-                getHeight() * getScaleY());
+        batch.draw(curFrame, getX(), getY(),
+                (mySide ? 1 : -1) * curFrame.getRegionWidth() * getScaleX(),
+                curFrame.getRegionHeight() * getScaleY());
     }
 
     public void dispose() {

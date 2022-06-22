@@ -25,7 +25,7 @@ public class Card extends Actor {
         cardTexture = assets.get(Assets.cardsAtlas).findRegion(characterName);
         setName(characterName);
         this.characterAtlas = Assets.stringToTextureAtlas(characterName);
-        cost = 3;
+        cost = 1;
 
         float scale = Gdx.graphics.getHeight() / 5f / cardTexture.getRegionHeight();
         setBounds(0, 0, cardTexture.getRegionWidth() * scale,

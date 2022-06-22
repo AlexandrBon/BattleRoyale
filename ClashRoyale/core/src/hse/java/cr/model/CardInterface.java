@@ -76,7 +76,9 @@ public class CardInterface extends Group {
                         characterEvent.x = curCard.getX();
                         characterEvent.y = curCard.getY();
                         characterEvent.gameIndex = Player.gameIndex;
-                        Starter.getClient().sendTCP(characterEvent);
+                        if (Starter.getClient() != null) {
+                            Starter.getClient().sendTCP(characterEvent);
+                        }
 
                         gameStage.addActor(new Character(
                                 curCard.getName(),

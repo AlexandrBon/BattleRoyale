@@ -33,7 +33,7 @@ public class Assets {
             new AssetDescriptor<>("greenGolem/golemAnimation_2.atlas", TextureAtlas.class);
 
     public static final AssetDescriptor<TextureAtlas> brownGolem =
-            new AssetDescriptor<>("brownGolem/golemAnimation_3.atlas", TextureAtlas.class);
+            new AssetDescriptor<>("brownGolem/brownGolemWalking.atlas", TextureAtlas.class);
 
     public static final AssetDescriptor<TextureAtlas> cardsAtlas =
             new AssetDescriptor<>("cardTextures/cardTextures.atlas", TextureAtlas.class);

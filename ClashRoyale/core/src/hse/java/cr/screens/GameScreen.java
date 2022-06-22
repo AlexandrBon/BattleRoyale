@@ -33,7 +33,9 @@ public class GameScreen implements Screen {
         gameBackground = new Sprite(assets.get(Assets.gameBackground));
         gameBackground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         player = new Player(assets);
-        Starter.getClient().addListener(new EventListener(player));
+        if (Starter.getClient() != null) {
+            Starter.getClient().addListener(new EventListener(player));
+        }
     }
 
     @Override
