@@ -1,0 +1,411 @@
+ui.png
+size: 2048, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+Audio Square Button
+  rotate: false
+  xy: 508, 308
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+Audio col_Square Button
+  rotate: false
+  xy: 2, 206
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+Back col_Button
+  rotate: false
+  xy: 1210, 818
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Back Button
+  rotate: false
+  xy: 304, 716
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Back Square Button
+  rotate: false
+  xy: 1010, 512
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+Back col_Square Button
+  rotate: false
+  xy: 908, 512
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+Continue col_Button
+  rotate: false
+  xy: 1210, 716
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Continue Button
+  rotate: false
+  xy: 2, 920
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Controls col_Button
+  rotate: false
+  xy: 1512, 920
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Controls Button
+  rotate: false
+  xy: 304, 512
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Down Square Button
+  rotate: false
+  xy: 1716, 818
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+Down col_Square Button
+  rotate: false
+  xy: 206, 206
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+Exit col_Button
+  rotate: false
+  xy: 606, 716
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Exit Button
+  rotate: false
+  xy: 606, 818
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Home Square Button
+  rotate: false
+  xy: 1112, 512
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+Home col_Square Button
+  rotate: false
+  xy: 912, 410
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+Info Square Button
+  rotate: false
+  xy: 1614, 716
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+Info col_Square Button
+  rotate: false
+  xy: 810, 410
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+Load col_Button
+  rotate: false
+  xy: 606, 920
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Load Button
+  rotate: false
+  xy: 908, 818
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Menu col_Button
+  rotate: false
+  xy: 304, 920
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Menu Button
+  rotate: false
+  xy: 304, 410
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Music Square Button
+  rotate: false
+  xy: 2, 104
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+Music col_Square Button
+  rotate: false
+  xy: 606, 410
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+New Game col_Button
+  rotate: false
+  xy: 606, 512
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+New game Button
+  rotate: false
+  xy: 304, 614
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Next Square Button
+  rotate: false
+  xy: 1614, 818
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+Next col_Square Button
+  rotate: false
+  xy: 1512, 818
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+On Off Square Button
+  rotate: false
+  xy: 104, 206
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+On Off col_Square Button
+  rotate: false
+  xy: 708, 410
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+Options col_Button
+  rotate: false
+  xy: 2, 410
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Options Button
+  rotate: false
+  xy: 908, 716
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Pause Square Button
+  rotate: false
+  xy: 1312, 614
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+Pause col_Square Button
+  rotate: false
+  xy: 1916, 920
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+Play Button
+  rotate: false
+  xy: 606, 614
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Play Square Button
+  rotate: false
+  xy: 1210, 614
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+Play col_Button
+  rotate: false
+  xy: 2, 614
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Play col_Square Button
+  rotate: false
+  xy: 104, 104
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+Questionmark Square Button
+  rotate: false
+  xy: 2, 2
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+Questionmark col_Square Button
+  rotate: false
+  xy: 1818, 818
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+Quit col_Button
+  rotate: false
+  xy: 2, 716
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Quit Button
+  rotate: false
+  xy: 2, 308
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Resume col_Button
+  rotate: false
+  xy: 2, 818
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Resume Button
+  rotate: false
+  xy: 304, 818
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Return Square Button
+  rotate: false
+  xy: 610, 308
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+Return col_Square Button
+  rotate: false
+  xy: 406, 308
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+Settings col_Button
+  rotate: false
+  xy: 908, 920
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Settings Button
+  rotate: false
+  xy: 1210, 920
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Settings Square Button
+  rotate: false
+  xy: 1512, 716
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+Settings col_Square Button
+  rotate: false
+  xy: 304, 308
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+Start col_Button
+  rotate: false
+  xy: 908, 614
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Start Button
+  rotate: false
+  xy: 2, 512
+  size: 300, 100
+  orig: 300, 100
+  offset: 0, 0
+  index: -1
+Up Square Button
+  rotate: false
+  xy: 1414, 614
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+Up col_Square Button
+  rotate: false
+  xy: 1716, 716
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+V Square Button
+  rotate: false
+  xy: 104, 2
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+V col_Square Button
+  rotate: false
+  xy: 1814, 920
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+X Square Button
+  rotate: false
+  xy: 308, 206
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+X col_Square Button
+  rotate: false
+  xy: 206, 104
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1

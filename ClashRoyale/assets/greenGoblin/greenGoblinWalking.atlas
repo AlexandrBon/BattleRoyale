@@ -1,0 +1,174 @@
+
+greenGoblinWalking.png
+size: 2048, 2048
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+0_Goblin_Walking
+  rotate: false
+  xy: 2, 1614
+  size: 450, 268
+  orig: 450, 450
+  offset: 0, 71
+  index: 14
+0_Goblin_Walking
+  rotate: false
+  xy: 2, 1344
+  size: 450, 268
+  orig: 450, 450
+  offset: 0, 72
+  index: 15
+0_Goblin_Walking
+  rotate: false
+  xy: 454, 1615
+  size: 450, 267
+  orig: 450, 450
+  offset: 0, 74
+  index: 17
+0_Goblin_Walking
+  rotate: false
+  xy: 2, 1075
+  size: 450, 267
+  orig: 450, 450
+  offset: 0, 75
+  index: 6
+0_Goblin_Walking
+  rotate: false
+  xy: 454, 1346
+  size: 450, 267
+  orig: 450, 450
+  offset: 0, 74
+  index: 19
+0_Goblin_Walking
+  rotate: false
+  xy: 906, 1615
+  size: 450, 267
+  orig: 450, 450
+  offset: 0, 71
+  index: 11
+0_Goblin_Walking
+  rotate: false
+  xy: 2, 806
+  size: 450, 267
+  orig: 450, 450
+  offset: 0, 73
+  index: 16
+0_Goblin_Walking
+  rotate: false
+  xy: 454, 1077
+  size: 450, 267
+  orig: 450, 450
+  offset: 0, 71
+  index: 13
+0_Goblin_Walking
+  rotate: false
+  xy: 906, 1346
+  size: 450, 267
+  orig: 450, 450
+  offset: 0, 74
+  index: 18
+0_Goblin_Walking
+  rotate: false
+  xy: 1358, 1615
+  size: 450, 267
+  orig: 450, 450
+  offset: 0, 71
+  index: 12
+0_Goblin_Walking
+  rotate: false
+  xy: 2, 538
+  size: 450, 266
+  orig: 450, 450
+  offset: 0, 74
+  index: 4
+0_Goblin_Walking
+  rotate: false
+  xy: 454, 809
+  size: 450, 266
+  orig: 450, 450
+  offset: 0, 74
+  index: 9
+0_Goblin_Walking
+  rotate: false
+  xy: 906, 1078
+  size: 450, 266
+  orig: 450, 450
+  offset: 0, 73
+  index: 22
+0_Goblin_Walking
+  rotate: false
+  xy: 1358, 1347
+  size: 450, 266
+  orig: 450, 450
+  offset: 0, 74
+  index: 3
+0_Goblin_Walking
+  rotate: false
+  xy: 2, 270
+  size: 450, 266
+  orig: 450, 450
+  offset: 0, 74
+  index: 8
+0_Goblin_Walking
+  rotate: false
+  xy: 454, 541
+  size: 450, 266
+  orig: 450, 450
+  offset: 0, 75
+  index: 5
+0_Goblin_Walking
+  rotate: false
+  xy: 906, 810
+  size: 450, 266
+  orig: 450, 450
+  offset: 0, 73
+  index: 10
+0_Goblin_Walking
+  rotate: false
+  xy: 1358, 1079
+  size: 450, 266
+  orig: 450, 450
+  offset: 0, 73
+  index: 2
+0_Goblin_Walking
+  rotate: false
+  xy: 2, 2
+  size: 450, 266
+  orig: 450, 450
+  offset: 0, 75
+  index: 7
+0_Goblin_Walking
+  rotate: false
+  xy: 454, 273
+  size: 450, 266
+  orig: 450, 450
+  offset: 0, 74
+  index: 20
+0_Goblin_Walking
+  rotate: false
+  xy: 906, 543
+  size: 450, 265
+  orig: 450, 450
+  offset: 0, 73
+  index: 1
+0_Goblin_Walking
+  rotate: false
+  xy: 1358, 812
+  size: 450, 265
+  orig: 450, 450
+  offset: 0, 74
+  index: 21
+0_Goblin_Walking
+  rotate: false
+  xy: 454, 6
+  size: 450, 265
+  orig: 450, 450
+  offset: 0, 72
+  index: 0
+0_Goblin_Walking
+  rotate: false
+  xy: 906, 276
+  size: 450, 265
+  orig: 450, 450
+  offset: 0, 73
+  index: 23

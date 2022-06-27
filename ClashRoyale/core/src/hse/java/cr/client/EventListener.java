@@ -7,6 +7,7 @@ import com.esotericsoftware.kryonet.Listener;
 import hse.java.cr.events.NewCharacterEvent;
 import hse.java.cr.events.PlayerUpdateEvent;
 import hse.java.cr.events.PlayerUpdateEvent.ObjectState;
+import hse.java.cr.events.StatusEvent;
 
 import java.util.Map;
 
@@ -29,12 +30,18 @@ public class EventListener extends Listener {
             );
         } else if (object instanceof PlayerUpdateEvent) {
             PlayerUpdateEvent playerUpdateEvent = (PlayerUpdateEvent) object;
-            Map<Integer, Vector2> map = player.objectManager.serverCharacterPositions;
+            Map<Integer, Vector2> map = player.serverCharacterPositions;
             ObjectState[] objectStates = playerUpdateEvent.objectStates;
             for (ObjectState state : objectStates) {
                 assert state != null;
                 map.put(state.index, new Vector2(state.x, state.y));
             }
+        } else if (object instanceof StatusEvent) {
+            player.setStatus(
+                    ((StatusEvent) object).win
+                            ? Player.Status.WIN
+                            : Player.Status.LOSE
+            );
         }
     }
 }

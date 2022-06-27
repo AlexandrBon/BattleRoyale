@@ -2,9 +2,11 @@ package hse.java.cr.client;
 
 import com.badlogic.gdx.Game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.esotericsoftware.kryonet.Client;
 import hse.java.cr.wrappers.Assets;
-import hse.java.cr.screens.LoadingScreen;
+import hse.java.cr.client.screens.LoadingScreen;
 
 public class Starter extends Game {
     private Assets assets;

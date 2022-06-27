@@ -1,0 +1,174 @@
+
+greenOgreWalking.png
+size: 2048, 2048
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+0_Ogre_Walking
+  rotate: false
+  xy: 2, 1691
+  size: 450, 281
+  orig: 450, 450
+  offset: 0, 72
+  index: 15
+0_Ogre_Walking
+  rotate: false
+  xy: 2, 1408
+  size: 450, 281
+  orig: 450, 450
+  offset: 0, 71
+  index: 13
+0_Ogre_Walking
+  rotate: false
+  xy: 454, 1692
+  size: 450, 280
+  orig: 450, 450
+  offset: 0, 71
+  index: 12
+0_Ogre_Walking
+  rotate: false
+  xy: 2, 1126
+  size: 450, 280
+  orig: 450, 450
+  offset: 0, 74
+  index: 17
+0_Ogre_Walking
+  rotate: false
+  xy: 454, 1410
+  size: 450, 280
+  orig: 450, 450
+  offset: 0, 72
+  index: 14
+0_Ogre_Walking
+  rotate: false
+  xy: 906, 1692
+  size: 450, 280
+  orig: 450, 450
+  offset: 0, 72
+  index: 11
+0_Ogre_Walking
+  rotate: false
+  xy: 2, 844
+  size: 450, 280
+  orig: 450, 450
+  offset: 0, 73
+  index: 16
+0_Ogre_Walking
+  rotate: false
+  xy: 454, 1128
+  size: 450, 280
+  orig: 450, 450
+  offset: 0, 74
+  index: 18
+0_Ogre_Walking
+  rotate: false
+  xy: 906, 1411
+  size: 450, 279
+  orig: 450, 450
+  offset: 0, 73
+  index: 2
+0_Ogre_Walking
+  rotate: false
+  xy: 1358, 1693
+  size: 450, 279
+  orig: 450, 450
+  offset: 0, 74
+  index: 4
+0_Ogre_Walking
+  rotate: false
+  xy: 2, 563
+  size: 450, 279
+  orig: 450, 450
+  offset: 0, 73
+  index: 22
+0_Ogre_Walking
+  rotate: false
+  xy: 454, 847
+  size: 450, 279
+  orig: 450, 450
+  offset: 0, 73
+  index: 1
+0_Ogre_Walking
+  rotate: false
+  xy: 906, 1130
+  size: 450, 279
+  orig: 450, 450
+  offset: 0, 75
+  index: 6
+0_Ogre_Walking
+  rotate: false
+  xy: 1358, 1412
+  size: 450, 279
+  orig: 450, 450
+  offset: 0, 74
+  index: 19
+0_Ogre_Walking
+  rotate: false
+  xy: 2, 282
+  size: 450, 279
+  orig: 450, 450
+  offset: 0, 74
+  index: 3
+0_Ogre_Walking
+  rotate: false
+  xy: 454, 566
+  size: 450, 279
+  orig: 450, 450
+  offset: 0, 72
+  index: 0
+0_Ogre_Walking
+  rotate: false
+  xy: 906, 849
+  size: 450, 279
+  orig: 450, 450
+  offset: 0, 75
+  index: 5
+0_Ogre_Walking
+  rotate: false
+  xy: 1358, 1131
+  size: 450, 279
+  orig: 450, 450
+  offset: 0, 73
+  index: 10
+0_Ogre_Walking
+  rotate: false
+  xy: 2, 2
+  size: 450, 278
+  orig: 450, 450
+  offset: 0, 75
+  index: 7
+0_Ogre_Walking
+  rotate: false
+  xy: 454, 286
+  size: 450, 278
+  orig: 450, 450
+  offset: 0, 74
+  index: 20
+0_Ogre_Walking
+  rotate: false
+  xy: 906, 569
+  size: 450, 278
+  orig: 450, 450
+  offset: 0, 74
+  index: 9
+0_Ogre_Walking
+  rotate: false
+  xy: 1358, 851
+  size: 450, 278
+  orig: 450, 450
+  offset: 0, 74
+  index: 21
+0_Ogre_Walking
+  rotate: false
+  xy: 454, 6
+  size: 450, 278
+  orig: 450, 450
+  offset: 0, 74
+  index: 8
+0_Ogre_Walking
+  rotate: false
+  xy: 906, 289
+  size: 450, 278
+  orig: 450, 450
+  offset: 0, 73
+  index: 23

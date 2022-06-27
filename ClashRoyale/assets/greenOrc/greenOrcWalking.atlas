@@ -1,0 +1,174 @@
+
+greenOrcWalking.png
+size: 2048, 2048
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+0_Orc_Walking
+  rotate: false
+  xy: 2, 1521
+  size: 450, 304
+  orig: 450, 450
+  offset: 0, 71
+  index: 14
+0_Orc_Walking
+  rotate: false
+  xy: 2, 1216
+  size: 450, 303
+  orig: 450, 450
+  offset: 0, 70
+  index: 12
+0_Orc_Walking
+  rotate: false
+  xy: 454, 1522
+  size: 450, 303
+  orig: 450, 450
+  offset: 0, 71
+  index: 13
+0_Orc_Walking
+  rotate: false
+  xy: 2, 911
+  size: 450, 303
+  orig: 450, 450
+  offset: 0, 72
+  index: 15
+0_Orc_Walking
+  rotate: false
+  xy: 454, 1218
+  size: 450, 302
+  orig: 450, 450
+  offset: 0, 73
+  index: 17
+0_Orc_Walking
+  rotate: false
+  xy: 906, 1523
+  size: 450, 302
+  orig: 450, 450
+  offset: 0, 71
+  index: 11
+0_Orc_Walking
+  rotate: false
+  xy: 2, 607
+  size: 450, 302
+  orig: 450, 450
+  offset: 0, 73
+  index: 16
+0_Orc_Walking
+  rotate: false
+  xy: 454, 914
+  size: 450, 302
+  orig: 450, 450
+  offset: 0, 73
+  index: 2
+0_Orc_Walking
+  rotate: false
+  xy: 906, 1220
+  size: 450, 301
+  orig: 450, 450
+  offset: 0, 74
+  index: 4
+0_Orc_Walking
+  rotate: false
+  xy: 1358, 1524
+  size: 450, 301
+  orig: 450, 450
+  offset: 0, 73
+  index: 1
+0_Orc_Walking
+  rotate: false
+  xy: 2, 304
+  size: 450, 301
+  orig: 450, 450
+  offset: 0, 74
+  index: 3
+0_Orc_Walking
+  rotate: false
+  xy: 454, 611
+  size: 450, 301
+  orig: 450, 450
+  offset: 0, 72
+  index: 0
+0_Orc_Walking
+  rotate: false
+  xy: 906, 917
+  size: 450, 301
+  orig: 450, 450
+  offset: 0, 74
+  index: 18
+0_Orc_Walking
+  rotate: false
+  xy: 1358, 1221
+  size: 450, 301
+  orig: 450, 450
+  offset: 0, 72
+  index: 10
+0_Orc_Walking
+  rotate: false
+  xy: 2, 2
+  size: 450, 300
+  orig: 450, 450
+  offset: 0, 73
+  index: 22
+0_Orc_Walking
+  rotate: false
+  xy: 454, 309
+  size: 450, 300
+  orig: 450, 450
+  offset: 0, 75
+  index: 6
+0_Orc_Walking
+  rotate: false
+  xy: 906, 615
+  size: 450, 300
+  orig: 450, 450
+  offset: 0, 74
+  index: 19
+0_Orc_Walking
+  rotate: false
+  xy: 1358, 919
+  size: 450, 300
+  orig: 450, 450
+  offset: 0, 75
+  index: 5
+0_Orc_Walking
+  rotate: false
+  xy: 454, 7
+  size: 450, 300
+  orig: 450, 450
+  offset: 0, 73
+  index: 23
+0_Orc_Walking
+  rotate: false
+  xy: 906, 314
+  size: 450, 299
+  orig: 450, 450
+  offset: 0, 74
+  index: 9
+0_Orc_Walking
+  rotate: false
+  xy: 1358, 618
+  size: 450, 299
+  orig: 450, 450
+  offset: 0, 74
+  index: 8
+0_Orc_Walking
+  rotate: false
+  xy: 906, 13
+  size: 450, 299
+  orig: 450, 450
+  offset: 0, 74
+  index: 21
+0_Orc_Walking
+  rotate: false
+  xy: 1358, 317
+  size: 450, 299
+  orig: 450, 450
+  offset: 0, 74
+  index: 20
+0_Orc_Walking
+  rotate: false
+  xy: 1358, 16
+  size: 450, 299
+  orig: 450, 450
+  offset: 0, 75
+  index: 7

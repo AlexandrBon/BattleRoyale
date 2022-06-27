@@ -1,34 +1,76 @@
 
 cardTextures.png
-size: 1024, 1024
+size: 1904, 1052
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-greenGoblin
+border
   rotate: false
-  xy: 2, 354
-  size: 380, 524
-  orig: 900, 900
-  offset: 234, 149
-  index: 0
-grayGolem
-  rotate: false
-  xy: 2, 2
-  size: 426, 350
-  orig: 720, 480
-  offset: 218, 30
-  index: 0
-greenGolem
-  rotate: false
-  xy: 384, 528
-  size: 431, 350
-  orig: 720, 480
-  offset: 218, 30
-  index: 0
+  xy: 1290, 215
+  size: 195, 284
+  orig: 195, 284
+  offset: 0, 0
+  index: -1
 brownGolem
   rotate: false
-  xy: 430, 179
+  xy: 863, 152
   size: 425, 347
   orig: 720, 480
   offset: 218, 30
-  index: 0
+  index: -1
+dirtGolem
+  rotate: false
+  xy: 384, 477
+  size: 374, 573
+  orig: 900, 900
+  offset: 244, 147
+  index: -1
+grayGolem
+  rotate: false
+  xy: 2, 107
+  size: 426, 350
+  orig: 720, 480
+  offset: 218, 30
+  index: -1
+greenGoblin
+  rotate: false
+  xy: 1522, 526
+  size: 380, 524
+  orig: 900, 900
+  offset: 234, 149
+  index: -1
+greenGolem
+  rotate: false
+  xy: 430, 125
+  size: 431, 350
+  orig: 720, 480
+  offset: 218, 30
+  index: -1
+greenOgre
+  rotate: false
+  xy: 1151, 501
+  size: 369, 549
+  orig: 900, 900
+  offset: 246, 149
+  index: -1
+greenOrc
+  rotate: false
+  xy: 2, 459
+  size: 380, 591
+  orig: 900, 900
+  offset: 234, 149
+  index: -1
+iceGolem
+  rotate: false
+  xy: 760, 510
+  size: 389, 540
+  orig: 900, 900
+  offset: 227, 142
+  index: -1
+lavaGolem
+  rotate: false
+  xy: 1522, 2
+  size: 365, 522
+  orig: 900, 900
+  offset: 255, 148
+  index: -1

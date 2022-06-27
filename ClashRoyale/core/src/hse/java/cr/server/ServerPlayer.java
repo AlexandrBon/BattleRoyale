@@ -1,7 +1,6 @@
 package hse.java.cr.server;
 
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.SnapshotArray;
 import com.esotericsoftware.kryonet.Connection;
 
 public class ServerPlayer {
@@ -11,18 +10,24 @@ public class ServerPlayer {
         LOSE
     }
 
-    private String name;
+    private final String name;
     private final Connection connection;
     private final Array<ServerCharacter> serverCharacters;
     private int newCharacterIndex;
     private PlayerStatus playerStatus;
     private int screenWidth, screenHeight;
     private int health;
+    private int score;
 
-    public ServerPlayer(Connection connection, int screenWidth, int screenHeight) {
-        health = 3;
+    private static final int MAX_SCORE = 1;
+    private static final int MIN_HEALTH = 0;
+
+    public ServerPlayer(Connection connection, String name, int screenWidth, int screenHeight) {
+        health = 1;
+        score = 0;
         playerStatus = PlayerStatus.EMPTY;
         serverCharacters = new Array<>(true, 16, ServerCharacter.class);
+        this.name = name;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
         this.connection = connection;
@@ -33,8 +38,11 @@ public class ServerPlayer {
     }
 
     public void update() {
-        if (health <= 0) {
+        if (health <= MIN_HEALTH) {
             playerStatus = PlayerStatus.LOSE;
+            return;
+        } else if (score >= MAX_SCORE) {
+            playerStatus = PlayerStatus.WIN;
             return;
         }
         ServerCharacter[] characters = serverCharacters.toArray(ServerCharacter.class);
@@ -42,13 +50,16 @@ public class ServerPlayer {
         float speed;
         for (int i = 0; i < characters.length; i++) {
             ServerCharacter character = characters[i];
-            isLeft = character.isLeft();
+            isLeft = character.isMine();
             speed = character.getSpeed();
             character.addToX(isLeft ? speed : -speed);
-            if (character.getX() >= screenWidth && character.isLeft()) {
-                serverCharacters.removeIndex(i);
-            } else if (character.getX() <= 0 && !character.isLeft()) {
-                health--;
+            int eps = (int) (5 * speed);
+            if (character.getX() < -eps || character.getX() > screenWidth + eps) {
+                if (!character.isMine()) {
+                    health--;
+                } else {
+                    score++;
+                }
                 serverCharacters.removeIndex(i);
             }
         }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.reflect.Field;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
 
@@ -20,20 +21,38 @@ public class Assets {
     public static final AssetDescriptor<Sound> clickSound =
             new AssetDescriptor<>("sounds/clickSound.mp3", Sound.class);
 
+    public static final AssetDescriptor<Skin> skin =
+            new AssetDescriptor<>("skin/skin-composer-ui.json", Skin.class);
+
     public static final AssetDescriptor<TextureAtlas> uiAtlas =
-            new AssetDescriptor<>("ui/button.atlas", TextureAtlas.class);
+            new AssetDescriptor<>("ui/ui.atlas", TextureAtlas.class);
 
     public static final AssetDescriptor<TextureAtlas> greenGoblin =
-            new AssetDescriptor<>("greenGoblin/greenGoblin.atlas", TextureAtlas.class);
+            new AssetDescriptor<>("greenGoblin/greenGoblinWalking.atlas", TextureAtlas.class);
 
     public static final AssetDescriptor<TextureAtlas> grayGolem =
-            new AssetDescriptor<>("grayGolem/grayGolemRun.atlas", TextureAtlas.class);
+            new AssetDescriptor<>("grayGolem/grayGolemWalking.atlas", TextureAtlas.class);
 
     public static final AssetDescriptor<TextureAtlas> greenGolem =
-            new AssetDescriptor<>("greenGolem/golemAnimation_2.atlas", TextureAtlas.class);
+            new AssetDescriptor<>("greenGolem/greenGolemWalking.atlas", TextureAtlas.class);
+
+    public static final AssetDescriptor<TextureAtlas> greenOrc =
+            new AssetDescriptor<>("greenOrc/greenOrcWalking.atlas", TextureAtlas.class);
+
+    public static final AssetDescriptor<TextureAtlas> lavaGolem =
+            new AssetDescriptor<>("lavaGolem/lavaGolemWalking.atlas", TextureAtlas.class);
+
+    public static final AssetDescriptor<TextureAtlas> dirtGolem =
+            new AssetDescriptor<>("dirtGolem/dirtGolemWalking.atlas", TextureAtlas.class);
+
+    public static final AssetDescriptor<TextureAtlas> iceGolem =
+            new AssetDescriptor<>("iceGolem/iceGolemWalking.atlas", TextureAtlas.class);
 
     public static final AssetDescriptor<TextureAtlas> brownGolem =
             new AssetDescriptor<>("brownGolem/brownGolemWalking.atlas", TextureAtlas.class);
+
+    public static final AssetDescriptor<TextureAtlas> greenOgre =
+            new AssetDescriptor<>("greenOgre/greenOgreWalking.atlas", TextureAtlas.class);
 
     public static final AssetDescriptor<TextureAtlas> cardsAtlas =
             new AssetDescriptor<>("cardTextures/cardTextures.atlas", TextureAtlas.class);
@@ -44,16 +63,19 @@ public class Assets {
     public static final AssetDescriptor<Texture> gameBackground =
             new AssetDescriptor<>("backgrounds/game_background_2.png", Texture.class);
 
+    @SuppressWarnings({"rawtypes"})
     public void load() {
-        manager.load(clickSound);
-        manager.load(mainMenuBackground);
-        manager.load(gameBackground);
-        manager.load(cardsAtlas);
-        manager.load(greenGoblin);
-        manager.load(grayGolem);
-        manager.load(greenGolem);
-        manager.load(brownGolem);
-        manager.load(uiAtlas);
+        Field[] fields = getFields(Assets.class);
+        for (Field field : fields) {
+            Object object = null;
+            try {
+                object = field.get(null);
+            } catch (ReflectionException ignored) {
+            }
+            if (object instanceof AssetDescriptor) {
+                manager.load((AssetDescriptor) object);
+            }
+        }
     }
 
     public <T> T get(AssetDescriptor<T> assetDescriptor) {
@@ -64,7 +86,7 @@ public class Assets {
         return manager;
     }
 
-    public static TextureAtlas stringToTextureAtlas(String s) {
+    public static TextureAtlas getTextureAtlas(String s) {
         return stringToTextureAtlas.get(s);
     }
 
@@ -74,10 +96,12 @@ public class Assets {
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     public void fillStringToTextureAtlasMap() throws ReflectionException {
-        for (Field field : getFields(Assets.class)) {
-            if (get((AssetDescriptor) field.get(null)) instanceof TextureAtlas) {
+        Field[] fields = getFields(Assets.class);
+        for (Field field : fields) {
+            Object object = field.get(null);
+            if (object instanceof AssetDescriptor && get((AssetDescriptor) object) instanceof TextureAtlas) {
                 stringToTextureAtlas.put(field.getName(),
-                        get((AssetDescriptor<TextureAtlas>) field.get(null)));
+                        get((AssetDescriptor<TextureAtlas>) object));
             }
         }
     }

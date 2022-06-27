@@ -1,0 +1,174 @@
+
+dirtGolemWalking.png
+size: 2048, 2048
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+0_Golem_Walking
+  rotate: false
+  xy: 2, 1491
+  size: 450, 298
+  orig: 450, 450
+  offset: 0, 70
+  index: 14
+0_Golem_Walking
+  rotate: false
+  xy: 2, 1191
+  size: 450, 298
+  orig: 450, 450
+  offset: 0, 69
+  index: 13
+0_Golem_Walking
+  rotate: false
+  xy: 454, 1491
+  size: 450, 298
+  orig: 450, 450
+  offset: 0, 68
+  index: 12
+0_Golem_Walking
+  rotate: false
+  xy: 2, 893
+  size: 450, 296
+  orig: 450, 450
+  offset: 0, 69
+  index: 11
+0_Golem_Walking
+  rotate: false
+  xy: 454, 1193
+  size: 450, 296
+  orig: 450, 450
+  offset: 0, 71
+  index: 3
+0_Golem_Walking
+  rotate: false
+  xy: 906, 1493
+  size: 450, 296
+  orig: 450, 450
+  offset: 0, 70
+  index: 0
+0_Golem_Walking
+  rotate: false
+  xy: 2, 595
+  size: 450, 296
+  orig: 450, 450
+  offset: 0, 71
+  index: 2
+0_Golem_Walking
+  rotate: false
+  xy: 454, 895
+  size: 450, 296
+  orig: 450, 450
+  offset: 0, 71
+  index: 15
+0_Golem_Walking
+  rotate: false
+  xy: 906, 1195
+  size: 450, 296
+  orig: 450, 450
+  offset: 0, 71
+  index: 1
+0_Golem_Walking
+  rotate: false
+  xy: 1358, 1494
+  size: 450, 295
+  orig: 450, 450
+  offset: 0, 71
+  index: 16
+0_Golem_Walking
+  rotate: false
+  xy: 2, 298
+  size: 450, 295
+  orig: 450, 450
+  offset: 0, 70
+  index: 23
+0_Golem_Walking
+  rotate: false
+  xy: 454, 599
+  size: 450, 294
+  orig: 450, 450
+  offset: 0, 72
+  index: 5
+0_Golem_Walking
+  rotate: false
+  xy: 906, 899
+  size: 450, 294
+  orig: 450, 450
+  offset: 0, 70
+  index: 10
+0_Golem_Walking
+  rotate: false
+  xy: 1358, 1198
+  size: 450, 294
+  orig: 450, 450
+  offset: 0, 72
+  index: 4
+0_Golem_Walking
+  rotate: false
+  xy: 2, 2
+  size: 450, 294
+  orig: 450, 450
+  offset: 0, 72
+  index: 17
+0_Golem_Walking
+  rotate: false
+  xy: 454, 304
+  size: 450, 293
+  orig: 450, 450
+  offset: 0, 71
+  index: 22
+0_Golem_Walking
+  rotate: false
+  xy: 906, 604
+  size: 450, 293
+  orig: 450, 450
+  offset: 0, 71
+  index: 9
+0_Golem_Walking
+  rotate: false
+  xy: 1358, 904
+  size: 450, 292
+  orig: 450, 450
+  offset: 0, 73
+  index: 6
+0_Golem_Walking
+  rotate: false
+  xy: 454, 10
+  size: 450, 292
+  orig: 450, 450
+  offset: 0, 73
+  index: 18
+0_Golem_Walking
+  rotate: false
+  xy: 906, 311
+  size: 450, 291
+  orig: 450, 450
+  offset: 0, 72
+  index: 21
+0_Golem_Walking
+  rotate: false
+  xy: 1358, 611
+  size: 450, 291
+  orig: 450, 450
+  offset: 0, 72
+  index: 8
+0_Golem_Walking
+  rotate: false
+  xy: 906, 18
+  size: 450, 291
+  orig: 450, 450
+  offset: 0, 73
+  index: 7
+0_Golem_Walking
+  rotate: false
+  xy: 1358, 319
+  size: 450, 290
+  orig: 450, 450
+  offset: 0, 73
+  index: 19
+0_Golem_Walking
+  rotate: false
+  xy: 1358, 28
+  size: 450, 289
+  orig: 450, 450
+  offset: 0, 73
+  index: 20

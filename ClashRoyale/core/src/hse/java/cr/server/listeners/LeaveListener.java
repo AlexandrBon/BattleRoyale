@@ -8,6 +8,6 @@ public class LeaveListener extends Listener {
     @Override
     public void disconnected(Connection connection) {
         super.disconnected(connection);
-        // TODO: remove connection from ServerGame
+        System.out.println("disconnect: " + connection.getID());
     }
 }

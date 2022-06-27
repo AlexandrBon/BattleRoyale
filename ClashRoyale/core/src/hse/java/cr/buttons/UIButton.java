@@ -31,15 +31,27 @@ public class UIButton extends Actor {
         buttonFrames.add(buttonAtlas.findRegion(buttonName + ' ' +  "col_Button"));
         buttonFrames.add(buttonFrames.get(1));
 
-        setBounds((float)Gdx.graphics.getWidth() / 2
-                - (float)buttonFrames.get(0).getRegionWidth() / 2,
-                (float)Gdx.graphics.getHeight() / 2
-                - (float)buttonFrames.get(0).getRegionHeight() / 2,
-                buttonFrames.get(0).getRegionWidth(), buttonFrames.get(0).getRegionHeight());
+        float buttonRegionWidth = buttonFrames.get(0).getRegionWidth();
+        float buttonRegionHeight = buttonFrames.get(0).getRegionHeight();
+
+        float expectedHeight = (float)Gdx.graphics.getHeight() / 5;
+        float scale = expectedHeight / buttonRegionHeight;
+        float buttonWidth = buttonRegionWidth * scale;
+        float buttonHeight  = buttonRegionHeight * scale;
+        setBounds((Gdx.graphics.getWidth() - buttonWidth) / 2,
+                (Gdx.graphics.getHeight() - buttonHeight) / 2,
+                buttonWidth,
+                buttonHeight
+        );
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        batch.draw(buttonFrames.get(state.ordinal()), getX(), getY(), getWidth(), getHeight());
+    }
+
+    @Override
+    public void act(float delta) {
         if (!state.equals(State.PRESSED)) {
             int x = Gdx.input.getX();
             int y = Gdx.graphics.getHeight() - Gdx.input.getY();
@@ -50,7 +62,6 @@ public class UIButton extends Actor {
                 setState(UIButton.State.NORMAL);
             }
         }
-        batch.draw(buttonFrames.get(state.ordinal()), getX(), getY());
     }
 
     public void playSound() {

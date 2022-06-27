@@ -6,14 +6,14 @@ public class ServerCharacter {
     private int index;
     private float x;
     private float y;
-    private final boolean isLeft;
-    private float speed = 1f;
+    private final boolean isMine;
+    private float speed = 3f;
 
-    public ServerCharacter(int index, float x, float y, boolean isLeft) {
+    public ServerCharacter(int index, float x, float y, boolean isMine) {
         this.index = index;
         this.x = x;
         this.y = y;
-        this.isLeft = isLeft;
+        this.isMine = isMine;
     }
 
     public void setIndex(int index) {
@@ -40,8 +40,8 @@ public class ServerCharacter {
         return y;
     }
 
-    public boolean isLeft() {
-        return isLeft;
+    public boolean isMine() {
+        return isMine;
     }
 
     public float getSpeed() {
@@ -57,7 +57,7 @@ public class ServerCharacter {
         characterState.index = index;
         characterState.x = x;
         characterState.y = y;
-        characterState.isLeft = isLeft;
+        characterState.isLeft = isMine;
         characterState.speed = speed;
         return characterState;
     }

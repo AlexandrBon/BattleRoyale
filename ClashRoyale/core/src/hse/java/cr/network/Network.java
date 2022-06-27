@@ -15,5 +15,6 @@ public class Network {
         kryo.register(PlayerUpdateEvent.class);
         kryo.register(PlayerUpdateEvent.ObjectState.class);
         kryo.register(PlayerUpdateEvent.ObjectState[].class);
+        kryo.register(StatusEvent.class);
     }
 }

@@ -1,0 +1,132 @@
+
+greenGolemWalking.png
+size: 2048, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+Golem_02_Walking
+  rotate: false
+  xy: 2, 733
+  size: 360, 182
+  orig: 360, 240
+  offset: 0, 12
+  index: 6
+Golem_02_Walking
+  rotate: false
+  xy: 2, 550
+  size: 360, 181
+  orig: 360, 240
+  offset: 0, 13
+  index: 15
+Golem_02_Walking
+  rotate: false
+  xy: 364, 734
+  size: 360, 181
+  orig: 360, 240
+  offset: 0, 12
+  index: 7
+Golem_02_Walking
+  rotate: false
+  xy: 2, 367
+  size: 360, 181
+  orig: 360, 240
+  offset: 0, 12
+  index: 12
+Golem_02_Walking
+  rotate: false
+  xy: 364, 551
+  size: 360, 181
+  orig: 360, 240
+  offset: 0, 14
+  index: 14
+Golem_02_Walking
+  rotate: false
+  xy: 726, 734
+  size: 360, 181
+  orig: 360, 240
+  offset: 0, 12
+  index: 3
+Golem_02_Walking
+  rotate: false
+  xy: 2, 184
+  size: 360, 181
+  orig: 360, 240
+  offset: 0, 12
+  index: 16
+Golem_02_Walking
+  rotate: false
+  xy: 364, 368
+  size: 360, 181
+  orig: 360, 240
+  offset: 0, 13
+  index: 13
+Golem_02_Walking
+  rotate: false
+  xy: 726, 551
+  size: 360, 181
+  orig: 360, 240
+  offset: 0, 14
+  index: 5
+Golem_02_Walking
+  rotate: false
+  xy: 1088, 735
+  size: 360, 180
+  orig: 360, 240
+  offset: 0, 14
+  index: 4
+Golem_02_Walking
+  rotate: false
+  xy: 2, 2
+  size: 360, 180
+  orig: 360, 240
+  offset: 0, 11
+  index: 11
+Golem_02_Walking
+  rotate: false
+  xy: 364, 186
+  size: 360, 180
+  orig: 360, 240
+  offset: 0, 11
+  index: 8
+Golem_02_Walking
+  rotate: false
+  xy: 726, 370
+  size: 360, 179
+  orig: 360, 240
+  offset: 0, 11
+  index: 10
+Golem_02_Walking
+  rotate: false
+  xy: 1088, 554
+  size: 360, 179
+  orig: 360, 240
+  offset: 0, 12
+  index: 2
+Golem_02_Walking
+  rotate: false
+  xy: 1450, 736
+  size: 360, 179
+  orig: 360, 240
+  offset: 0, 12
+  index: 17
+Golem_02_Walking
+  rotate: false
+  xy: 364, 5
+  size: 360, 179
+  orig: 360, 240
+  offset: 0, 12
+  index: 1
+Golem_02_Walking
+  rotate: false
+  xy: 726, 190
+  size: 360, 178
+  orig: 360, 240
+  offset: 0, 12
+  index: 9
+Golem_02_Walking
+  rotate: false
+  xy: 1088, 374
+  size: 360, 178
+  orig: 360, 240
+  offset: 0, 12
+  index: 0

@@ -4,7 +4,7 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import hse.java.cr.events.GameStartsEvent;
 import hse.java.cr.events.EnemyInfo;
-import hse.java.cr.screens.MainScreen;
+import hse.java.cr.client.screens.MainScreen;
 
 public class JoinResponseListener extends Listener {
     @Override
@@ -12,7 +12,7 @@ public class JoinResponseListener extends Listener {
         if (object instanceof EnemyInfo) {
             final EnemyInfo enemyInfo = (EnemyInfo) object;
             Player.isLeft = enemyInfo.isLeft;
-            Player.enemyUsername = enemyInfo.enemyUsername;
+            Player.enemyNickname = enemyInfo.enemyUsername;
         } else if (object instanceof GameStartsEvent) {
             Player.gameIndex = ((GameStartsEvent) object).gameIndex;
             MainScreen.isGameRunning = true;

@@ -15,8 +15,14 @@ public class NewObjectListener extends Listener {
             NewCharacterEvent character = (NewCharacterEvent) object;
             ServerGame game = ServerFoundation.INSTANCE
                     .getServerGame(character.gameIndex);
+            if (game == null) {
+                return;
+            }
             ServerPlayer player1 = game.getPlayerByConnection(connection);
             ServerPlayer player2 = game.getEnemy(player1);
+            if (player1 == null || player2 == null) {
+                return;
+            }
 
             player1.addCharacter(new ServerCharacter(
                     player1.getNewCharacterIndex(),

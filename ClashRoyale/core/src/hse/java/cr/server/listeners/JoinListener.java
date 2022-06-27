@@ -2,7 +2,6 @@ package hse.java.cr.server.listeners;
 
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
-import com.esotericsoftware.kryonet.Server;
 import hse.java.cr.events.JoinRequestEvent;
 import hse.java.cr.server.ServerFoundation;
 import hse.java.cr.server.ServerGame;
@@ -17,12 +16,13 @@ public class JoinListener extends Listener {
     public void received(Connection connection, Object object) {
         if (object instanceof JoinRequestEvent) {
             final JoinRequestEvent joinRequestEvent = (JoinRequestEvent) object;
-            Server server = ServerFoundation.INSTANCE.getServer();
+            ServerFoundation serverFoundation = ServerFoundation.INSTANCE;
 
             int playersCount = joinRequestEvent.playersCount;
 
             // get or create a game for `playersCount` gamers
-            Collection<ServerGame> games = ServerFoundation.INSTANCE.getServerGames();
+            Collection<ServerGame> games = serverFoundation.getServerGames();
+
             ServerGame[] serverGames = new ServerGame[games.size()];
             serverGames = games.toArray(serverGames);
 
@@ -31,22 +31,22 @@ public class JoinListener extends Listener {
                             .parallel()
                             .filter(game -> game.players.items.length == playersCount
                                             && (game.gameStatus.equals(GameStatus.EMPTY)
-                                            || game.gameStatus.equals(GameStatus.WAITING))
-                            )
+                                            || game.gameStatus.equals(GameStatus.WAITING)))
                             .findAny()
                             .orElse(new ServerGame(playersCount));
 
-            if (serverGame.gameStatus.equals(ServerGame.GameStatus.EMPTY)) {
-                ServerFoundation.INSTANCE.addGame(serverGame);
+            if (serverGame.gameStatus.equals(GameStatus.EMPTY)) {
+                serverFoundation.addGame(serverGame);
             }
 
             serverGame.addPlayer(new ServerPlayer(
                     connection,
+                    joinRequestEvent.username,
                     joinRequestEvent.screenWidth,
                     joinRequestEvent.screenHeight
             ));
 
-            if (serverGame.increasePlayersCount() == playersCount) {
+            if (serverGame.increasePlayersCountAndGet() == playersCount) {
                 serverGame.start();
             }
         }
