@@ -1,4 +1,4 @@
-package hse.java.cr.model;
+package hse.java.cr.client.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -66,12 +66,15 @@ public class Spell extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        for(Actor actor : getStage().getActors()) {
+        Actor[] actors = getStage().getActors().items;
+        for (Actor actor : actors) {
             if (actor instanceof Character) {
                 Character character = (Character) actor;
                 String typeOfSpellBurst = "burst";
                 String typeOfSpellHeal = "heal";
-                if ((character.getTeam() != myTeam && typeOfSpell.equals(typeOfSpellBurst)) || (character.getTeam() == myTeam && typeOfSpell.equals(typeOfSpellHeal)) && (Math.abs(character.getX() - getX()) <= radius)) {
+                if ((character.getMySide() != myTeam && typeOfSpell.equals(typeOfSpellBurst))
+                        || (character.getMySide() == myTeam && typeOfSpell.equals(typeOfSpellHeal))
+                        && (Math.abs(character.getX() - getX()) <= radius)) {
                     if (!times.containsKey(character)) {
                         times.put(character, 1.5f);
                     }

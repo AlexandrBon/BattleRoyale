@@ -31,18 +31,28 @@ import java.io.IOException;
 
 public class MainScreen implements Screen {
     private final SpriteBatch batch;
+
     private final Assets assets;
+
     private final Starter starter;
+
+    private final Viewport viewport;
     private final OrthographicCamera camera;
     private final Sprite gameBackground;
+
     private final UIButton playButton;
     private final UIButton exitButton;
+    private final UIButton deckButton;
+
     private final Stage stage;
+    private final Table table;
+
     public static boolean isGameRunning = false;
     private boolean zoomingOut;
-    private final Table table;
+
     private TextField nicknameTextField;
-    private final Viewport viewport;
+
+    private DeckScreen deckScreen = null;
 
 
     public MainScreen(@NotNull Starter starter) {
@@ -61,11 +71,16 @@ public class MainScreen implements Screen {
         gameBackground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         playButton = new UIButton("Play", assets);
-        exitButton = new UIButton("Exit", assets);
 
-        exitButton.setPosition(
+        deckButton = new UIButton("Play", assets);
+        deckButton.setPosition(
                 playButton.getX(),
                 playButton.getY() - playButton.getHeight()
+        );
+        exitButton = new UIButton("Exit", assets);
+        exitButton.setPosition(
+                deckButton.getX(),
+                deckButton.getY() - deckButton.getHeight()
         );
 
         stage = new Stage();
@@ -83,6 +98,8 @@ public class MainScreen implements Screen {
     private void setupStage() {
         stage.addActor(exitButton);
         stage.addActor(playButton);
+        stage.addActor(deckButton);
+
         stage.addListener(new ClickListener() {
             @Override
             public void clicked (InputEvent event, float x, float y) {
@@ -100,6 +117,10 @@ public class MainScreen implements Screen {
                         throw new RuntimeException(e);
                     }
                     System.exit(0);
+                }
+                if (deckButton.getState().equals(UIButton.State.HOVERED)) {
+                    deckButton.setState(UIButton.State.PRESSED);
+                    deckButton.playSound();
                 }
             }
         });
@@ -192,13 +213,22 @@ public class MainScreen implements Screen {
         stage.draw();
 
         if (playButton.getState().equals(UIButton.State.PRESSED)) {
-            if (isGameRunning/* || Starter.getClient() == null*/) {
+            if (isGameRunning || Starter.getClient() == null) {
                 starter.setScreen(new GameScreen(this, assets));
                 playButton.setState(UIButton.State.NORMAL);
                 isGameRunning = false;
             } else {
                 zooming();
             }
+        }
+
+        if (deckButton.getState().equals(UIButton.State.PRESSED)) {
+            if (deckScreen == null) {
+                deckScreen = new DeckScreen(starter, this);
+                System.out.println("oops");
+            }
+            deckButton.setState(UIButton.State.NORMAL);
+            starter.setScreen(deckScreen);
         }
     }
 

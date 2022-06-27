@@ -15,6 +15,8 @@ public class Character extends Actor {
         JUMP
     }
 
+    private static final int maxHealth = 100;
+
     private int characterIndex;
     private final State state;
 
@@ -26,11 +28,9 @@ public class Character extends Actor {
 
     private final boolean mySide;
     private int attack = 1;
-    private int maxHealth;
-    private final int attack;
+
     float deltaY = getHeight() * 0.01f;
     float deltaX = getWidth() * 0.1f;
-    private final int maxHealth;
     private int health;
     private boolean isRun = true;
     
@@ -39,12 +39,6 @@ public class Character extends Actor {
         TextureAtlas characterAtlas = Assets.getTextureAtlas(characterName);
         golemAnimations = new Array<>(State.values().length);
         attack = 1;
-
-        maxHealth = 100;
-
-        hpLine = new ShapeRen derer();
-        health = maxHealth;
-
         health = 100;
         curFrame = new Sprite();
         state = State.HIT;
@@ -73,6 +67,10 @@ public class Character extends Actor {
 
     public int getMaxHealth() {
         return maxHealth;
+    }
+
+    public boolean getMySide() {
+        return mySide;
     }
 
     public void setHealth(int health) {
@@ -104,7 +102,7 @@ public class Character extends Actor {
                 if (actor instanceof Character) {
                     Character character = (Character) actor;
                     if (character != this && character.getHealth() > 0
-                            && (character.myTeam != myTeam) && Math.abs(character.getY() - getY()) < deltaY
+                            && (character.mySide != mySide) && Math.abs(character.getY() - getY()) < deltaY
                             && Math.abs(getX() - character.getX()) <= 100) {
                         isRun = false;
                         currentOpponennt = character;
