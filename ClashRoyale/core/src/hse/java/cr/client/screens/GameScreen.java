@@ -10,6 +10,10 @@ import hse.java.cr.client.EventListener;
 import hse.java.cr.client.Player;
 import hse.java.cr.client.Starter;
 import hse.java.cr.wrappers.Assets;
+import hse.java.cr.Assets;
+import hse.java.cr.model.GameInterface;
+import hse.java.cr.model.Spell;
+import hse.java.cr.Starter;
 import org.jetbrains.annotations.NotNull;
 
 public class GameScreen implements Screen {
@@ -32,11 +36,13 @@ public class GameScreen implements Screen {
         camera.setToOrtho(false);
         gameBackground = new Sprite(assets.get(Assets.gameBackground));
         gameBackground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        stage = new Stage();
+        gameInterface = new GameInterface(assets, stage);
         player = new Player(assets, mainScreen);
         if (Starter.getClient() != null) {
             Starter.getClient().addListener(new EventListener(player));
         }
-    }
+}
 
     @Override
     public void render(float delta) {

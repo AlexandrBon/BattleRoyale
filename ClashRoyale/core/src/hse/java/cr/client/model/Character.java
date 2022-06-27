@@ -1,6 +1,7 @@
 package hse.java.cr.client.model;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -16,16 +17,20 @@ public class Character extends Actor {
 
     private int characterIndex;
     private final State state;
+
     private final Array<Animation<TextureRegion>> golemAnimations;
     private TextureRegion curFrame;
     private float frameDelta = 0f;
     private Character currentOpponennt;
     private float timer;
-    private Rectangle hpLine;
 
     private final boolean mySide;
     private int attack = 1;
     private int maxHealth;
+    private final int attack;
+    float deltaY = getHeight() * 0.01f;
+    float deltaX = getWidth() * 0.1f;
+    private final int maxHealth;
     private int health;
     private boolean isRun = true;
     
@@ -33,6 +38,12 @@ public class Character extends Actor {
         characterIndex = index;
         TextureAtlas characterAtlas = Assets.getTextureAtlas(characterName);
         golemAnimations = new Array<>(State.values().length);
+        attack = 1;
+
+        maxHealth = 100;
+
+        hpLine = new ShapeRen derer();
+        health = maxHealth;
 
         health = 100;
         curFrame = new Sprite();
@@ -49,7 +60,7 @@ public class Character extends Actor {
 
         float textureWidth = golemAnimations.get(0).getKeyFrame(0).getRegionWidth();
         float textureHeight = golemAnimations.get(0).getKeyFrame(0).getRegionHeight();
-        System.out.println(textureWidth + " " + textureHeight);
+
         float scale = Gdx.graphics.getHeight() / 8f / textureHeight;
         setScale(scale, scale);
         setBounds(x, y, textureWidth * getScaleX(),
@@ -59,7 +70,11 @@ public class Character extends Actor {
     public int getHealth() {
         return health;
     }
-    
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
     public void setHealth(int health) {
         this.health = health;
     }
@@ -89,7 +104,7 @@ public class Character extends Actor {
                 if (actor instanceof Character) {
                     Character character = (Character) actor;
                     if (character != this && character.getHealth() > 0
-                            && (character.mySide != mySide) && Math.abs(character.getY() - getY()) < 20
+                            && (character.myTeam != myTeam) && Math.abs(character.getY() - getY()) < deltaY
                             && Math.abs(getX() - character.getX()) <= 100) {
                         isRun = false;
                         currentOpponennt = character;
@@ -98,9 +113,9 @@ public class Character extends Actor {
                 }
             }
             if (mySide) {
-                moveBy(1, 0);
+                moveBy(deltaX, 0);
             } else {
-                moveBy(-1, 0);
+                moveBy(-deltaX, 0);
             }
         } else {
             timer += delta;
