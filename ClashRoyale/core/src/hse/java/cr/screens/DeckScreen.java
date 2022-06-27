@@ -3,10 +3,8 @@ package hse.java.cr.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -14,40 +12,32 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-
 import hse.java.cr.Assets;
 import hse.java.cr.Starter;
 import hse.java.cr.buttons.UIButton;
 import hse.java.cr.model.CardInfo;
 
 public class DeckScreen implements Screen {
-    private MainScreen mainScreen;
-    private SpriteBatch batch;
-    private Assets assets;
+    private final MainScreen mainScreen;
+    private final SpriteBatch batch;
     private final Starter game;
-    private OrthographicCamera camera;
-    private Sprite gameBackground;
-    private CardInfo cardInfos;
-    private UIButton backButton;
-    private UIButton leftButton;
+    private final OrthographicCamera camera;
+    private final Sprite gameBackground;
+    private final CardInfo cardInfos;
+    private final UIButton backButton;
+    private final UIButton leftButton;
     private UIButton rightButton;
-    private UIButton addButton;
-    private UIButton deleteButton;
-    private Stage stage;
+    private final UIButton addButton;
+    private final UIButton deleteButton;
+    private final Stage stage;
 
     public DeckScreen(@NotNull Starter game, MainScreen screen) {
         this.game = game;
         mainScreen = screen;
-    }
-
-    @Override
-    public void show() {
         stage = new Stage();
-        assets = game.getAssets();
+        Assets assets = game.getAssets();
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
-        camera.setToOrtho(false);
         cardInfos = new CardInfo();
         cardInfos.add(assets.get(Assets.fire), "Fire", "Spell", 0, 0, 0);
         cardInfos.add(assets.get(Assets.grayGolem), "GrayGolem", "Character", 0, 0, 0);
@@ -55,18 +45,23 @@ public class DeckScreen implements Screen {
         cardInfos.add(assets.get(Assets.greenGolem), "GreenGolem", "Character", 0, 0, 0);
         cardInfos.add(assets.get(Assets.brownGolem), "BrownGolem", "Character", 0, 0, 0);
         gameBackground = new Sprite(assets.get(Assets.gameBackground));
-        gameBackground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         backButton = new UIButton("Play", assets);
         leftButton = new UIButton("Play", assets);
         rightButton = new UIButton("Play", assets);
         addButton = new UIButton("Play", assets);
         deleteButton = new UIButton("Play", assets);
         rightButton = new UIButton("Play", assets);
-        addButton.setBounds(3 * Gdx.graphics.getWidth() / 10, 0, Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() / 10);
-        deleteButton.setBounds( 3 * Gdx.graphics.getWidth() / 10, 2 * Gdx.graphics.getHeight() / 10, Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() / 10);
-        leftButton.setBounds(0, 0, Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() / 10);
-        rightButton.setBounds( 6 * Gdx.graphics.getWidth() / 10, 0, Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() / 10);
-        backButton.setBounds( 0, 8.7f * Gdx.graphics.getHeight() / 10, Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() / 10);
+    }
+
+    @Override
+    public void show() {
+        camera.setToOrtho(false);
+        gameBackground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        addButton.setBounds(3.0f * Gdx.graphics.getWidth() / 10, 0, 1.0f * Gdx.graphics.getWidth() / 10, 1.0f *Gdx.graphics.getHeight() / 10);
+        deleteButton.setBounds( 3.0f * Gdx.graphics.getWidth() / 10, 2.0f * Gdx.graphics.getHeight() / 10, 1.0f * Gdx.graphics.getWidth() / 10, 1.0f * Gdx.graphics.getHeight() / 10);
+        leftButton.setBounds(0, 0, 1.0f * Gdx.graphics.getWidth() / 10, 1.0f * Gdx.graphics.getHeight() / 10);
+        rightButton.setBounds( 6.0f * Gdx.graphics.getWidth() / 10, 0, 1.0f * Gdx.graphics.getWidth() / 10, 1.0f * Gdx.graphics.getHeight() / 10);
+        backButton.setBounds( 0, 8.7f * Gdx.graphics.getHeight() / 10, 1.0f * Gdx.graphics.getWidth() / 10, 1.0f * Gdx.graphics.getHeight() / 10);
 
         stage.addActor(cardInfos);
         stage.addActor(backButton);
@@ -118,6 +113,7 @@ public class DeckScreen implements Screen {
 
         stage.draw();
         if (backButton.getState().equals(UIButton.State.PRESSED)) {
+            backButton.setState(UIButton.State.NORMAL);
             game.setScreen(mainScreen);
         }
         if (leftButton.getState().equals(UIButton.State.PRESSED)) {

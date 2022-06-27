@@ -14,7 +14,7 @@ public class Character extends Actor {
         JUMP
     }
 
-    private State state;
+    private final State state;
     
     private final Array<Animation<TextureRegion>> golemAnimations;
     private TextureRegion curFrame;
@@ -23,14 +23,17 @@ public class Character extends Actor {
     private float timer;
     private final ShapeRenderer hpLine;
 
-    private int attack = 1;
-    private int maxHealth;
+    private final int attack;
+    float deltaY = getHeight() * 0.01f;
+    float deltaX = getWidth() * 0.1f;
+    private final int maxHealth;
     private int health;
-    private boolean myTeam;
+    private final boolean myTeam;
     private boolean isRun = true;
     
     public Character(TextureAtlas golemAtlas, float x, float y, boolean team) {
         golemAnimations = new Array<>(State.values().length);
+        attack = 1;
         if (team) {
             setPosition(100, 100);
             maxHealth = 100;
@@ -44,8 +47,8 @@ public class Character extends Actor {
         myTeam = team;
         state = State.HIT;
 
-        int n = golemAnimations.size;
-        n = 1; // TODO: add RUN and JUMP animation
+        //int n = golemAnimations.size;
+        int n = 1; // TODO: add RUN and JUMP animation
 
         for (int i = 0; i < n; i++) {
             golemAnimations.add(new Animation<>(0.06f, golemAtlas.getRegions()));
@@ -65,12 +68,16 @@ public class Character extends Actor {
                 textureHeight * getScaleY());
     }
 
-    public Character(TextureAtlas golemAtlas, boolean team) {
-       this(golemAtlas, 0, 0, team);
-    }
+//    public Character(TextureAtlas golemAtlas, boolean team) {
+//       this(golemAtlas, 0, 0, team);
+//    }
 
     public int getHealth() {
         return health;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
     }
     
     public void setHealth(int health) {
@@ -81,13 +88,13 @@ public class Character extends Actor {
         this.health -= damage;
     }
 
-    public State getState() {
-        return state;
-    }
+//    public State getState() {
+//        return state;
+//    }
 
-    public void setState(State state) {
-        this.state = state;
-    }
+//    public void setState(State state) {
+//        this.state = state;
+//    }
 
     public boolean getTeam() {return myTeam;}
 
@@ -126,7 +133,7 @@ public class Character extends Actor {
                 if (actor instanceof Character) {
                     Character character = (Character) actor;
                     if (character != this && character.getHealth() > 0
-                            && (character.myTeam != myTeam) && character.getY() == getY()
+                            && (character.myTeam != myTeam) && Math.abs(character.getY() - getY()) < deltaY
                             && Math.abs(getX() - character.getX()) <= 100) {
                         isRun = false;
                         currentOpponennt = character;
@@ -135,9 +142,9 @@ public class Character extends Actor {
                 }
             }
             if (myTeam) {
-                moveBy(1, 0);
+                moveBy(deltaX, 0);
             } else {
-                moveBy(-1, 0);
+                moveBy(-deltaX, 0);
             }
         } else {
             timer += delta;

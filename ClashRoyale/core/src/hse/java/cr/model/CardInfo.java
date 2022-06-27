@@ -70,6 +70,11 @@ public class CardInfo extends Actor {
 
     public void addCard(int index) {
         for (int i = 0; i < maxCardsInDeck; i++) {
+            if (addedCards.get(i) != null &&  addedCards.get(i) == index) {
+                return;
+            }
+        }
+        for (int i = 0; i < maxCardsInDeck; i++) {
             if (addedCards.get(i) == null) {
                 addedCards.set(i, index);
                 return;
@@ -86,12 +91,12 @@ public class CardInfo extends Actor {
         }
     }
 
-    private void drawAddedCards(Batch batch, float parentAlpha, int i) {
+    private void drawAddedCards(Batch batch, int i) {
         if (addedCards.get(i) != null) {
             int currentIndex = addedCards.get(i);
             curFrames.set(i, animation.get(currentIndex).getKeyFrame(frameDeltas.get(i)));
-            batch.draw(curFrames.get(i), 6 * Gdx.graphics.getWidth() / 10 + (i % 2) * 2 * Gdx.graphics.getWidth() / 10,  7.5f * Gdx.graphics.getHeight() / 10 - (i % 3) * 2.5f * Gdx.graphics.getHeight() / 10,
-                    2 * Gdx.graphics.getWidth() / 10, 8 * Gdx.graphics.getHeight() / 30);
+            batch.draw(curFrames.get(i), 6.0f * Gdx.graphics.getWidth() / 10 + (i % 2) * 2.0f * Gdx.graphics.getWidth() / 10,  7.5f * Gdx.graphics.getHeight() / 10 - (i % 3) * 2.5f * Gdx.graphics.getHeight() / 10,
+                    2.0f * Gdx.graphics.getWidth() / 10, 8.0f * Gdx.graphics.getHeight() / 30);
             frameDeltas.set(i, frameDeltas.get(i) + Gdx.graphics.getDeltaTime());
         }
     }
@@ -105,12 +110,12 @@ public class CardInfo extends Actor {
         currentString += "Attack: " + attack.get(index) + "\n";
         currentString += "Health: " + hp.get(index) + "\n";
         currentString += "Radious: " + radious.get(index) + "\n";
-        font.draw(batch, currentString, Gdx.graphics.getWidth() / 10 , 8 * Gdx.graphics.getHeight() / 10);
-        batch.draw(curFrame, 0,  2 * Gdx.graphics.getHeight() / 10,
-                3 * Gdx.graphics.getWidth() / 10, 4 * Gdx.graphics.getHeight() / 10);
+        font.draw(batch, currentString, 1.0f * Gdx.graphics.getWidth() / 10 , 8.0f * Gdx.graphics.getHeight() / 10);
+        batch.draw(curFrame, 0,  2.0f * Gdx.graphics.getHeight() / 10,
+                3.0f * Gdx.graphics.getWidth() / 10, 4.0f * Gdx.graphics.getHeight() / 10);
         frameDelta += Gdx.graphics.getDeltaTime();
         for (int i = 0; i < maxCardsInDeck; i++) {
-            drawAddedCards(batch, parentAlpha, i);
+            drawAddedCards(batch, i);
         }
     }
 

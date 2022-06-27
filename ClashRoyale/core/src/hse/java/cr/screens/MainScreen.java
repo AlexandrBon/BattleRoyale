@@ -15,12 +15,12 @@ import org.jetbrains.annotations.NotNull;
 
 public class MainScreen implements Screen {
     private SpriteBatch batch;
-    private Assets assets;
     private final Starter game;
     private OrthographicCamera camera;
     private Sprite gameBackground;
     private UIButton playButton;
     private UIButton deckButton;
+    private DeckScreen deckScreen = null;
     private Stage stage;
 
     public MainScreen(@NotNull Starter game) {
@@ -30,7 +30,7 @@ public class MainScreen implements Screen {
     @Override
     public void show() {
         stage = new Stage();
-        assets = game.getAssets();
+        Assets assets = game.getAssets();
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         camera.setToOrtho(false);
@@ -78,7 +78,11 @@ public class MainScreen implements Screen {
             game.setScreen(new GameScreen(game));
         }
         if (deckButton.getState().equals(UIButton.State.PRESSED)) {
-            game.setScreen(new DeckScreen(game, this));
+            if (deckScreen == null) {
+                deckScreen = new DeckScreen(game, this);
+                System.out.println("oops");
+            }
+            game.setScreen(deckScreen);
         }
     }
 
