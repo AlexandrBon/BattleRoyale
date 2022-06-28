@@ -96,7 +96,6 @@ public class MainScreen implements Screen {
 
     @Override
     public void show() {
-        // TODO: show current score number: read it from 'rewards' file
         Gdx.input.setInputProcessor(stage);
     }
 

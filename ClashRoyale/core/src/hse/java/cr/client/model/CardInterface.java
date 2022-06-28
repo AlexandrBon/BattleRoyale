@@ -31,16 +31,12 @@ public class CardInterface extends Group {
         Array<Card> cardDeck = new Array<>(true, DECK_SIZE, Card.class);
         tmpCardDeck = new Array<>(true, DECK_SIZE, Card.class);
 
-        // tempCode
-        // TODO: get cardDeck from user's choice
         cardDeck.add(new Card(assets, "brownGolem"));
         cardDeck.add(new Card(assets, "grayGolem"));
         cardDeck.add(new Card(assets, "greenOrc"));
         cardDeck.add(new Card(assets, "iceGolem"));
         cardDeck.add(new Card(assets, "lavaGolem"));
         cardDeck.add(new Card(assets, "greenOgre"));
-
-        ///////////
 
         mana = new Mana(Card.getBorderWidth() * 4);
         if (cardDeck.size!= DECK_SIZE) {
