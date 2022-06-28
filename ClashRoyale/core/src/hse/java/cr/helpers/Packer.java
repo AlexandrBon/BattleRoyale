@@ -9,8 +9,8 @@ public class Packer {
         settings.alias = false;
         settings.maxHeight = 2048;
         settings.maxWidth = 2048;
-        TexturePacker.process(settings, "assets/goblinAnimation_1",
-                "assets/goblinAnimation_1",
-                "goblinAnimation_1");
+        TexturePacker.process(settings, "assets/explosion",
+                "assets/explosion",
+                "explosion");
     }
 }

@@ -31,14 +31,14 @@ Back Button
   orig: 300, 100
   offset: 0, 0
   index: -1
-Back Square Button
+Back2 Button
   rotate: false
   xy: 1010, 512
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-Back col_Square Button
+Back2 col_Button
   rotate: false
   xy: 908, 512
   size: 100, 100
@@ -185,14 +185,14 @@ New game Button
   orig: 300, 100
   offset: 0, 0
   index: -1
-Next Square Button
+Next Button
   rotate: false
   xy: 1614, 818
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-Next col_Square Button
+Next col_Button
   rotate: false
   xy: 1512, 818
   size: 100, 100
@@ -339,14 +339,14 @@ Settings Button
   orig: 300, 100
   offset: 0, 0
   index: -1
-Settings Square Button
+Settings2 Button
   rotate: false
   xy: 1512, 716
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-Settings col_Square Button
+Settings2 col_Button
   rotate: false
   xy: 304, 308
   size: 100, 100
@@ -381,28 +381,28 @@ Up col_Square Button
   orig: 100, 100
   offset: 0, 0
   index: -1
-V Square Button
+V Button
   rotate: false
   xy: 104, 2
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-V col_Square Button
+V col_Button
   rotate: false
   xy: 1814, 920
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-X Square Button
+X Button
   rotate: false
   xy: 308, 206
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-X col_Square Button
+X col_Button
   rotate: false
   xy: 206, 104
   size: 100, 100

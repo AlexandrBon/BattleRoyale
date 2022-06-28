@@ -72,15 +72,15 @@ public class MainScreen implements Screen {
 
         playButton = new UIButton("Play", assets);
 
-        deckButton = new UIButton("Play", assets);
+        deckButton = new UIButton("Settings2", assets);
         deckButton.setPosition(
-                playButton.getX(),
-                playButton.getY() - playButton.getHeight()
+                playButton.getX() - deckButton.getWidth(),
+                playButton.getY()
         );
         exitButton = new UIButton("Exit", assets);
         exitButton.setPosition(
-                deckButton.getX(),
-                deckButton.getY() - deckButton.getHeight()
+                playButton.getX(),
+                playButton.getY() - playButton.getHeight()
         );
 
         stage = new Stage();

@@ -40,20 +40,26 @@ public class DeckScreen implements Screen {
         camera = new OrthographicCamera();
 
         cardInfos = new CardInfo();
-        cardInfos.add(assets.get(Assets.fire), "Fire", "Spell", 0, 0, 0);
         cardInfos.add(assets.get(Assets.grayGolem), "GrayGolem", "Character", 0, 0, 0);
         cardInfos.add(assets.get(Assets.greenGoblin), "GreenGoblin", "Character", 0, 0, 0);
         cardInfos.add(assets.get(Assets.greenGolem), "GreenGolem", "Character", 0, 0, 0);
         cardInfos.add(assets.get(Assets.brownGolem), "BrownGolem", "Character", 0, 0, 0);
+        cardInfos.add(assets.get(Assets.dirtGolem), "DirtGolem", "Character", 0, 0, 0);
+        cardInfos.add(assets.get(Assets.greenOgre), "GreenOgre", "Character", 0, 0, 0);
+        cardInfos.add(assets.get(Assets.greenOrc), "GreenOrc", "Character", 0, 0, 0);
+        cardInfos.add(assets.get(Assets.iceGolem), "IceGolem", "Character", 0, 0, 0);
+        cardInfos.add(assets.get(Assets.lavaGolem), "LavaGolem", "Character", 0, 0, 0);
+        cardInfos.add(assets.get(Assets.fire), "Fire", "Spell", 0, 0, 0);
+        cardInfos.add(assets.get(Assets.healWave), "HealWave", "Spell", 0, 0, 0);
+        cardInfos.add(assets.get(Assets.explosion), "Explosion", "Spell", 0, 0, 0);
 
         gameBackground = new Sprite(assets.get(Assets.gameBackground));
 
-        backButton = new UIButton("Play", assets);
-        leftButton = new UIButton("Play", assets);
-        rightButton = new UIButton("Play", assets);
-        addButton = new UIButton("Play", assets);
-        deleteButton = new UIButton("Play", assets);
-        rightButton = new UIButton("Play", assets);
+        backButton = new UIButton("Back", assets);
+        leftButton = new UIButton("Back2", assets);
+        addButton = new UIButton("V", assets);
+        deleteButton = new UIButton("X", assets);
+        rightButton = new UIButton("Next", assets);
 
     }
 

@@ -95,7 +95,7 @@ public class CardInfo extends Actor {
         if (addedCards.get(i) != null) {
             int currentIndex = addedCards.get(i);
             curFrames.set(i, animation.get(currentIndex).getKeyFrame(frameDeltas.get(i)));
-            batch.draw(curFrames.get(i), 6.0f * Gdx.graphics.getWidth() / 10 + (i % 2) * 2.0f * Gdx.graphics.getWidth() / 10,  7.5f * Gdx.graphics.getHeight() / 10 - (i % 3) * 2.5f * Gdx.graphics.getHeight() / 10,
+            batch.draw(curFrames.get(i), 6.0f * Gdx.graphics.getWidth() / 10 + (i < 3 ? 0 : 1) * 2.0f * Gdx.graphics.getWidth() / 10,  7.5f * Gdx.graphics.getHeight() / 10 - (i % 3) * 2.5f * Gdx.graphics.getHeight() / 10,
                     2.0f * Gdx.graphics.getWidth() / 10, 8.0f * Gdx.graphics.getHeight() / 30);
             frameDeltas.set(i, frameDeltas.get(i) + Gdx.graphics.getDeltaTime());
         }
@@ -110,6 +110,7 @@ public class CardInfo extends Actor {
         currentString += "Attack: " + attack.get(index) + "\n";
         currentString += "Health: " + hp.get(index) + "\n";
         currentString += "Radious: " + radious.get(index) + "\n";
+        font.setColor(0, 0, 0, 1);
         font.draw(batch, currentString, 1.0f * Gdx.graphics.getWidth() / 10 , 8.0f * Gdx.graphics.getHeight() / 10);
         batch.draw(curFrame, 0,  2.0f * Gdx.graphics.getHeight() / 10,
                 3.0f * Gdx.graphics.getWidth() / 10, 4.0f * Gdx.graphics.getHeight() / 10);
