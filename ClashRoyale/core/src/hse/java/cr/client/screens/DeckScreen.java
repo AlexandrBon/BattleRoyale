@@ -26,7 +26,7 @@ public class DeckScreen implements Screen {
     private final CardInfo cardInfos;
     private final UIButton backButton;
     private final UIButton leftButton;
-    private UIButton rightButton;
+    private final UIButton rightButton;
     private final UIButton addButton;
     private final UIButton deleteButton;
     private final Stage stage;
@@ -40,18 +40,18 @@ public class DeckScreen implements Screen {
         camera = new OrthographicCamera();
 
         cardInfos = new CardInfo();
-        cardInfos.add(assets.get(Assets.grayGolem), "GrayGolem", "Character", 0, 0, 0);
-        cardInfos.add(assets.get(Assets.greenGoblin), "GreenGoblin", "Character", 0, 0, 0);
-        cardInfos.add(assets.get(Assets.greenGolem), "GreenGolem", "Character", 0, 0, 0);
-        cardInfos.add(assets.get(Assets.brownGolem), "BrownGolem", "Character", 0, 0, 0);
-        cardInfos.add(assets.get(Assets.dirtGolem), "DirtGolem", "Character", 0, 0, 0);
-        cardInfos.add(assets.get(Assets.greenOgre), "GreenOgre", "Character", 0, 0, 0);
-        cardInfos.add(assets.get(Assets.greenOrc), "GreenOrc", "Character", 0, 0, 0);
-        cardInfos.add(assets.get(Assets.iceGolem), "IceGolem", "Character", 0, 0, 0);
-        cardInfos.add(assets.get(Assets.lavaGolem), "LavaGolem", "Character", 0, 0, 0);
-        cardInfos.add(assets.get(Assets.fire), "Fire", "Spell", 0, 0, 0);
-        cardInfos.add(assets.get(Assets.healWave), "HealWave", "Spell", 0, 0, 0);
-        cardInfos.add(assets.get(Assets.explosion), "Explosion", "Spell", 0, 0, 0);
+        cardInfos.add(assets.get(Assets.grayGolemWalking), "GrayGolem", "Character", 40, 30, 2);
+        cardInfos.add(assets.get(Assets.greenGoblinWalking), "GreenGoblin", "Character", 40, 90, 4);
+        cardInfos.add(assets.get(Assets.greenGolemWalking), "GreenGolem", "Character", 30, 30, 1);
+        cardInfos.add(assets.get(Assets.brownGolemWalking), "BrownGolem", "Character", 50, 40, 3);
+        cardInfos.add(assets.get(Assets.dirtGolemWalking), "DirtGolem", "Character", 70, 20, 3);
+        cardInfos.add(assets.get(Assets.greenOgreWalking), "GreenOgre", "Character", 100, 30, 4);
+        cardInfos.add(assets.get(Assets.greenOrcWalking), "GreenOrc", "Character", 80, 25, 3);
+        cardInfos.add(assets.get(Assets.iceGolemWalking), "IceGolem", "Character", 110, 100, 6);
+        cardInfos.add(assets.get(Assets.lavaGolemWalking), "LavaGolem", "Character", 60, 70, 5);
+        cardInfos.add(assets.get(Assets.fire), "Fire", "Spell", 0, 40, 3);
+        cardInfos.add(assets.get(Assets.healWave), "HealWave", "Spell", 0, 0, 2);
+        cardInfos.add(assets.get(Assets.explosion), "Explosion", "Spell", 0, 70, 3);
 
         gameBackground = new Sprite(assets.get(Assets.gameBackground));
 
@@ -60,7 +60,6 @@ public class DeckScreen implements Screen {
         addButton = new UIButton("V", assets);
         deleteButton = new UIButton("X", assets);
         rightButton = new UIButton("Next", assets);
-
     }
 
     @Override

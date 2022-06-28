@@ -47,7 +47,6 @@ public class JoinListener extends Listener {
             ));
 
             if (serverGame.increasePlayersCountAndGet() == playersCount) {
-                System.out.println("playersCount: " + playersCount);
                 serverGame.start();
             }
         }

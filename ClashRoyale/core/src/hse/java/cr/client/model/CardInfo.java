@@ -20,7 +20,7 @@ public class CardInfo extends Actor {
     private final ArrayList<String> name;
     private final ArrayList<Integer> hp;
     private final ArrayList<Integer> attack;
-    private final ArrayList<Integer> radious;
+    private final ArrayList<Integer> costs;
     private final ArrayList<TextureRegion> curFrames;
     private final ArrayList<Integer> addedCards;
     private final int maxCardsInDeck = 6;
@@ -34,7 +34,7 @@ public class CardInfo extends Actor {
         name = new ArrayList<>();
         hp = new ArrayList<>();
         attack = new ArrayList<>();
-        radious = new ArrayList<>();
+        costs = new ArrayList<>();
         addedCards = new ArrayList<>();
         curFrames = new ArrayList<>();
         frameDeltas = new ArrayList<>();
@@ -45,7 +45,7 @@ public class CardInfo extends Actor {
         }
     }
 
-    public void add(TextureAtlas atlas, String nameOfCard, String type, int hp1, int attack1, int radious1) {
+    public void add(TextureAtlas atlas, String nameOfCard, String type, int hp1, int attack1, int cost) {
         Animation<TextureRegion> animation1 = new Animation<>(0.06f, atlas.getRegions());
         animation1.setPlayMode(Animation.PlayMode.LOOP);
         animation.add(animation1);
@@ -53,7 +53,7 @@ public class CardInfo extends Actor {
         name.add(nameOfCard);
         hp.add(hp1);
         attack.add(attack1);
-        radious.add(radious1);
+        costs.add(cost);
     }
 
     public int getIndex() {
@@ -109,7 +109,7 @@ public class CardInfo extends Actor {
         currentString += "Type: " + typeOfCard.get(index) + "\n";
         currentString += "Attack: " + attack.get(index) + "\n";
         currentString += "Health: " + hp.get(index) + "\n";
-        currentString += "Radious: " + radious.get(index) + "\n";
+        currentString += "Radious: " + costs.get(index) + "\n";
         font.setColor(0, 0, 0, 1);
         font.draw(batch, currentString, 1.0f * Gdx.graphics.getWidth() / 10 , 8.0f * Gdx.graphics.getHeight() / 10);
         batch.draw(curFrame, 0,  2.0f * Gdx.graphics.getHeight() / 10,

@@ -77,7 +77,6 @@ public class LoadingScreen implements Screen {
             try {
                 assets.fillStringToTextureAtlasMap();
             } catch (ReflectionException e) {
-                System.out.println("please, rerun game");
                 System.exit(1);
             }
             game.setScreen(new MainScreen(game));

@@ -33,10 +33,10 @@ public class Card extends Actor {
         card = assets.get(Assets.cardsAtlas).findRegion(characterName);
         border = assets.get(Assets.cardsAtlas).findRegion(borderName);
         setName(characterName);
-        cost = 1;
+        cost = 3;
 
-        borderWidth = (float) Gdx.graphics.getWidth() / 8;
-        borderHeight = (float) Gdx.graphics.getHeight() / 4;
+        borderWidth = (float) Gdx.graphics.getWidth() / 8.5f;
+        borderHeight = (float) Gdx.graphics.getHeight() / 4.5f;
 
         float scale = (float) Math.min(
                 borderWidth * 0.9 / card.getRegionWidth(),

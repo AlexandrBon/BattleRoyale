@@ -35,7 +35,7 @@ public class ServerGame implements Runnable {
         gameStatus = GameStatus.EMPTY;
         players = new Array<>(true, playersCount, ServerPlayer.class);
         currentBattles = new Array<>(true, playersCount / 2, SimpleEntry.class);
-        System.out.println("ServerGameConstructor");
+        serverGameIndex = ServerFoundation.newGameId;
     }
 
     public synchronized void start() {
@@ -153,7 +153,7 @@ public class ServerGame implements Runnable {
                 case WIN: {
                     statusEvent.win = true;
                     player.getConnection().sendTCP(statusEvent);
-                    player.getConnection().close();
+                    //player.getConnection().close();
                     win++;
                     break;
                 }
@@ -172,12 +172,10 @@ public class ServerGame implements Runnable {
             }
         }
         if (win == 1 && lose == 1) {
-            System.out.println("1 win and 1 lose");
             ServerFoundation.lock.lock();
             try {
                 gameStatus = GameStatus.END;
                 players.clear();
-                System.out.println("signal");
                 ServerFoundation.gameIsEnd.signal();
             } finally {
                 ServerFoundation.lock.unlock();

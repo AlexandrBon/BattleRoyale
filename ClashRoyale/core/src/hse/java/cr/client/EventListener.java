@@ -22,7 +22,6 @@ public class EventListener extends Listener {
     public void received (Connection connection, Object object) {
         if (object instanceof NewCharacterEvent) {
             NewCharacterEvent newCharacterEvent = (NewCharacterEvent) object;
-            System.out.println("EventListener: " + newCharacterEvent.x);
             player.addCharacter(
                     newCharacterEvent.characterName,
                     Gdx.graphics.getWidth() - newCharacterEvent.x,

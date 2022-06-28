@@ -1,0 +1,90 @@
+
+greenGoblinAttacking.png
+size: 2048, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+0_Goblin_Slashing
+  rotate: false
+  xy: 2, 539
+  size: 450, 267
+  orig: 450, 450
+  offset: 0, 74
+  index: 0
+0_Goblin_Slashing
+  rotate: false
+  xy: 2, 270
+  size: 450, 267
+  orig: 450, 450
+  offset: 0, 74
+  index: 1
+0_Goblin_Slashing
+  rotate: false
+  xy: 454, 539
+  size: 450, 267
+  orig: 450, 450
+  offset: 0, 74
+  index: 11
+0_Goblin_Slashing
+  rotate: false
+  xy: 2, 2
+  size: 450, 266
+  orig: 450, 450
+  offset: 0, 74
+  index: 10
+0_Goblin_Slashing
+  rotate: false
+  xy: 454, 271
+  size: 450, 266
+  orig: 450, 450
+  offset: 0, 74
+  index: 2
+0_Goblin_Slashing
+  rotate: false
+  xy: 906, 542
+  size: 450, 264
+  orig: 450, 450
+  offset: 0, 74
+  index: 9
+0_Goblin_Slashing
+  rotate: false
+  xy: 454, 5
+  size: 450, 264
+  orig: 450, 450
+  offset: 0, 74
+  index: 3
+0_Goblin_Slashing
+  rotate: false
+  xy: 906, 279
+  size: 450, 261
+  orig: 450, 450
+  offset: 0, 74
+  index: 8
+0_Goblin_Slashing
+  rotate: false
+  xy: 1358, 547
+  size: 450, 259
+  orig: 450, 450
+  offset: 0, 74
+  index: 5
+0_Goblin_Slashing
+  rotate: false
+  xy: 906, 18
+  size: 450, 259
+  orig: 450, 450
+  offset: 0, 74
+  index: 7
+0_Goblin_Slashing
+  rotate: false
+  xy: 1358, 286
+  size: 450, 259
+  orig: 450, 450
+  offset: 0, 74
+  index: 4
+0_Goblin_Slashing
+  rotate: false
+  xy: 1358, 25
+  size: 450, 259
+  orig: 450, 450
+  offset: 0, 74
+  index: 6

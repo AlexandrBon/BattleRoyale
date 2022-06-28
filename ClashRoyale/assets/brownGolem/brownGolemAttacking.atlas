@@ -1,0 +1,90 @@
+
+brownGolemAttacking.png
+size: 2048, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+Golem_03_Attacking
+  rotate: false
+  xy: 2, 777
+  size: 360, 214
+  orig: 360, 240
+  offset: 0, 15
+  index: 3
+Golem_03_Attacking
+  rotate: false
+  xy: 2, 564
+  size: 360, 211
+  orig: 360, 240
+  offset: 0, 15
+  index: 4
+Golem_03_Attacking
+  rotate: false
+  xy: 364, 783
+  size: 360, 208
+  orig: 360, 240
+  offset: 0, 15
+  index: 7
+Golem_03_Attacking
+  rotate: false
+  xy: 2, 355
+  size: 360, 207
+  orig: 360, 240
+  offset: 0, 15
+  index: 5
+Golem_03_Attacking
+  rotate: false
+  xy: 364, 574
+  size: 360, 207
+  orig: 360, 240
+  offset: 0, 15
+  index: 2
+Golem_03_Attacking
+  rotate: false
+  xy: 726, 788
+  size: 360, 203
+  orig: 360, 240
+  offset: 0, 15
+  index: 6
+Golem_03_Attacking
+  rotate: false
+  xy: 2, 177
+  size: 360, 176
+  orig: 360, 240
+  offset: 0, 15
+  index: 1
+Golem_03_Attacking
+  rotate: false
+  xy: 364, 398
+  size: 360, 174
+  orig: 360, 240
+  offset: 0, 15
+  index: 0
+Golem_03_Attacking
+  rotate: false
+  xy: 726, 612
+  size: 360, 174
+  orig: 360, 240
+  offset: 0, 15
+  index: 10
+Golem_03_Attacking
+  rotate: false
+  xy: 1088, 817
+  size: 360, 174
+  orig: 360, 240
+  offset: 0, 15
+  index: 8
+Golem_03_Attacking
+  rotate: false
+  xy: 2, 2
+  size: 360, 173
+  orig: 360, 240
+  offset: 0, 15
+  index: 9
+Golem_03_Attacking
+  rotate: false
+  xy: 364, 223
+  size: 360, 173
+  orig: 360, 240
+  offset: 0, 15
+  index: 11

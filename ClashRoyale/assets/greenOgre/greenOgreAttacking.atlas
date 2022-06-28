@@ -1,0 +1,90 @@
+
+greenOgreAttacking.png
+size: 2048, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+0_Ogre_Slashing
+  rotate: false
+  xy: 2, 564
+  size: 450, 280
+  orig: 450, 450
+  offset: 0, 74
+  index: 11
+0_Ogre_Slashing
+  rotate: false
+  xy: 2, 282
+  size: 450, 280
+  orig: 450, 450
+  offset: 0, 74
+  index: 10
+0_Ogre_Slashing
+  rotate: false
+  xy: 454, 565
+  size: 450, 279
+  orig: 450, 450
+  offset: 0, 74
+  index: 2
+0_Ogre_Slashing
+  rotate: false
+  xy: 2, 2
+  size: 450, 278
+  orig: 450, 450
+  offset: 0, 74
+  index: 0
+0_Ogre_Slashing
+  rotate: false
+  xy: 454, 286
+  size: 450, 277
+  orig: 450, 450
+  offset: 0, 74
+  index: 1
+0_Ogre_Slashing
+  rotate: false
+  xy: 906, 568
+  size: 450, 276
+  orig: 450, 450
+  offset: 0, 74
+  index: 9
+0_Ogre_Slashing
+  rotate: false
+  xy: 454, 8
+  size: 450, 276
+  orig: 450, 450
+  offset: 0, 74
+  index: 3
+0_Ogre_Slashing
+  rotate: false
+  xy: 906, 296
+  size: 450, 270
+  orig: 450, 450
+  offset: 0, 74
+  index: 8
+0_Ogre_Slashing
+  rotate: false
+  xy: 1358, 577
+  size: 450, 267
+  orig: 450, 450
+  offset: 0, 74
+  index: 7
+0_Ogre_Slashing
+  rotate: false
+  xy: 906, 28
+  size: 450, 266
+  orig: 450, 450
+  offset: 0, 74
+  index: 6
+0_Ogre_Slashing
+  rotate: false
+  xy: 1358, 309
+  size: 450, 266
+  orig: 450, 450
+  offset: 0, 74
+  index: 5
+0_Ogre_Slashing
+  rotate: false
+  xy: 1358, 41
+  size: 450, 266
+  orig: 450, 450
+  offset: 0, 74
+  index: 4

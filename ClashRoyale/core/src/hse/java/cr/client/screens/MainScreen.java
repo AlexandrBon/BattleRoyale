@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -52,8 +54,11 @@ public class MainScreen implements Screen {
 
     private TextField nicknameTextField;
 
-    private DeckScreen deckScreen = null;
+    private TextButton mode2;
+    private TextButton mode4;
+    private TextButton mode8;
 
+    private DeckScreen deckScreen = null;
 
     public MainScreen(@NotNull Starter starter) {
         this.starter = starter;
@@ -129,27 +134,32 @@ public class MainScreen implements Screen {
     private void setupTable() {
         table.clear();
 
-        float width = playButton.getWidth();
-        float height = 2 * playButton.getHeight() / 3;
+        // text field
+
+        float textFieldWidth = playButton.getWidth();
+        float textFieldHeight = 2 * playButton.getHeight() / 3;
 
         Skin skin = assets.get(Assets.skin);
-        TextField.TextFieldStyle style = new TextField.TextFieldStyle();
+        TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
 
-        style.font = FontSizeHandler.INSTANCE.getFont((int) (height / 3), Color.BLACK);
-        style.fontColor = Color.WHITE;
-        style.background = skin.getDrawable("black");
-        style.cursor = skin.getDrawable("white");
-        style.selection = skin.getDrawable("pressed");
+        BitmapFont font = FontSizeHandler.INSTANCE.getFont((int) (textFieldHeight / 2.3f), Color.BLACK);
+
+        textFieldStyle.font = font;
+        textFieldStyle.fontColor = Color.WHITE;
+        textFieldStyle.background = skin.getDrawable("black");
+        textFieldStyle.cursor = skin.getDrawable("white");
+        textFieldStyle.selection = skin.getDrawable("pressed");
+
         final String defaultText = "enter your nickname";
-        nicknameTextField = new TextField(defaultText, style);
+        nicknameTextField = new TextField(defaultText, textFieldStyle);
 
-        table
-                .add(nicknameTextField)
-                .width(width)
-                .height(height)
-                .padTop(Gdx.graphics.getHeight() - playButton.getTop() - height)
-                .row();
-        table.top();
+        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
+        textButtonStyle.font = font;
+        textButtonStyle.down = skin.getDrawable("black");
+        textButtonStyle.up = skin.getDrawable("black");
+        textButtonStyle.over = skin.getDrawable("black");
+        textButtonStyle.checked = skin.getDrawable("button");
+        textButtonStyle.checkedOver = skin.getDrawable("button");
 
         nicknameTextField.addListener(new ClickListener() {
             @Override
@@ -168,6 +178,42 @@ public class MainScreen implements Screen {
                 return true;
             }
         });
+
+
+        // mode buttons
+        mode2 = new TextButton("2", textButtonStyle);
+        mode4 = new TextButton("4", textButtonStyle);
+        mode8 = new TextButton("8", textButtonStyle);
+
+        ClickListener clickListener = new ClickListener() {
+            @Override
+            public void clicked (InputEvent event, float x, float y) {
+                mode2.setChecked(false);
+                mode4.setChecked(false);
+                mode8.setChecked(false);
+                if (mode2.getRight() >= x) {
+                    mode2.setChecked(true);
+                } else if (mode4.getRight() >= x) {
+                    mode4.setChecked(true);
+                } else {
+                    mode8.setChecked(true);
+                }
+            }
+        };
+
+        float textButtonWidth = playButton.getWidth() / 3;
+        float textButtonHeight = playButton.getHeight() * 0.66f;
+
+        table.add(mode2).width(textButtonWidth).height(textButtonHeight).center();
+        table.add(mode4).width(textButtonWidth).height(textButtonHeight).center();
+        table.add(mode8).width(textButtonWidth).height(textButtonHeight).center();
+        table.row();
+
+        table.add(nicknameTextField).colspan(3).width(textFieldWidth).center();
+        table.row();
+        table.add(deckButton, playButton).row();
+
+        table.add(exitButton).colspan(3).row();
     }
 
     private void setupClient() {
@@ -179,7 +225,6 @@ public class MainScreen implements Screen {
             client.start();
             client.connect(10000, "localhost", 54555, 54777);
         } catch (IOException e) {
-            System.out.println("client couldn't connect");
             return;
         }
 
@@ -190,7 +235,15 @@ public class MainScreen implements Screen {
         final String nickname = nicknameTextField.getText();
         joinRequestEvent.username =
                 (nickname.equals("enter your nickname") || nickname.isEmpty() ? "noname" : nickname);
-        joinRequestEvent.playersCount = 2;
+
+        if (mode4.isChecked()) {
+            joinRequestEvent.playersCount = 4;
+        } else if (mode8.isChecked()) {
+            joinRequestEvent.playersCount = 8;
+        } else {
+            joinRequestEvent.playersCount = 2;
+        }
+
         joinRequestEvent.screenHeight = Gdx.graphics.getHeight();
         joinRequestEvent.screenWidth = Gdx.graphics.getWidth();
         Starter.getClient().sendTCP(joinRequestEvent);
@@ -225,7 +278,6 @@ public class MainScreen implements Screen {
         if (deckButton.getState().equals(UIButton.State.PRESSED)) {
             if (deckScreen == null) {
                 deckScreen = new DeckScreen(starter, this);
-                System.out.println("oops");
             }
             deckButton.setState(UIButton.State.NORMAL);
             starter.setScreen(deckScreen);

@@ -1,0 +1,90 @@
+
+greenOrcAttacking.png
+size: 2048, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+0_Orc_Slashing
+  rotate: false
+  xy: 2, 609
+  size: 450, 303
+  orig: 450, 450
+  offset: 0, 74
+  index: 10
+0_Orc_Slashing
+  rotate: false
+  xy: 2, 305
+  size: 450, 302
+  orig: 450, 450
+  offset: 0, 74
+  index: 11
+0_Orc_Slashing
+  rotate: false
+  xy: 454, 611
+  size: 450, 301
+  orig: 450, 450
+  offset: 0, 74
+  index: 2
+0_Orc_Slashing
+  rotate: false
+  xy: 2, 2
+  size: 450, 301
+  orig: 450, 450
+  offset: 0, 74
+  index: 9
+0_Orc_Slashing
+  rotate: false
+  xy: 454, 308
+  size: 450, 301
+  orig: 450, 450
+  offset: 0, 74
+  index: 3
+0_Orc_Slashing
+  rotate: false
+  xy: 906, 614
+  size: 450, 298
+  orig: 450, 450
+  offset: 0, 74
+  index: 1
+0_Orc_Slashing
+  rotate: false
+  xy: 454, 8
+  size: 450, 298
+  orig: 450, 450
+  offset: 0, 74
+  index: 0
+0_Orc_Slashing
+  rotate: false
+  xy: 906, 315
+  size: 450, 297
+  orig: 450, 450
+  offset: 0, 74
+  index: 8
+0_Orc_Slashing
+  rotate: false
+  xy: 1358, 618
+  size: 450, 294
+  orig: 450, 450
+  offset: 0, 74
+  index: 7
+0_Orc_Slashing
+  rotate: false
+  xy: 906, 19
+  size: 450, 294
+  orig: 450, 450
+  offset: 0, 74
+  index: 4
+0_Orc_Slashing
+  rotate: false
+  xy: 1358, 322
+  size: 450, 294
+  orig: 450, 450
+  offset: 0, 74
+  index: 6
+0_Orc_Slashing
+  rotate: false
+  xy: 1358, 26
+  size: 450, 294
+  orig: 450, 450
+  offset: 0, 74
+  index: 5

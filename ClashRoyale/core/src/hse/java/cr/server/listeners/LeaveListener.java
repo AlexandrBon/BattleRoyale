@@ -8,6 +8,5 @@ public class LeaveListener extends Listener {
     @Override
     public void disconnected(Connection connection) {
         super.disconnected(connection);
-        System.out.println("disconnect: " + connection.getID());
     }
 }

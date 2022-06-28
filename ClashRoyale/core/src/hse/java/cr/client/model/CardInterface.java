@@ -126,10 +126,12 @@ public class CardInterface extends Group {
                             Gdx.graphics.getHeight() - Gdx.input.getY())
                             && mana.decreaseMana(curCard.getCost())) {
 
+                        float cardPosY = gameField.getNearestLineY(Gdx.graphics.getHeight() - Gdx.input.getY());
+
                         final NewCharacterEvent characterEvent = new NewCharacterEvent();
                         characterEvent.characterName = curCard.getName();
                         characterEvent.x = curCard.getX();
-                        characterEvent.y = curCard.getY();
+                        characterEvent.y = cardPosY; //curCard.getY();
                         characterEvent.gameIndex = Player.gameIndex;
                         if (Starter.getClient() != null) {
                             Starter.getClient().sendTCP(characterEvent);
@@ -138,7 +140,7 @@ public class CardInterface extends Group {
                         gameStage.addActor(new Character(
                                 curCard.getName(),
                                 curCard.getX(),
-                                curCard.getY(),
+                                cardPosY/*curCard.getY()*/,
                                 true,
                                 Player.charactersCount++
                         ));

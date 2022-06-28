@@ -15,6 +15,8 @@ import hse.java.cr.client.screens.MainScreen;
 import hse.java.cr.wrappers.Assets;
 import hse.java.cr.wrappers.FontSizeHandler;
 
+import static hse.java.cr.client.Player.enemyNickname;
+
 public class GameInterface {
     private final CardInterface cardInterface;
     private final Stage gameStage;
@@ -22,18 +24,27 @@ public class GameInterface {
     private final UIButton quitButton;
     private final Stage interfaceStage;
     private final Assets assets;
-    private final String enemyNickname;
+    private Label label;
+
+    enum LabelPosition {
+        CENTER,
+        RIGHT_TOP,
+        LEFT_TOP,
+        RIGHT_DOWN,
+        LEFT_DOWN
+    }
 
     public GameInterface(Assets assets, Stage gameStage,
                          MainScreen mainScreen, String enemyNickname) {
-        this.enemyNickname = enemyNickname;
         this.assets = assets;
         this.gameStage = gameStage;
         cardInterface = new CardInterface(assets, gameStage);
         setupGameStage();
 
         table = new Table();
-        setupTable();
+        setupLabel(enemyNickname);
+        setupTable(LabelPosition.RIGHT_TOP);
+
         gameStage.addActor(table);
 
         quitButton = new UIButton("Quit", assets);
@@ -42,22 +53,46 @@ public class GameInterface {
         setupInterfaceStage(mainScreen);
     }
 
-    private void setupTable() {
+    private void setupTable(LabelPosition labelPosition) {
+        table.clear();
+
+        table.add(label)
+                .size(label.getWidth(), label.getHeight())
+                .row();
+
+        switch (labelPosition) {
+            case RIGHT_TOP: {
+                table.top().right();
+                break;
+            }
+            case CENTER: {
+                table.center();
+                break;
+            }
+            case LEFT_TOP: {
+                table.top().left();
+                break;
+            }
+            case LEFT_DOWN: {
+                table.bottom().left();
+                break;
+            }
+            case RIGHT_DOWN: {
+                table.bottom().right();
+                break;
+            }
+        }
+    }
+
+    private void setupLabel(String text) {
         table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Skin skin = assets.get(Assets.skin);
         Label.LabelStyle style = new Label.LabelStyle();
 
-        style.font = FontSizeHandler.INSTANCE.getFont(Gdx.graphics.getHeight() / 12, Color.BLACK);
+        style.font = FontSizeHandler.INSTANCE.getFont(Gdx.graphics.getHeight() / 12, Color.WHITE);
         style.fontColor = Color.WHITE;
-        style.background = skin.getDrawable("button-color");
-        Label enemyNicknameLabel = new Label(enemyNickname, style);
-
-        table
-                .add(enemyNicknameLabel)
-                .width(enemyNicknameLabel.getWidth())
-                .height(enemyNicknameLabel.getHeight())
-                .row();
-        table.top().right();
+        style.background = skin.getDrawable("black");
+        label = new Label(text, style);
     }
 
     private void setupInterfaceStage(MainScreen mainScreen) {
@@ -80,24 +115,23 @@ public class GameInterface {
     }
 
     public void updateGameState(Player.Status status) {
+        interfaceStage.addActor(table);
         Player.status = status;
         switch (status) {
             case EMPTY: {
                 break;
             }
             case WIN: {
-                quitButton.setPosition(
-                        quitButton.getWidth() / 3,
-                        (Gdx.graphics.getHeight()  - quitButton.getHeight()) / 2
-                );
+                setupLabel("YOU WIN");
+                setupTable(LabelPosition.CENTER);
+                table.add(quitButton);
                 Gdx.input.setInputProcessor(interfaceStage);
                 break;
             }
             case LOSE: {
-                quitButton.setPosition(
-                        (Gdx.graphics.getWidth() - quitButton.getWidth()) / 2,
-                        (Gdx.graphics.getHeight()  - quitButton.getHeight()) / 2
-                );
+                setupLabel("YOU LOSE");
+                setupTable(LabelPosition.CENTER);
+                table.add(quitButton);
                 Gdx.input.setInputProcessor(interfaceStage);
                 break;
             }

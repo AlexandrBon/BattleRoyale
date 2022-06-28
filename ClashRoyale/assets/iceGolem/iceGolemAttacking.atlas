@@ -1,0 +1,90 @@
+
+iceGolemAttacking.png
+size: 2048, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+0_Golem_Slashing
+  rotate: false
+  xy: 2, 556
+  size: 450, 277
+  orig: 450, 450
+  offset: 0, 71
+  index: 0
+0_Golem_Slashing
+  rotate: false
+  xy: 2, 278
+  size: 450, 276
+  orig: 450, 450
+  offset: 0, 71
+  index: 1
+0_Golem_Slashing
+  rotate: false
+  xy: 454, 559
+  size: 450, 274
+  orig: 450, 450
+  offset: 0, 71
+  index: 9
+0_Golem_Slashing
+  rotate: false
+  xy: 2, 2
+  size: 450, 274
+  orig: 450, 450
+  offset: 0, 71
+  index: 3
+0_Golem_Slashing
+  rotate: false
+  xy: 454, 284
+  size: 450, 273
+  orig: 450, 450
+  offset: 0, 71
+  index: 10
+0_Golem_Slashing
+  rotate: false
+  xy: 906, 561
+  size: 450, 272
+  orig: 450, 450
+  offset: 0, 71
+  index: 2
+0_Golem_Slashing
+  rotate: false
+  xy: 454, 10
+  size: 450, 272
+  orig: 450, 450
+  offset: 0, 71
+  index: 11
+0_Golem_Slashing
+  rotate: false
+  xy: 906, 287
+  size: 450, 272
+  orig: 450, 450
+  offset: 0, 71
+  index: 8
+0_Golem_Slashing
+  rotate: false
+  xy: 1358, 562
+  size: 450, 271
+  orig: 450, 450
+  offset: 0, 71
+  index: 7
+0_Golem_Slashing
+  rotate: false
+  xy: 906, 14
+  size: 450, 271
+  orig: 450, 450
+  offset: 0, 71
+  index: 4
+0_Golem_Slashing
+  rotate: false
+  xy: 1358, 289
+  size: 450, 271
+  orig: 450, 450
+  offset: 0, 71
+  index: 6
+0_Golem_Slashing
+  rotate: false
+  xy: 1358, 16
+  size: 450, 271
+  orig: 450, 450
+  offset: 0, 71
+  index: 5

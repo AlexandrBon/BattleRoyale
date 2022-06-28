@@ -2,12 +2,14 @@ package hse.java.cr.server;
 
 import hse.java.cr.events.PlayerUpdateEvent.ObjectState;
 
+import java.util.Objects;
+
 public class ServerCharacter {
     private int index;
     private float x;
     private float y;
     private final boolean isMine;
-    private float speed = 3f;
+    private float speed = 1f;
 
     public ServerCharacter(int index, float x, float y, boolean isMine) {
         this.index = index;
@@ -60,5 +62,18 @@ public class ServerCharacter {
         characterState.isLeft = isMine;
         characterState.speed = speed;
         return characterState;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof ServerCharacter) {
+            return ((ServerCharacter) o).index == this.index;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(index + x + y);
     }
 }

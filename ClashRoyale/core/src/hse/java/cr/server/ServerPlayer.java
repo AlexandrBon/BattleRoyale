@@ -3,6 +3,8 @@ package hse.java.cr.server;
 import com.badlogic.gdx.utils.Array;
 import com.esotericsoftware.kryonet.Connection;
 
+import java.util.Arrays;
+
 public class ServerPlayer {
     enum PlayerStatus {
         EMPTY,
@@ -49,18 +51,29 @@ public class ServerPlayer {
         boolean isLeft;
         float speed;
         for (int i = 0; i < characters.length; i++) {
-            ServerCharacter character = characters[i];
-            isLeft = character.isMine();
-            speed = character.getSpeed();
-            character.addToX(isLeft ? speed : -speed);
-            int eps = (int) (5 * speed);
-            if (character.getX() < -eps || character.getX() > screenWidth + eps) {
-                if (!character.isMine()) {
-                    health--;
-                } else {
-                    score++;
+            boolean isOverlaps = false;
+            for (int j = 0; j < characters.length; j++) {
+                if (i != j && Math.abs(characters[i].getX() - characters[j].getX()) < 150
+                && characters[i].getY() == characters[j].getY()
+                && characters[i].isMine() != characters[j].isMine()) {
+                    isOverlaps = true;
+                    break;
                 }
-                serverCharacters.removeIndex(i);
+            }
+            if (!isOverlaps) {
+                ServerCharacter character = characters[i];
+                isLeft = character.isMine();
+                speed = character.getSpeed();
+                character.addToX(isLeft ? speed : -speed);
+                int eps = (int) (20 * speed);
+                if (character.getX() < -eps || character.getX() > screenWidth + eps) {
+                    if (!character.isMine()) {
+                        health--;
+                    } else {
+                        score++;
+                    }
+                    serverCharacters.removeIndex(i);
+                }
             }
         }
     }
@@ -80,6 +93,15 @@ public class ServerPlayer {
 
     public void addCharacter(ServerCharacter character) {
         serverCharacters.add(character);
+    }
+
+    public void removeCharacter(int characterIndex) {
+        for (int i = 0; i < serverCharacters.size; i++) {
+            if (serverCharacters.get(i).getIndex() == characterIndex) {
+                serverCharacters.removeIndex(i);
+                break;
+            }
+        }
     }
 
     public String getName() {

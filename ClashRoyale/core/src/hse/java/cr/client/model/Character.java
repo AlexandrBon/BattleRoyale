@@ -1,64 +1,68 @@
 package hse.java.cr.client.model;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.*;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
+import hse.java.cr.client.Player;
+import hse.java.cr.client.Starter;
+import hse.java.cr.events.RemoveObjectEvent;
 import hse.java.cr.wrappers.Assets;
 
 public class Character extends Actor {
     public enum State {
-        HIT,
-        RUN,
-        JUMP
+        WALKING,
+        ATTACKING
     }
 
     private static final int maxHealth = 100;
 
     private int characterIndex;
-    private final State state;
+    private State state;
 
     private final Array<Animation<TextureRegion>> golemAnimations;
     private TextureRegion curFrame;
     private float frameDelta = 0f;
-    private Character currentOpponennt;
+    private Character currentOpponent;
     private float timer;
 
     private final boolean mySide;
-    private int attack = 1;
+    private final int attack;
 
-    float deltaY = getHeight() * 0.01f;
-    float deltaX = getWidth() * 0.1f;
+    private final float deltaX;
     private int health;
     private boolean isRun = true;
-    
+
     public Character(String characterName, float x, float y, boolean side, int index) {
         characterIndex = index;
-        TextureAtlas characterAtlas = Assets.getTextureAtlas(characterName);
-        golemAnimations = new Array<>(State.values().length);
-        attack = 1;
+        attack = 50;
         health = 100;
-        curFrame = new Sprite();
-        state = State.HIT;
-        mySide = side;
-        int n = golemAnimations.size;
-        n = 1; // TODO: add RUN and JUMP animation
 
-        for (int i = 0; i < n; i++) {
-            golemAnimations.add(new Animation<>(0.06f, characterAtlas.getRegions()));
-            golemAnimations.get(i).setPlayMode(Animation.PlayMode.LOOP_REVERSED);
-            // TODO: JUMP PlayMode is .NORMAL
-        }
+        golemAnimations = new Array<>(true, State.values().length, Animation.class);
+
+        curFrame = new Sprite();
+        state = State.WALKING;
+        mySide = side;
+
+        TextureAtlas characterWalkingAtlas = Assets.getTextureAtlas(characterName + "Walking");
+        TextureAtlas characterAttackingAtlas = Assets.getTextureAtlas(characterName + "Attacking");
+
+        golemAnimations.add(new Animation<>(0.06f, characterWalkingAtlas.getRegions()));
+        golemAnimations.get(0).setPlayMode(Animation.PlayMode.LOOP_REVERSED);
+
+        golemAnimations.add(new Animation<>(0.06f, characterAttackingAtlas.getRegions()));
+        golemAnimations.get(1).setPlayMode(Animation.PlayMode.LOOP_REVERSED);
 
         float textureWidth = golemAnimations.get(0).getKeyFrame(0).getRegionWidth();
         float textureHeight = golemAnimations.get(0).getKeyFrame(0).getRegionHeight();
 
         float scale = Gdx.graphics.getHeight() / 8f / textureHeight;
+
         setScale(scale, scale);
         setBounds(x, y, textureWidth * getScaleX(),
                 textureHeight * getScaleY());
+
+        deltaX = getWidth() * 0.01f;
     }
 
     public int getHealth() {
@@ -77,9 +81,6 @@ public class Character extends Actor {
         this.health = health;
     }
 
-    public void decreaseHealth(int damage) {
-        this.health -= damage;
-    }
 
     public void setIndex(int index) {
         characterIndex = index;
@@ -91,38 +92,50 @@ public class Character extends Actor {
 
     @Override
     public void act(float delta) {
-        if (health <= 0 || getX() < 0 || getX() > Gdx.graphics.getWidth()) {
+        float eps = Gdx.graphics.getWidth();
+        if (health <= 0 || getX() < -eps || getX() > Gdx.graphics.getWidth() + eps) {
             remove();
             return;
         }
         if (isRun) {
-            //getStage().setDebugAll(true);
             Actor[] actors = getStage().getActors().toArray();
-            for(Actor actor : actors) {
+            for (Actor actor : actors) {
                 if (actor instanceof Character) {
                     Character character = (Character) actor;
                     if (character != this && character.getHealth() > 0
-                            && (character.mySide != mySide) && Math.abs(character.getY() - getY()) < deltaY
-                            && Math.abs(getX() - character.getX()) <= 100) {
+                            && getY() == character.getY()
+                            && (character.mySide != mySide)
+                            && Math.abs(getX() - character.getX()) <= 160) {
+                        state = State.ATTACKING;
+                        character.state = State.ATTACKING;
                         isRun = false;
-                        currentOpponennt = character;
+                        currentOpponent = character;
                         timer = 0;
                     }
                 }
             }
-            if (mySide) {
-                moveBy(deltaX, 0);
-            } else {
-                moveBy(-deltaX, 0);
+            if (!isRun) {
+                if (mySide) {
+                    moveBy(deltaX, 0);
+                } else {
+                    moveBy(-deltaX, 0);
+                }
             }
         } else {
             timer += delta;
             if (timer >= 1) {
-                int opponentHealth = Math.max(0, currentOpponennt.getHealth() - attack);
-                currentOpponennt.setHealth(opponentHealth);
+                int opponentHealth = Math.max(0, currentOpponent.getHealth() - attack);
+                currentOpponent.setHealth(opponentHealth);
                 if (opponentHealth == 0) {
                     isRun = true;
-                    currentOpponennt.remove();
+                    currentOpponent.remove();
+                    {
+                        RemoveObjectEvent removeObjectEvent = new RemoveObjectEvent();
+                        removeObjectEvent.gameIndex = Player.gameIndex;
+                        removeObjectEvent.characterIndex = currentOpponent.characterIndex;
+                        Starter.getClient().sendTCP(removeObjectEvent);
+                    }
+                    state = State.WALKING;
                 }
                 timer = 0;
             }

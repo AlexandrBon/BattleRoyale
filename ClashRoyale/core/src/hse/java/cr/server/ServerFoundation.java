@@ -3,10 +3,7 @@ package hse.java.cr.server;
 import com.badlogic.gdx.utils.Array;
 import com.esotericsoftware.kryonet.Server;
 import hse.java.cr.network.Network;
-import hse.java.cr.server.listeners.EventListener;
-import hse.java.cr.server.listeners.JoinListener;
-import hse.java.cr.server.listeners.LeaveListener;
-import hse.java.cr.server.listeners.NewObjectListener;
+import hse.java.cr.server.listeners.*;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -26,7 +23,7 @@ public class ServerFoundation {
             Executors.newScheduledThreadPool(10);
     public static final Lock lock = new ReentrantLock();
     public static Condition gameIsEnd = lock.newCondition();
-    private int newGameId = 0;
+    public static int newGameId = 0;
 
     public Server getServer() {
         return server;
@@ -53,6 +50,7 @@ public class ServerFoundation {
         server.addListener(new JoinListener());
         server.addListener(new EventListener());
         server.addListener(new LeaveListener());
+        server.addListener(new RemoveObjectListener());
 
         bindServer();
     }
@@ -82,17 +80,13 @@ public class ServerFoundation {
             lock.lock();
             try {
                 while ((endGamesIndexes = INSTANCE.getEndGamesIndexes()).isEmpty()) {
-                    System.out.println("waiting");
                     gameIsEnd.await();
                 }
-                System.out.println("get signal -> deleting");
                 for (Integer id : endGamesIndexes.items) {
                     if (id == null)
                         break;
-                    System.out.println("id: " + id);
                     serverGames.remove(id);
                 }
-                System.out.println("serverGameSize: " + serverGames.size());
             } finally {
                 lock.unlock();
             }

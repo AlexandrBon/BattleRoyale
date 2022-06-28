@@ -1,0 +1,90 @@
+
+lavaGolemAttacking.png
+size: 2048, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+0_Golem_Slashing
+  rotate: false
+  xy: 2, 537
+  size: 450, 266
+  orig: 450, 450
+  offset: 0, 73
+  index: 2
+0_Golem_Slashing
+  rotate: false
+  xy: 2, 269
+  size: 450, 266
+  orig: 450, 450
+  offset: 0, 74
+  index: 11
+0_Golem_Slashing
+  rotate: false
+  xy: 454, 538
+  size: 450, 265
+  orig: 450, 450
+  offset: 0, 74
+  index: 10
+0_Golem_Slashing
+  rotate: false
+  xy: 2, 2
+  size: 450, 265
+  orig: 450, 450
+  offset: 0, 74
+  index: 1
+0_Golem_Slashing
+  rotate: false
+  xy: 454, 271
+  size: 450, 265
+  orig: 450, 450
+  offset: 0, 74
+  index: 0
+0_Golem_Slashing
+  rotate: false
+  xy: 906, 540
+  size: 450, 263
+  orig: 450, 450
+  offset: 0, 74
+  index: 9
+0_Golem_Slashing
+  rotate: false
+  xy: 454, 6
+  size: 450, 263
+  orig: 450, 450
+  offset: 0, 74
+  index: 3
+0_Golem_Slashing
+  rotate: false
+  xy: 906, 277
+  size: 450, 261
+  orig: 450, 450
+  offset: 0, 73
+  index: 4
+0_Golem_Slashing
+  rotate: false
+  xy: 1358, 542
+  size: 450, 261
+  orig: 450, 450
+  offset: 0, 74
+  index: 8
+0_Golem_Slashing
+  rotate: false
+  xy: 906, 15
+  size: 450, 260
+  orig: 450, 450
+  offset: 0, 74
+  index: 7
+0_Golem_Slashing
+  rotate: false
+  xy: 1358, 280
+  size: 450, 260
+  orig: 450, 450
+  offset: 0, 74
+  index: 6
+0_Golem_Slashing
+  rotate: false
+  xy: 1358, 18
+  size: 450, 260
+  orig: 450, 450
+  offset: 0, 74
+  index: 5

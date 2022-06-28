@@ -1,0 +1,90 @@
+
+dirtGolemAttacking.png
+size: 2048, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+0_Golem_Slashing
+  rotate: false
+  xy: 2, 602
+  size: 450, 300
+  orig: 450, 450
+  offset: 0, 73
+  index: 9
+0_Golem_Slashing
+  rotate: false
+  xy: 2, 301
+  size: 450, 299
+  orig: 450, 450
+  offset: 0, 73
+  index: 10
+0_Golem_Slashing
+  rotate: false
+  xy: 454, 603
+  size: 450, 299
+  orig: 450, 450
+  offset: 0, 73
+  index: 3
+0_Golem_Slashing
+  rotate: false
+  xy: 2, 2
+  size: 450, 297
+  orig: 450, 450
+  offset: 0, 73
+  index: 8
+0_Golem_Slashing
+  rotate: false
+  xy: 454, 305
+  size: 450, 296
+  orig: 450, 450
+  offset: 0, 72
+  index: 4
+0_Golem_Slashing
+  rotate: false
+  xy: 906, 606
+  size: 450, 296
+  orig: 450, 450
+  offset: 0, 73
+  index: 6
+0_Golem_Slashing
+  rotate: false
+  xy: 454, 8
+  size: 450, 295
+  orig: 450, 450
+  offset: 0, 73
+  index: 7
+0_Golem_Slashing
+  rotate: false
+  xy: 906, 309
+  size: 450, 295
+  orig: 450, 450
+  offset: 0, 73
+  index: 5
+0_Golem_Slashing
+  rotate: false
+  xy: 1358, 608
+  size: 450, 294
+  orig: 450, 450
+  offset: 0, 73
+  index: 11
+0_Golem_Slashing
+  rotate: false
+  xy: 906, 14
+  size: 450, 293
+  orig: 450, 450
+  offset: 0, 73
+  index: 2
+0_Golem_Slashing
+  rotate: false
+  xy: 1358, 320
+  size: 450, 286
+  orig: 450, 450
+  offset: 0, 73
+  index: 1
+0_Golem_Slashing
+  rotate: false
+  xy: 1358, 32
+  size: 450, 286
+  orig: 450, 450
+  offset: 0, 73
+  index: 0
